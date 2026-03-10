@@ -1,0 +1,49 @@
+.liquid-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-electric-purple);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 15px var(--color-electric-purple), 0 0 30px var(--color-electric-purple);
+  mix-blend-mode: screen;
+}
+
+.liquid-cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(156, 163, 175, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  box-shadow: 0 0 10px rgba(98, 54, 255, 0.2);
+}
+
+.cursor-ripple {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  border: 2px solid rgba(98, 54, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  animation: cursorRippleAnim 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  box-shadow: inset 0 0 20px rgba(98, 54, 255, 0.2), 0 0 20px rgba(98, 54, 255, 0.2);
+}
+
+@keyframes cursorRippleAnim {
+  0% { transform: scale(0.2); opacity: 1; border-width: 4px; }
+  100% { transform: scale(3); opacity: 0; border-width: 0px; }
+}
+
+@media (pointer: coarse) {
+  .liquid-cursor, .liquid-cursor-trail, .cursor-ripple {
+    display: none;
+  }
+}

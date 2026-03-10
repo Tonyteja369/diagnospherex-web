@@ -1,0 +1,189 @@
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 20px;
+  z-index: 1000;
+  transition: padding 0.3s ease;
+}
+
+.navbar-container.scrolled {
+  padding: 12px 20px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 40px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar:hover {
+  border: 1px solid rgba(98, 54, 255, 0.4);
+  box-shadow: 0 0 20px rgba(98, 54, 255, 0.2);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Logo image pill with gradient background */
+.navbar-logo-pill {
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: radial-gradient(ellipse at center,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(200, 220, 255, 0.80) 45%,
+    rgba(59, 130, 246, 0.50) 100%
+  );
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.navbar-logo-pill:hover {
+  background: radial-gradient(ellipse at center,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(180, 210, 255, 0.90) 45%,
+    rgba(98, 54, 255, 0.60) 100%
+  );
+  box-shadow: 0 0 22px rgba(59, 130, 246, 0.5), 0 0 8px rgba(255,255,255,0.3);
+  transform: scale(1.04);
+}
+
+.navbar-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.primary-btn {
+  background: rgba(98, 54, 255, 0.1);
+  border: 1px solid rgba(98, 54, 255, 0.5);
+  color: var(--color-text-primary);
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(98, 54, 255, 0.1);
+}
+
+.primary-btn:hover {
+  background: rgba(98, 54, 255, 0.3);
+  box-shadow: 0 0 20px rgba(98, 54, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.mobile-only {
+  display: none;
+}
+
+.mobile-menu-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  right: 20px;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-nav-link {
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-action-btn {
+  margin-top: 16px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: flex; /* Changed from block to flex for proper centering */
+  }
+  
+  .navbar-container {
+    padding: 16px 12px;
+  }
+  
+  .navbar {
+    padding: 10px 18px;
+  }
+  
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  
+  .navbar-logo-pill {
+    padding: 5px 12px;
+  }
+  
+  .navbar-logo-img {
+    height: 32px;
+  }
+}
+
+@media (max-width: 500px) {
+  .logo-text {
+    display: none; /* Only show the icon on very small phones to avoid overlap */
+  }
+}

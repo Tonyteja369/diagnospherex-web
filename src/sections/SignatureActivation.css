@@ -1,0 +1,75 @@
+.signature-section {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.signature-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Modern founder name display */
+.founder-name-display {
+  text-align: center;
+  padding: 60px 80px;
+  background: rgba(98, 54, 255, 0.06);
+  border: 1px solid rgba(98, 54, 255, 0.2);
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.founder-name-display::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(98,54,255,0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.founder-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--color-electric-purple);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.founder-name-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffffff 0%, #a78bfa 50%, #6236FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.founder-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6236FF, #3B82F6, transparent);
+  margin: 0 auto 20px;
+}
+
+.founder-role {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+.founder-dept {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}

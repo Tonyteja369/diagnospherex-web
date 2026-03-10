@@ -1,0 +1,182 @@
+/* =========================================================
+   SECURITY SECTION – Security-First System Design
+   ========================================================= */
+
+.security-section {
+  padding: 100px 20px;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* ── Animated grid background ── */
+.security-grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(47, 211, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 211, 255, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridDrift 15s linear infinite;
+  z-index: 0;
+}
+
+@keyframes gridDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 40px; }
+}
+
+/* ── Divider glow lines ── */
+.section-divider-glow {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(98, 54, 255, 0.5), rgba(47, 211, 255, 0.4), transparent);
+  box-shadow: 0 0 12px rgba(98, 54, 255, 0.3);
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+.security-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Header ── */
+.security-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.security-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #2FD3FF;
+  margin-bottom: 14px;
+}
+
+.security-desc {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-top: 18px;
+}
+
+/* ── 2×2 Principles grid ── */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 700px) {
+  .principles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Principle card ── */
+.principle-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(98, 54, 255, 0.22);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(98, 54, 255, 0.08);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  animation: cardFloat linear infinite;
+  animation-duration: 5s;
+}
+
+/* Stagger float phase per card */
+.principle-card:nth-child(1) { animation-delay: 0s; }
+.principle-card:nth-child(2) { animation-delay: -1.25s; }
+.principle-card:nth-child(3) { animation-delay: -2.5s; }
+.principle-card:nth-child(4) { animation-delay: -3.75s; }
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+
+.principle-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(98, 54, 255, 0.45);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(98, 54, 255, 0.35);
+}
+
+.principle-icon {
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 8px rgba(98, 54, 255, 0.5));
+}
+
+.principle-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 12px;
+  line-height: 1.3;
+}
+
+.principle-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Transparency statement ── */
+.transparency-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: rgba(47, 211, 255, 0.06);
+  border: 1px solid rgba(47, 211, 255, 0.2);
+  border-radius: 16px;
+  padding: 22px 28px;
+  margin-top: 8px;
+}
+
+.transparency-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2FD3FF;
+  box-shadow: 0 0 10px #2FD3FF;
+  flex-shrink: 0;
+  margin-top: 4px;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px #2FD3FF; }
+  50%       { opacity: 0.5; box-shadow: 0 0 4px #2FD3FF; }
+}
+
+.transparency-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #2FD3FF;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.transparency-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.7;
+  margin: 0;
+}

@@ -1,0 +1,523 @@
+/* =========================================================
+   CAREERS – Interactive Glass Slide Cards
+   ========================================================= */
+
+.careers-section {
+  padding: 100px 0 80px;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.careers-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 56px;
+  padding: 0 20px;
+}
+
+.careers-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #2FD3FF;
+  margin-bottom: 14px;
+}
+
+.careers-desc {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-top: 18px;
+}
+
+/* ── Track ── */
+.careers-track-wrapper {
+  position: relative;
+}
+
+.careers-track {
+  display: flex;
+  gap: 32px;
+  padding: 40px 80px 60px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.careers-track::-webkit-scrollbar { display: none; }
+
+.track-fade-left,
+.track-fade-right {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.track-fade-left  { left: 0;  background: linear-gradient(90deg, #0A0A0F, transparent); }
+.track-fade-right { right: 0; background: linear-gradient(-90deg, #0A0A0F, transparent); }
+
+.drag-hint {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.2);
+  margin-top: -16px;
+}
+
+/* =========================================================
+   ROLE CARD
+   ========================================================= */
+
+.role-card {
+  --rot-x: 0deg;
+  --rot-y: 0deg;
+  --shift-x: 0px;
+  --shift-y: 0px;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  flex-shrink: 0;
+  width: 300px;
+  min-height: 400px;
+  border-radius: 24px;
+  scroll-snap-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* Animated gradient body — brand colors only */
+  background:
+    linear-gradient(135deg,
+      rgba(98, 54, 255, 0.12) 0%,
+      rgba(6, 11, 26, 0.82) 45%,
+      rgba(47, 211, 255, 0.08) 100%
+    );
+  background-size: 300% 300%;
+  animation: cardBodyGrad 8s ease infinite;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(98, 54, 255, 0.28);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(98, 54, 255, 0.12);
+
+  transform:
+    rotateX(var(--rot-x))
+    rotateY(var(--rot-y))
+    translate(var(--shift-x), var(--shift-y))
+    scale(1);
+  transform-style: preserve-3d;
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out;
+  will-change: transform;
+  cursor: default;
+}
+
+.role-card.hovered {
+  transform:
+    rotateX(var(--rot-x))
+    rotateY(var(--rot-y))
+    translate(var(--shift-x), var(--shift-y))
+    scale(1.04);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 50px rgba(98, 54, 255, 0.35),
+    0 0 20px rgba(47, 211, 255, 0.12);
+  border-color: rgba(98, 54, 255, 0.55);
+}
+
+/* Neighbour card gets a subtle glow when adjacent card is hovered */
+.role-card.neighbour-glow {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(98, 54, 255, 0.22);
+  border-color: rgba(98, 54, 255, 0.38);
+}
+
+/* Neural pulse ring */
+.role-card.pulsing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  border: 2px solid rgba(98, 54, 255, 0.55);
+  animation: neuralPulse 1.4s ease-out forwards;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  border: 2px solid rgba(98, 54, 255, 0.7);
+  animation: neuralPulse 1.4s ease-out forwards;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@keyframes neuralPulse {
+  0%   { transform: scale(1);   opacity: 0.6;  border-color: rgba(98, 54, 255, 0.7); }
+  60%  { transform: scale(1.06); opacity: 0.3; border-color: rgba(47, 211, 255, 0.4); }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
+/* Liquid cursor reflection */
+.card-reflection {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+  z-index: 2;
+  backdrop-filter: blur(0px);
+}
+
+/* Top gradient banner — base */
+.card-top-banner {
+  height: 110px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: #060B1A;
+}
+
+/* ── Per-card AI-generated image backgrounds ── */
+.card-banner-1 { background: url('/career_banner_1.png') center/cover no-repeat; }
+.card-banner-2 { background: url('/career_banner_2.png') center/cover no-repeat; }
+.card-banner-3 { background: url('/career_banner_3.png') center/cover no-repeat; }
+.card-banner-4 { background: url('/career_banner_4.png') center/cover no-repeat; }
+.card-banner-5 { background: url('/career_banner_5.png') center/cover no-repeat; }
+
+/* ── Abstract floating orbs that physically MOVE ── */
+.banner-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+/* Orb 1 — large, purple, orbits top-left → top-right */
+.banner-orb-1 {
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, rgba(98,54,255,0.85), rgba(98,54,255,0.1));
+  top: -20px;
+  left: -20px;
+  animation: orb1Move 5s ease-in-out infinite alternate;
+}
+
+/* Orb 2 — medium, cyan, moves bottom-right → top-left diagonal */
+.banner-orb-2 {
+  width: 70px;
+  height: 70px;
+  background: radial-gradient(circle, rgba(47,211,255,0.8), rgba(47,211,255,0.05));
+  bottom: -10px;
+  right: 20px;
+  animation: orb2Move 4s ease-in-out infinite alternate;
+}
+
+/* Orb 3 — small, violet accent, drifts center */
+.banner-orb-3 {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, rgba(168,85,247,0.75), rgba(168,85,247,0.05));
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: orb3Move 6s ease-in-out infinite alternate;
+}
+
+/* Stagger animations per card so they don't all move identically */
+.card-banner-1 .banner-orb-1 { animation-duration: 4.5s; }
+.card-banner-2 .banner-orb-1 { animation-duration: 5.5s; animation-direction: alternate-reverse; }
+.card-banner-3 .banner-orb-1 { animation-duration: 4s;   animation-delay: -1s; }
+.card-banner-4 .banner-orb-1 { animation-duration: 6s;   animation-direction: alternate-reverse; }
+.card-banner-5 .banner-orb-1 { animation-duration: 5s;   animation-delay: -2s; }
+
+.card-banner-1 .banner-orb-2 { animation-duration: 3.5s; animation-delay: -0.5s; }
+.card-banner-2 .banner-orb-2 { animation-duration: 4.5s; }
+.card-banner-3 .banner-orb-2 { animation-duration: 3.8s; animation-direction: alternate-reverse; }
+.card-banner-4 .banner-orb-2 { animation-duration: 5.2s; animation-delay: -1.5s; }
+.card-banner-5 .banner-orb-2 { animation-duration: 4s;   animation-direction: alternate-reverse; }
+
+.card-banner-1 .banner-orb-3 { animation-duration: 5s; }
+.card-banner-2 .banner-orb-3 { animation-duration: 6.5s; animation-delay: -2s; }
+.card-banner-3 .banner-orb-3 { animation-duration: 5.5s; animation-direction: alternate-reverse; }
+.card-banner-4 .banner-orb-3 { animation-duration: 4.5s; animation-delay: -1s; }
+.card-banner-5 .banner-orb-3 { animation-duration: 7s;   animation-delay: -3s; }
+
+@keyframes orb1Move {
+  0%   { transform: translate(0px,  0px)  scale(1); }
+  33%  { transform: translate(80px, 20px) scale(1.15); }
+  66%  { transform: translate(160px,-10px) scale(0.9); }
+  100% { transform: translate(220px, 30px) scale(1.1); }
+}
+
+@keyframes orb2Move {
+  0%   { transform: translate(0px,   0px)  scale(1); }
+  40%  { transform: translate(-70px,-30px) scale(1.2); }
+  80%  { transform: translate(-140px,15px) scale(0.85); }
+  100% { transform: translate(-200px,-20px) scale(1.05); }
+}
+
+@keyframes orb3Move {
+  0%   { transform: translateX(-50%) translateY(0px)   scale(1); }
+  30%  { transform: translateX(-80%) translateY(-20px) scale(1.3); }
+  70%  { transform: translateX(-20%) translateY(15px)  scale(0.8); }
+  100% { transform: translateX(-50%) translateY(-10px) scale(1.1); }
+}
+
+/* ── Scrolling grid lines over banner ── */
+.banner-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(47,211,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,211,255,0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  animation: bannerGridScroll 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes bannerGridScroll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 24px 24px; }
+}
+
+/* ── Pulsing ring that expands from center ── */
+.banner-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(98,54,255,0.5);
+  animation: ringPulse 3s ease-out infinite;
+  pointer-events: none;
+}
+
+.banner-ring::before {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(47,211,255,0.25);
+  animation: ringPulse 3s ease-out infinite 0.8s;
+}
+
+@keyframes ringPulse {
+  0%   { transform: translate(-50%,-50%) scale(0.6); opacity: 0.7; }
+  80%  { transform: translate(-50%,-50%) scale(2.2); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+
+
+/* Status badge */
+.status-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #2FD3FF;
+  background: rgba(47, 211, 255, 0.12);
+  border: 1px solid rgba(47, 211, 255, 0.38);
+  border-radius: 20px;
+  padding: 3px 10px;
+  z-index: 5;
+}
+
+/* Card content */
+.card-content {
+  flex: 1;
+  padding: 20px 22px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 3;
+}
+
+.role-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.role-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.role-tag {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+/* Hover-reveal overview */
+.role-overview {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 350ms ease, opacity 350ms ease;
+  opacity: 0;
+}
+
+.role-overview.visible {
+  max-height: 120px;
+  opacity: 1;
+}
+
+.overview-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2FD3FF;
+  margin-bottom: 5px;
+}
+
+.overview-text {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Footer button */
+.card-footer {
+  padding: 0 22px 22px;
+  position: relative;
+  z-index: 3;
+}
+
+.apply-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #6236FF, #2FD3FF);
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.04em;
+  transition: box-shadow 250ms ease, transform 250ms ease;
+}
+
+.apply-btn:hover {
+  box-shadow: 0 0 22px rgba(98, 54, 255, 0.55), 0 0 8px rgba(47, 211, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Neural connector SVG overlay */
+.neural-connector {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 30;
+  overflow: visible;
+}
+
+.nc-line {
+  stroke-dashoffset: 0;
+  animation: dashFlow 1s linear infinite;
+  filter: drop-shadow(0 0 4px #6236FF);
+}
+
+@keyframes dashFlow {
+  to { stroke-dashoffset: -20; }
+}
+
+/* =========================================================
+   MOBILE RESPONSIVENESS
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .careers-section {
+    padding: 60px 0 50px;
+  }
+  
+  .careers-header {
+    margin-bottom: 30px;
+  }
+  
+  .careers-desc {
+    font-size: 0.9rem;
+  }
+  
+  /* Reduce track padding on sides for smaller screens */
+  .careers-track {
+    padding: 20px 20px 40px;
+    gap: 20px;
+  }
+  
+  .track-fade-left,
+  .track-fade-right {
+    width: 20px;
+  }
+  
+  /* Scale down cards */
+  .role-card {
+    width: 260px;
+    min-height: 380px;
+  }
+  
+  .card-top-banner {
+    height: 90px;
+  }
+  
+  .card-content {
+    padding: 16px 18px 10px;
+  }
+  
+  .role-title {
+    font-size: 1.05rem;
+  }
+  
+  .role-tag {
+    font-size: 0.6rem;
+    padding: 2px 8px;
+  }
+  
+  .card-footer {
+    padding: 0 18px 18px;
+  }
+  
+  /* Remove heavy 3D hover effects on touch devices */
+  @media (hover: none) {
+    .role-card.hovered {
+      transform: none !important;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(98, 54, 255, 0.12) !important;
+    }
+    
+    .role-overview {
+      max-height: 120px;
+      opacity: 1;
+    }
+  }
+}

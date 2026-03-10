@@ -1,0 +1,289 @@
+/* =========================================================
+   AI HERO PANEL – Advanced Medical Diagnostic HUD
+   ========================================================= */
+
+.ai-hero-panel {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: rgba(10, 15, 35, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(98, 54, 255, 0.28);
+  border-radius: 24px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 0 80px rgba(98, 54, 255, 0.22),
+    inset 0 0 0 1px rgba(47, 211, 255, 0.07);
+  transition: box-shadow 0.4s ease;
+  cursor: crosshair;
+  min-height: 480px;
+}
+
+.ai-hero-panel:hover {
+  box-shadow:
+    0 0 130px rgba(98, 54, 255, 0.42),
+    0 0 50px rgba(47, 211, 255, 0.18),
+    inset 0 0 0 1px rgba(47, 211, 255, 0.18);
+}
+
+/* ── Grid overlay ── */
+.panel-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(47, 211, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 211, 255, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  border-radius: 24px;
+  z-index: 0;
+}
+
+/* ── Neural network canvas ── */
+.neural-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 24px;
+}
+
+/* ── Ripple rings ── */
+.ripple-ring {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #2FD3FF;
+  pointer-events: none;
+  z-index: 20;
+  animation: rippleExpand 1.1s ease-out forwards;
+  box-shadow: 0 0 12px rgba(47, 211, 255, 0.7), inset 0 0 6px rgba(98, 54, 255, 0.4);
+}
+
+@keyframes rippleExpand {
+  0%   { width: 10px; height: 10px; opacity: 0.8; border-color: #2FD3FF; }
+  50%  { border-color: #6236FF; }
+  100% { width: 140px; height: 140px; opacity: 0; margin-left: -65px; margin-top: -65px; }
+}
+
+/* ── Corner brackets ── */
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  z-index: 10;
+  pointer-events: none;
+}
+.corner-tl { top: 10px; left: 10px; border-top: 2px solid #2FD3FF; border-left: 2px solid #2FD3FF; border-radius: 4px 0 0 0; }
+.corner-tr { top: 10px; right: 10px; border-top: 2px solid #2FD3FF; border-right: 2px solid #2FD3FF; border-radius: 0 4px 0 0; }
+.corner-bl { bottom: 10px; left: 10px; border-bottom: 2px solid #6236FF; border-left: 2px solid #6236FF; border-radius: 0 0 0 4px; }
+.corner-br { bottom: 10px; right: 10px; border-bottom: 2px solid #6236FF; border-right: 2px solid #6236FF; border-radius: 0 0 4px 0; }
+
+/* ── Header ── */
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 5;
+}
+
+.panel-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2FD3FF;
+  box-shadow: 0 0 10px #2FD3FF;
+  animation: dotPulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px #2FD3FF; }
+  50%       { opacity: 0.5; box-shadow: 0 0 3px #2FD3FF; }
+}
+
+.panel-title {
+  font-size: 0.61rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #2FD3FF;
+  font-weight: 600;
+  flex: 1;
+}
+
+.panel-sys-status {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.status-active { color: #2FD3FF; font-weight: 700; }
+
+/* ── Body panel ── */
+.panel-body-area {
+  flex: 1;
+  position: relative;
+  min-height: 230px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scan line */
+.scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2FD3FF 30%, #6236FF 70%, transparent);
+  box-shadow: 0 0 18px rgba(47, 211, 255, 0.7), 0 0 6px rgba(98, 54, 255, 0.5);
+  z-index: 8;
+  pointer-events: none;
+}
+
+/* Body SVG wrapper */
+.body-svg-wrapper {
+  position: relative;
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.body-svg {
+  width: 130px;
+  height: auto;
+  filter: drop-shadow(0 0 10px rgba(47, 211, 255, 0.45));
+  overflow: visible;
+}
+
+/* Organ label overlays */
+.organ-label {
+  position: absolute;
+  background: rgba(10, 15, 35, 0.75);
+  border: 1px solid rgba(47, 211, 255, 0.25);
+  border-radius: 6px;
+  padding: 3px 8px;
+  pointer-events: none;
+  z-index: 9;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  transition: opacity 0.3s ease, border-color 0.3s, box-shadow 0.3s;
+}
+
+.organ-label--active {
+  opacity: 1;
+  border-color: rgba(47, 211, 255, 0.7);
+  box-shadow: 0 0 12px rgba(47, 211, 255, 0.4);
+}
+
+.organ-name {
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  color: #2FD3FF;
+  text-transform: uppercase;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.organ-value {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+/* ── ECG Strip ── */
+.ecg-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(6, 11, 26, 0.65);
+  border: 1px solid rgba(47, 211, 255, 0.14);
+  border-radius: 10px;
+  padding: 5px 12px;
+  position: relative;
+  z-index: 5;
+}
+
+.ecg-label {
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  color: #2FD3FF;
+  text-transform: uppercase;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ecg-canvas {
+  flex: 1;
+  display: block;
+  height: 36px;
+  max-width: 100%;
+}
+
+/* ── Footer Progress ── */
+.panel-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  z-index: 5;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-status-text {
+  font-size: 0.67rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.04em;
+  min-width: 200px;
+}
+
+.progress-pct {
+  font-size: 0.67rem;
+  font-weight: 700;
+  color: #6236FF;
+}
+
+.progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(98, 54, 255, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(98, 54, 255, 0.18);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6236FF, #2FD3FF);
+  border-radius: 10px;
+  position: relative;
+  transition: width 0.06s linear;
+}
+
+.progress-glow {
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #2FD3FF;
+  box-shadow: 0 0 10px #2FD3FF, 0 0 3px #6236FF;
+}

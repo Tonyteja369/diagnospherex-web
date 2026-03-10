@@ -1,0 +1,156 @@
+.footer {
+  margin-top: 100px;
+  padding: 60px 40px 40px;
+  border-radius: 40px 40px 0 0;
+  border-bottom: none;
+  background: rgba(10, 10, 15, 0.8);
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.footer-brand {
+  flex: 1.5;
+  min-width: 280px;
+}
+
+.footer-logo {
+  margin-bottom: 16px;
+}
+
+.footer-tagline {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.footer-links {
+  display: flex;
+  flex: 2;
+  gap: 60px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.link-title {
+  color: var(--color-text-primary);
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.contact-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+}
+
+.contact-value {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s;
+}
+
+.contact-value.link:hover {
+  color: var(--color-cyan);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  width: fit-content;
+}
+
+.profile-link:hover {
+  color: #fff;
+  background: rgba(98, 54, 255, 0.15);
+  border-color: rgba(98, 54, 255, 0.3);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.founder-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(90deg, rgba(98, 54, 255, 0.1), rgba(47, 211, 255, 0.1));
+  border: 1px solid rgba(98, 54, 255, 0.3);
+  border-radius: 30px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-message {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* Base utility overrides since we used Tailwind classes in TSX */
+.text-white { color: #ffffff; }
+.text-cyan { color: #2FD3FF; }
+.font-semibold { font-weight: 600; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mr-2 { margin-right: 0.5rem; }
+.mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.max-w-2xl { max-width: 42rem; }
+.inline { display: inline-block; }
+.opacity-50 { opacity: 0.5; }
+
+@media (max-width: 768px) {
+  .footer-links {
+    gap: 40px;
+    justify-content: flex-start;
+  }
+}
