@@ -72,6 +72,59 @@
   .split-panel { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 767px) {
+  .interactive-report-section {
+    padding: 64px 16px 56px;
+  }
+
+  .report-header {
+    margin-bottom: 24px;
+  }
+
+  .demo-tabs {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .demo-tab {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  .split-left,
+  .split-right {
+    padding: 18px 14px;
+    border-radius: 16px;
+    gap: 12px;
+  }
+
+  .ai-summary {
+    font-size: 0.85rem;
+  }
+
+  .ai-point {
+    padding: 8px 10px;
+  }
+
+  .ai-point p {
+    font-size: 0.8rem;
+  }
+
+  .report-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .row-label {
+    font-size: 0.78rem;
+  }
+
+  .row-value {
+    font-size: 0.82rem;
+  }
+}
+
 /* ── Glass panel base (reuse existing class) ── */
 .split-left,
 .split-right {

@@ -10,13 +10,28 @@ interface NavbarProps {
 const Navbar = ({ onOpenModal }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isIdle, setIsIdle] = useState(false);
 
   useEffect(() => {
+    let idleTimer: ReturnType<typeof setTimeout>;
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      setIsIdle(false);
+      clearTimeout(idleTimer);
+
+      if (window.scrollY > 50) {
+        idleTimer = setTimeout(() => {
+          setIsIdle(true);
+        }, 2000); // 2 seconds of no scrolling triggers idle fade
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(idleTimer);
+    };
   }, []);
 
   const navLinks = [
@@ -36,10 +51,11 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <div className="navbar glass-panel">
+      <div className={`navbar glass-panel ${isIdle ? 'nav-idle' : ''}`}>
         <div className="navbar-logo">
           <div className="navbar-logo-pill">
             <img src="/logo1.png" alt="DiagnoSphereX Logo" className="navbar-logo-img" loading="lazy" />
+            <span className="logo-text ml-2">DiagnoSphereX</span>
           </div>
         </div>
 

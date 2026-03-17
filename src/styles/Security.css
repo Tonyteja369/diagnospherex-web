@@ -180,3 +180,50 @@
   line-height: 1.7;
   margin: 0;
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 767px) {
+  .security-section {
+    padding: 64px 16px;
+  }
+
+  /* Disable costly grid animation on mobile */
+  .security-grid-bg {
+    animation: none;
+    background-size: 60px 60px;
+    opacity: 0.4;
+  }
+
+  .security-header {
+    margin-bottom: 32px;
+  }
+
+  .security-desc {
+    font-size: 0.95rem;
+  }
+
+  /* 2-col grid → 1 col on mobile */
+  .principles-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .principle-card {
+    padding: 20px 18px;
+    border-radius: 16px;
+    /* Disable float animations on mobile */
+    animation: none;
+  }
+
+  .transparency-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .transparency-text {
+    font-size: 0.88rem;
+  }
+}

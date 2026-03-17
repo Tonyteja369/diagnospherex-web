@@ -16,6 +16,7 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
       </div>
 
       <div className="container">
+        
         <div className="hero-content">
           <div className="hero-text-container">
             <motion.h1
@@ -24,8 +25,8 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Medical Intelligence,<br />
-              Reimagined with <span className="text-gradient">AI</span>
+              From Reports to <br />
+              <span className="text-gradient">Real Insights</span> — Instantly
             </motion.h1>
 
             <motion.p
@@ -34,9 +35,8 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              DiagnoSphereX transforms complex medical reports,<br />
-              clinical data, and diagnostic information into<br />
-              clear, actionable insights powered by artificial intelligence.
+              AI That Explains, Not Just Analyzes. Transform complex medical data 
+              into clear, actionable intelligence in seconds.
             </motion.p>
 
             <motion.div
@@ -44,7 +44,6 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}
             >
               <button 
                 className="btn-primary ripple-btn glow-effect elevation-3d"
@@ -54,14 +53,11 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
                 Join Early Access
               </button>
 
-              <div 
-                className="social-proof-badge" 
-                style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginTop: '8px' }}
-              >
-                <div style={{ display: 'flex', position: 'relative', width: '60px', height: '28px' }}>
-                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#4F46E5', position: 'absolute', left: 0, border: '2px solid var(--color-bg-black)' }}></div>
-                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#EC4899', position: 'absolute', left: '16px', border: '2px solid var(--color-bg-black)' }}></div>
-                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#10B981', position: 'absolute', left: '32px', border: '2px solid var(--color-bg-black)' }}></div>
+              <div className="social-proof-badge">
+                <div className="avatar-group">
+                  <div className="avatar" style={{ background: '#4F46E5', left: 0 }}></div>
+                  <div className="avatar" style={{ background: '#EC4899', left: '16px' }}></div>
+                  <div className="avatar" style={{ background: '#10B981', left: '32px' }}></div>
                 </div>
                 <span><strong>50+</strong> people showed interest • Early users joining</span>
               </div>

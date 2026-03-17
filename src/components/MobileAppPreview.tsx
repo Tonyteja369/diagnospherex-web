@@ -31,13 +31,14 @@ const Screen1Dashboard = () => {
     <div className="app-screen screen1">
       {/* Header */}
       <div className="app-header">
-        <div className="app-logo-dot" />
-        <div>
-          <div className="app-brand">DiagnoSphereX</div>
-          <div className="app-greeting">Good morning, Dr. Williams</div>
+        <div className="nav-left">
+          <div className="app-logo-dot" />
+          <span className="nav-brand">DiagnoSphereX</span>
         </div>
         <div className="app-avatar">DW</div>
       </div>
+      
+      <div className="app-greeting">Good morning, Dr. Williams</div>
       <div className="app-sub">Clinical Intelligence Overview</div>
 
       {/* Stats grid */}
@@ -130,12 +131,13 @@ const Screen2Analyzer = () => {
     <div className="app-screen screen2">
       {/* Header */}
       <div className="app-header">
-        <div className="app-logo-dot" />
-        <div>
-          <div className="app-brand">DiagnoSphereX</div>
-          <div className="app-greeting">Report Assistant</div>
+        <div className="nav-left">
+          <div className="app-logo-dot" />
+          <span className="nav-brand">DiagnoSphereX</span>
         </div>
       </div>
+
+      <div className="app-greeting">Report Assistant</div>
       <div className="app-sub">Transform clinical data into clear insights.</div>
 
       {/* Upload section */}
@@ -212,6 +214,28 @@ const PhoneFrame = ({ children, tilt }: { children: React.ReactNode; tilt?: stri
 /* ---- Main Export ---- */
 const MobileAppPreview = () => (
   <div className="mobile-preview-container">
+    {/* Decorative background elements to fill space */}
+    <div className="preview-bg-glow"></div>
+    <div className="floating-element badge-1">
+      <div className="badge-icon">
+        <Upload size={14} color="#2FD3FF" />
+      </div>
+      <div className="badge-text">
+        <span className="badge-title">Data Sync</span>
+        <span className="badge-sub">Real-time active</span>
+      </div>
+    </div>
+    
+    <div className="floating-element badge-2">
+      <div className="badge-icon purple">
+        <Info size={14} color="#6236FF" />
+      </div>
+      <div className="badge-text">
+        <span className="badge-title">AI Engine</span>
+        <span className="badge-sub">99.9% Uptime</span>
+      </div>
+    </div>
+
     <PhoneFrame tilt="rotate(-4deg) translateY(10px)">
       <Screen1Dashboard />
     </PhoneFrame>

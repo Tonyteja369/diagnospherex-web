@@ -4,7 +4,9 @@ import { Float, Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import '../styles/NeuralGlobe.css';
 
-const NODE_COUNT = 1500;
+// Detect mobile once at module level for node count
+const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
+const NODE_COUNT = isMobileDevice ? 400 : 1500;
 const RADIUS = 3;
 
 const SphereNetwork = () => {
@@ -153,8 +155,17 @@ const ParticleField = () => {
 
 export default function NeuralGlobe() {
   const [rippleActive, setRippleActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 480);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const handleClick = () => {
+    if (isMobile) return;
     setRippleActive(true);
     setTimeout(() => setRippleActive(false), 1000);
   };
@@ -168,12 +179,16 @@ export default function NeuralGlobe() {
     return () => window.removeEventListener('signatureActivated', handleSignature);
   }, []);
 
+  // On very small screens hide the globe entirely to save resources
+  if (isMobile) return null;
+
   return (
     <div className="neural-globe-container" onClick={handleClick}>
       {rippleActive && <div className="canvas-ripple" />}
       <Canvas 
         camera={{ position: [0, 0, 7], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: !isMobileDevice, alpha: true }}
+        style={{ pointerEvents: 'none' }}
       >
         <color attach="background" args={['transparent']} />
         
@@ -186,7 +201,8 @@ export default function NeuralGlobe() {
           <SphereNetwork />
         </Float>
         
-        <ParticleField />
+        {/* Skip particle field on mobile for performance */}
+        {!isMobileDevice && <ParticleField />}
       </Canvas>
     </div>
   );

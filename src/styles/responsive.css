@@ -1,121 +1,677 @@
-/* =========================================
-   CENTRALIZED RESPONSIVE SYSTEM
-   Overrides for mobile devices (max-width: 768px)
-   ========================================= */
+/* =========================================================
+   DIAGNOSHEREX – CENTRALIZED RESPONSIVE SYSTEM
+   Breakpoints:
+     Mobile  : max-width 767px
+     Tablet  : 768px – 1023px
+     Desktop : 1024px+
+   ========================================================= */
 
-@media (max-width: 768px) {
-  /* 
-   * 1. STACK LAYOUTS 
-   * Convert side-by-side flex/grid to column
-   */
-  .hero-content,
-  .hero-container,
-  .info-container,
-  .careers-container,
-  .footer-content,
-  .capabilities-container,
-  .capabilities-content,
+/* ── 0. Global safe-area / overflow guards ── */
+html, body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent any absolute-positioned element from causing horizontal scroll */
+.hero-section,
+.capabilities-section,
+.careers-section,
+.mobile-preview-section,
+.security-section,
+.footer {
+  overflow-x: hidden;
+}
+
+/* ── 1. Pointer-events fix for Three.js / canvas layers ── */
+canvas,
+.neural-globe-container canvas,
+.neural-canvas,
+.vp-energy-canvas,
+.animated-bg canvas {
+  pointer-events: none !important;
+}
+
+/* ── 2. Touch-friendly minimum sizes ── */
+@media (hover: none) {
+  button,
+  a,
+  [role="button"],
+  .apply-btn,
+  .submit-btn,
+  .cta-btn,
+  .btn-primary,
+  .btn-secondary,
+  .vp-dot,
+  .mobile-menu-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ── 3. Disable hover-only visual effects on touch devices ── */
+@media (hover: none) {
+  .glow-effect:hover,
+  .elevation-3d:hover,
+  .phone-frame:hover,
+  .role-card.hovered,
+  .vp-panel.vp-active:hover,
+  .glass-card:hover,
+  .profile-link:hover,
+  .apply-btn:hover,
+  .navbar:hover,
+  .navbar-logo-pill:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+  /* Keep active/tap states responsive */
+  button:active,
+  a:active,
+  .apply-btn:active,
+  .btn-primary:active {
+    transform: scale(0.97) !important;
+    opacity: 0.9;
+  }
+}
+
+/* ── 4. Animation performance – reduce on mobile ── */
+@media (max-width: 767px) {
+  /* Only allow fast, cheap transitions */
+  * {
+    transition-duration: 0.2s !important;
+    animation-duration: 0.5s !important;
+  }
+
+  /* Suppress very heavy animations by name */
+  .gradient-waves {
+    animation: none !important;
+  }
+  .vp-grid-bg {
+    animation: none !important;
+  }
+  .banner-orb-1, .banner-orb-2, .banner-orb-3 {
+    animation: none !important;
+  }
+  .banner-grid-lines {
+    animation: none !important;
+  }
+
+  /* Hide heavy decorative layers */
+  .particle-layer,
+  .ambient-glow,
+  .panel-grid,
+  .scan-line {
+    display: none !important;
+  }
+}
+
+/* ── 5. Reduce motion system preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* =========================================================
+   TABLET  768px – 1023px
+   ========================================================= */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  /* Hero */
+  .hero-section {
+    padding: 100px 20px 60px;
+  }
+  .hero-headline {
+    font-size: clamp(2rem, 4vw, 3.2rem) !important;
+  }
+  .hero-3d-container {
+    min-height: 450px;
+  }
+
+  /* Navbar */
+  .navbar-links {
+    gap: 20px;
+  }
+
+  /* Capabilities */
+  .vp-stage {
+    height: 320px;
+  }
+  .vp-track, .vp-panel {
+    width: 320px;
+    height: 260px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 50px 24px 36px;
+  }
+  .footer-content {
+    gap: 32px;
+  }
+  .footer-links {
+    gap: 32px;
+  }
+
+  /* Demo Page */
+  .demo-section {
+    padding: 100px 20px 60px;
+  }
+
+  /* Application page */
+  .application-glass-panel {
+    padding: 40px 36px;
+  }
+}
+
+/* =========================================================
+   MOBILE  max-width 767px
+   ========================================================= */
+@media (max-width: 767px) {
+
+  /* ── 5.1 Container ── */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* ── 5.2 Global section spacing ── */
+  section {
+    padding: 64px 0 !important;
+  }
+
+  /* ── 5.3 Typography scale ── */
+  h1 {
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important;
+    line-height: 1.15 !important;
+    word-break: break-word;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.2 !important;
+  }
+  h3 {
+    font-size: clamp(1.1rem, 5vw, 1.4rem) !important;
+    line-height: 1.3 !important;
+  }
+  p {
+    font-size: 0.95rem !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── 5.4 NAVBAR ── */
+  .navbar-container {
+    padding: 12px 12px;
+  }
+  .navbar {
+    padding: 10px 16px;
+    border-radius: 20px;
+  }
+  .navbar-logo-pill {
+    padding: 5px 12px;
+  }
+  .navbar-logo-img {
+    height: 30px;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
+  .mobile-menu {
+    top: 72px;
+    left: 12px;
+    right: 12px;
+    border-radius: 16px;
+    padding: 20px;
+    gap: 12px;
+  }
+  .mobile-nav-link {
+    font-size: 1rem;
+    padding: 12px 0;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+  /* Mobile menu CTA button – full width, good touch target */
+  .mobile-menu .btn-primary {
+    width: 100% !important;
+    min-height: 50px !important;
+    font-size: 1rem;
+    margin-top: 8px;
+    border-radius: 16px;
+  }
+
+  /* ── 5.5 HERO SECTION ── */
+  .hero-section {
+    padding: 100px 16px 60px !important;
+    min-height: auto;
+  }
+  .hero-content {
+    flex-direction: column-reverse !important;
+    gap: 32px;
+    align-items: center;
+  }
+  .hero-text-container {
+    width: 100%;
+    text-align: center;
+    gap: 16px;
+  }
+  .hero-headline {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+  }
+  .hero-subheadline {
+    font-size: 1rem !important;
+    max-width: 100%;
+  }
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100% !important;
+    text-align: center;
+    justify-content: center;
+    min-height: 52px;
+    font-size: 1rem;
+  }
+  .hero-3d-container {
+    width: 100%;
+    min-height: 260px;
+  }
+  /* Logo panel inside hero 3D container */
+  .hero-logo-panel {
+    padding: 20px 28px;
+    width: 85%;
+    max-width: 280px;
+    border-radius: 20px;
+  }
+  .hero-logo-img {
+    max-width: 200px;
+    max-height: 120px;
+  }
+  /* NeuralGlobe: reduce node count handled via props, ensure canvas fits */
+  .neural-globe-container {
+    width: 100% !important;
+    height: 260px !important;
+  }
+
+  /* ── 5.6 AI HERO PANEL ── */
+  .ai-hero-panel {
+    max-width: 100%;
+    min-height: auto;
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+  /* Disable hover-only glow on touch */
+  .ai-hero-panel:hover {
+    box-shadow:
+      0 0 80px rgba(98, 54, 255, 0.22),
+      inset 0 0 0 1px rgba(47, 211, 255, 0.07) !important;
+  }
+  .ai-hero-panel {
+    cursor: default !important;
+  }
+  .body-svg-wrapper {
+    width: 100px;
+  }
+  .body-svg {
+    width: 100px;
+  }
+  .panel-body-area {
+    min-height: 180px;
+  }
+
+  /* ── 5.7 PLATFORM CAPABILITIES ── */
+  .capabilities-section {
+    padding: 60px 0 50px !important;
+  }
+  .capabilities-header {
+    margin-bottom: 24px;
+    padding: 0 16px;
+  }
+  .vp-stage {
+    height: 360px;
+    perspective: 600px;
+    cursor: default;
+  }
+  .vp-track {
+    width: 280px;
+    height: 300px;
+  }
+  .vp-panel {
+    width: 280px;
+    height: 300px;
+    padding: 20px 18px 16px;
+  }
+  .vp-title {
+    font-size: 1rem !important;
+  }
+  .vp-desc {
+    font-size: 0.82rem !important;
+  }
+  /* Dots – make them tappable */
+  .vp-dot {
+    min-width: 24px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .vp-dot::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: inherit;
+    box-shadow: inherit;
+  }
+  /* Turn off 3D interactive drag hint */
+  .vp-stage {
+    cursor: default !important;
+  }
+  .drag-hint {
+    display: none;
+  }
+
+  /* ── 5.8 MOBILE APP PREVIEW (section wrapper) ── */
+  .mobile-preview-container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px 16px;
+  }
+  .phone-frame {
+    width: 180px;
+  }
+  /* Show only the first phone on very small screens */
+  .phone-frame:nth-child(2) {
+    display: none;
+  }
+
+  /* ── 5.9 CAREERS ── */
+  .careers-section {
+    padding: 60px 0 50px !important;
+  }
+  .careers-header {
+    margin-bottom: 24px;
+    padding: 0 16px;
+  }
+  .careers-desc {
+    font-size: 0.9rem !important;
+  }
+  .careers-track {
+    padding: 16px 16px 36px;
+    gap: 16px;
+  }
+  .track-fade-left,
+  .track-fade-right {
+    width: 16px;
+  }
+  .role-card {
+    width: 260px;
+    min-height: 360px;
+  }
+  .card-top-banner {
+    height: 80px;
+  }
+  /* Always show overview on mobile (no hover needed) */
+  .role-overview {
+    max-height: 200px !important;
+    opacity: 1 !important;
+  }
+
+  /* ── 5.10 FOOTER ── */
+  .footer {
+    padding: 48px 20px 32px;
+    border-radius: 24px 24px 0 0;
+    margin-top: 60px;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .footer-brand {
+    min-width: unset;
+    flex: none;
+  }
+  .footer-links {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 32px;
+  }
+  .link-group {
+    min-width: unset;
+  }
+  .footer-tagline {
+    max-width: 100%;
+  }
+  .footer-bottom {
+    margin-top: 40px;
+  }
+
+  /* ── 5.11 DEMO PAGE ── */
+  .demo-section {
+    padding: 100px 16px 60px !important;
+  }
+  .demo-container {
+    gap: 28px;
+  }
+  .demo-title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem) !important;
+  }
+  .demo-subtitle {
+    font-size: 0.95rem !important;
+  }
+  .search-bar {
+    padding: 12px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .search-bar input {
+    font-size: 1rem;
+  }
+  .suggestions-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+  .suggestion-btn {
+    padding: 16px;
+    font-size: 0.95rem;
+    gap: 12px;
+    min-height: 64px;
+  }
+  .demo-processing {
+    padding: 24px 16px;
+    gap: 24px;
+  }
+  .processing-steps {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+  .step-connector {
+    width: 4px;
+    height: 24px;
+    margin: 0;
+    margin-bottom: 0 !important;
+  }
+  .connector-fill {
+    height: 0%;
+    width: 100%;
+    transition: height 1s ease-in-out;
+  }
+  .connector-fill.filled {
+    height: 100%;
+    width: 100%;
+  }
+  .processing-step {
+    width: auto;
+    min-width: 120px;
+  }
+  .result-main {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+  .result-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .result-header h3 {
+    font-size: 1.2rem !important;
+  }
+  .result-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .report-summary-box {
+    font-size: 0.95rem !important;
+    padding: 16px;
+  }
+
+  /* ── 5.12 APPLICATION PAGE ── */
+  .app-main {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+  .application-glass-panel {
+    padding: 24px 16px;
+    border-radius: 20px;
+  }
+  .app-title {
+    font-size: 1.6rem !important;
+  }
+  .input-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .submit-btn {
+    max-width: 100%;
+  }
+  .success-panel {
+    padding: 48px 16px;
+  }
+  .success-headline {
+    font-size: 1.6rem !important;
+  }
+  .success-msg {
+    font-size: 0.95rem !important;
+  }
+
+  /* ── 5.13 EARLY ACCESS MODAL ── */
+  .early-access-modal,
+  .modal-overlay > div,
+  .modal-content {
+    width: 95vw !important;
+    max-width: 420px;
+    padding: 24px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  /* ── 5.14 INTERACTIVE REPORT / SECURITY / ABOUT sections ── */
   .report-container,
-  .cta-content,
+  .security-container,
+  .info-container {
+    flex-direction: column !important;
+    gap: 24px;
+  }
+  .report-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  /* ── 5.15 LOGO SHOWCASE ── */
+  .logo-showcase-track {
+    gap: 24px;
+  }
+
+  /* ── 5.16 BRAIN SIMULATION ── */
   .brain-container {
     flex-direction: column !important;
   }
-
-  /* Grid fallbacks to single column */
-  .features-grid,
-  .roles-grid,
-  .stats-grid,
-  .grid-container,
-  .footer-links-grid,
-  .capabilities-grid,
-  .report-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* 
-   * 2. REMOVE FIXED DIMENSIONS 
-   * Prevent layout collapse from rigid widths
-   */
-  .hero-text-content,
-  .hero-visual,
-  .info-content,
-  .info-visual,
-  .role-card,
-  .stat-card,
-  .glass-card,
-  .glass-panel,
-  .capability-card,
-  .cta-box,
   .brain-model-container {
     width: 100% !important;
-    min-height: auto;
-    height: auto;
+    height: 240px;
   }
 
-  /* Reduce massive desktop paddings */
-  section {
-    padding: 60px 0 !important;
+  /* ── 5.17 TRUST BANNER ── */
+  .trust-banner-grid,
+  .trust-badges {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
   }
 
-  .hero-section {
-    padding-top: 120px !important;
-  }
-
-  /* 
-   * 3. ANIMATION OPTIMIZATION 
-   * Disable heavy layout animations, keep only transform/opacity
-   */
-  .heavy-animation,
-  .particle-layer,
-  .ambient-glow {
-    display: none !important;
-  }
-
-  * {
-    /* Standardize transition to avoid expensive paints on mobile */
-    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease !important;
-  }
-
-  /* 
-   * 4. TOUCH & MOBILE UX OPTIMIZATION
-   * Make interactive elements tappable and full width where appropriate
-   */
-  button, 
-  .btn-primary, 
-  .btn-secondary,
-  .apply-btn,
-  .submit-btn,
-  .cta-btn {
-    min-height: 48px !important;
-    width: 100% !important;
-    touch-action: manipulation !important;
-    margin-bottom: 12px;
-  }
-
-  /* Keep nav buttons normal */
-  .navbar button,
-  .modal-close,
-  .back-btn {
-    width: auto !important;
-    margin-bottom: 0;
-  }
-
-  /* Typography scaling */
-  h1 {
-    font-size: 2.5rem !important;
-    line-height: 1.2 !important;
-  }
-  
-  h2 {
-    font-size: 2rem !important;
-    line-height: 1.3 !important;
-  }
-
-  h3 {
-    font-size: 1.5rem !important;
-  }
-
-  p {
+  /* ── 5.18 INTERACTIVE BUTTONS – global ── */
+  .btn-primary, .btn-secondary,
+  .apply-btn, .submit-btn, .cta-btn {
+    min-height: 50px;
     font-size: 1rem !important;
+    border-radius: 16px;
+    touch-action: manipulation;
+  }
+
+  /* CTA nav button override (compact) */
+  .cta-nav {
+    padding: 12px 20px !important;
+    min-height: 44px !important;
+  }
+
+  /* ── 5.19 GENERAL CARD WIDTHS ── */
+  .glass-panel,
+  .glass-card,
+  .capability-card,
+  .cta-box {
+    width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* ── 5.20 Floating UI Preview ── */
+  .floating-ui-preview {
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE  max-width 400px (extra small phones)
+   ========================================================= */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.7rem !important;
+  }
+  .hero-logo-panel {
+    width: 92%;
+    padding: 16px 18px;
+  }
+  .hero-logo-img {
+    max-width: 160px;
+  }
+  .vp-track, .vp-panel {
+    width: 250px;
+  }
+  .role-card {
+    width: 240px;
+  }
+  .phone-frame {
+    width: 160px;
+  }
+  .navbar-container {
+    padding: 10px 8px;
+  }
+  .footer {
+    padding: 36px 12px 28px;
+  }
+  .suggestion-btn {
+    padding: 14px 12px;
+    font-size: 0.9rem;
   }
 }

@@ -10,6 +10,9 @@ const AnimatedBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth < 1024;
+
     let animId: number;
     let time = 0;
 
@@ -20,18 +23,22 @@ const AnimatedBackground = () => {
     resize();
     window.addEventListener('resize', resize);
 
-    // Heavy nebula orbs – violet, electric blue, black-white glow
-    const orbs = [
-      { x: 0.15, y: 0.2,  rx: 450, ry: 320, spx: 0.00018,  spy: 0.00010,  color: '98, 54, 255',    opacity: 0.22 }, // violet
-      { x: 0.80, y: 0.75, rx: 500, ry: 380, spx: -0.00015, spy: -0.00008, color: '59, 130, 246',   opacity: 0.18 }, // electric blue
-      { x: 0.50, y: 0.50, rx: 600, ry: 450, spx: 0.00008,  spy: 0.00012,  color: '150, 100, 255',  opacity: 0.12 }, // violet-blue blend
-      { x: 0.85, y: 0.15, rx: 360, ry: 260, spx: -0.00020, spy: 0.00015,  color: '34, 211, 238',   opacity: 0.10 }, // cyan acct
-      { x: 0.10, y: 0.85, rx: 420, ry: 320, spx: 0.00012,  spy: -0.00018, color: '200, 180, 255',  opacity: 0.08 }, // white-violet
-      { x: 0.60, y: 0.30, rx: 300, ry: 220, spx: -0.00010, spy: 0.00020,  color: '255, 255, 255',  opacity: 0.04 }, // bright white mist
-    ].map(o => ({ ...o, px: o.x, py: o.y, angle: 0 }));
+    // Reduce orbs on mobile for performance
+    const allOrbs = [
+      { x: 0.15, y: 0.2,  rx: 450, ry: 320, spx: 0.00018,  spy: 0.00010,  color: '98, 54, 255',    opacity: 0.22 },
+      { x: 0.80, y: 0.75, rx: 500, ry: 380, spx: -0.00015, spy: -0.00008, color: '59, 130, 246',   opacity: 0.18 },
+      { x: 0.50, y: 0.50, rx: 600, ry: 450, spx: 0.00008,  spy: 0.00012,  color: '150, 100, 255',  opacity: 0.12 },
+      { x: 0.85, y: 0.15, rx: 360, ry: 260, spx: -0.00020, spy: 0.00015,  color: '34, 211, 238',   opacity: 0.10 },
+      { x: 0.10, y: 0.85, rx: 420, ry: 320, spx: 0.00012,  spy: -0.00018, color: '200, 180, 255',  opacity: 0.08 },
+      { x: 0.60, y: 0.30, rx: 300, ry: 220, spx: -0.00010, spy: 0.00020,  color: '255, 255, 255',  opacity: 0.04 },
+    ];
 
-    // Fine particles
-    const NUM_P = 180;
+    // On mobile use only 2 orbs, tablet: 4, desktop: all 6
+    const orbCount = isMobile ? 2 : isTablet ? 4 : 6;
+    const orbs = allOrbs.slice(0, orbCount).map(o => ({ ...o, px: o.x, py: o.y, angle: 0 }));
+
+    // Reduce particles on mobile for performance
+    const NUM_P = isMobile ? 40 : isTablet ? 100 : 180;
     const pArr = Array.from({ length: NUM_P }, () => ({
       x: Math.random(),
       y: Math.random(),
@@ -42,8 +49,11 @@ const AnimatedBackground = () => {
       col: Math.random() > 0.5 ? '98,54,255' : '59,130,246',
     }));
 
+    // On mobile: slower time increment to ease CPU
+    const timeStep = isMobile ? 0.002 : 0.003;
+
     const draw = () => {
-      time += 0.003;
+      time += timeStep;
       const W = canvas.width, H = canvas.height;
 
       ctx.clearRect(0, 0, W, H);
@@ -63,12 +73,10 @@ const AnimatedBackground = () => {
         o.angle += o.spx;
         o.px += o.spy * Math.sin(time + o.py * 3);
         o.py += o.spx * Math.cos(time + o.px * 3);
-        // clamp
         o.px = Math.max(0, Math.min(1, o.px));
         o.py = Math.max(0, Math.min(1, o.py));
 
         const dx = o.px * W, dy = o.py * H;
-        // Inner core glow
         const g = ctx.createRadialGradient(dx, dy, 0, dx, dy, o.rx * (0.9 + 0.1 * Math.sin(time)));
         g.addColorStop(0,   `rgba(${o.color}, ${o.opacity * 1.6})`);
         g.addColorStop(0.3, `rgba(${o.color}, ${o.opacity})`);
@@ -83,21 +91,25 @@ const AnimatedBackground = () => {
         ctx.restore();
       });
 
-      // Subtle grid
-      ctx.strokeStyle = 'rgba(98, 54, 255, 0.04)';
-      ctx.lineWidth = 1;
-      const gs = 90;
-      for (let x = 0; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
-      for (let y = 0; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+      // Skip grid on mobile (expensive lines)
+      if (!isMobile) {
+        ctx.strokeStyle = 'rgba(98, 54, 255, 0.04)';
+        ctx.lineWidth = 1;
+        const gs = 90;
+        for (let x = 0; x < W; x += gs) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+        for (let y = 0; y < H; y += gs) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+      }
 
-      // Scan band
-      const sy = (Math.sin(time * 0.35) * 0.5 + 0.5) * H;
-      const sg = ctx.createLinearGradient(0, sy - 80, 0, sy + 80);
-      sg.addColorStop(0,   'rgba(98,54,255,0)');
-      sg.addColorStop(0.5, 'rgba(150,100,255,0.07)');
-      sg.addColorStop(1,   'rgba(98,54,255,0)');
-      ctx.fillStyle = sg;
-      ctx.fillRect(0, sy - 80, W, 160);
+      // Skip scan band on mobile
+      if (!isMobile) {
+        const sy = (Math.sin(time * 0.35) * 0.5 + 0.5) * H;
+        const sg = ctx.createLinearGradient(0, sy - 80, 0, sy + 80);
+        sg.addColorStop(0,   'rgba(98,54,255,0)');
+        sg.addColorStop(0.5, 'rgba(150,100,255,0.07)');
+        sg.addColorStop(1,   'rgba(98,54,255,0)');
+        ctx.fillStyle = sg;
+        ctx.fillRect(0, sy - 80, W, 160);
+      }
 
       // Particles
       pArr.forEach(p => {
@@ -118,7 +130,7 @@ const AnimatedBackground = () => {
     return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
   }, []);
 
-  return <canvas ref={canvasRef} className="animated-bg-canvas" />;
+  return <canvas ref={canvasRef} className="animated-bg-canvas" style={{ pointerEvents: 'none' }} />;
 };
 
 export default AnimatedBackground;

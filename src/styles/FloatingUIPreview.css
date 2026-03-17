@@ -165,3 +165,24 @@
 @keyframes shimmer {
   100% { left: 200%; }
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 767px) {
+  .floating-preview {
+    display: none; /* User explicitly requested hiding all mockups on mobile */
+  }
+
+  .preview-body {
+    padding: 20px 16px;
+    min-height: 160px;
+  }
+
+  .preview-step p {
+    font-size: 0.95rem;
+  }
+
+  .upload-box {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
+}

@@ -10,6 +10,25 @@
   z-index: 5;
 }
 
+@media (max-width: 767px) {
+  .neural-globe-container {
+    min-height: 260px;
+    height: 260px;
+    cursor: default;
+  }
+  .canvas-ripple {
+    /* Suppress massive ripple on mobile */
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .neural-globe-container {
+    min-height: 420px;
+    height: 420px;
+  }
+}
+
 .neural-globe-container canvas {
   width: 100% !important;
   height: 100% !important;
