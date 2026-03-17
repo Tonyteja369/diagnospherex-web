@@ -1,44 +1,18 @@
-
-import './App.css';
-import AnimatedBackground from './components/AnimatedBackground';
-import Cursor from './components/Cursor';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import HeroSection from './sections/HeroSection';
-import ProductExplanation from './sections/ProductExplanation';
-import PlatformCapabilities from './sections/PlatformCapabilities';
-import AIBrainSimulation from './sections/AIBrainSimulation';
-import InteractiveReport from './sections/InteractiveReport';
-import Security from './sections/Security';
-import Careers from './sections/Careers';
-import SignatureActivation from './sections/SignatureActivation';
-import LogoShowcase from './sections/LogoShowcase';
-import CallToAction from './sections/CallToAction';
-import DemoPage from './pages/DemoPage';
+import { Routes, Route } from 'react-router-dom';
+import './styles/App.css';
+import './styles/responsive.css';
+import LandingPage from './pages/LandingPage';
+import ApplicationPage from './pages/ApplicationPage';
+import ApplicationSuccessPage from './pages/ApplicationSuccessPage';
 
 function App() {
   return (
     <div className="app-container">
-      <AnimatedBackground />
-      
-      <Cursor />
-      <Navbar />
-      
-      <main>
-        <HeroSection />
-        <ProductExplanation />
-        <DemoPage />
-        <PlatformCapabilities />
-        <AIBrainSimulation />
-        <InteractiveReport />
-        <Security />
-        <Careers />
-        <SignatureActivation />
-        <LogoShowcase />
-        <CallToAction />
-      </main>
-
-      <Footer />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/careers/apply" element={<ApplicationPage />} />
+        <Route path="/apply-success" element={<ApplicationSuccessPage />} />
+      </Routes>
     </div>
   );
 }

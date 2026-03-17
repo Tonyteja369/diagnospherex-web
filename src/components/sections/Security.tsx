@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import './Security.css';
+import '../../styles/Security.css';
 
 const PRINCIPLES = [
   {

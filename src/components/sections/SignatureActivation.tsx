@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import './SignatureActivation.css';
+import '../../styles/SignatureActivation.css';
 
 const FounderSection = () => {
   return (

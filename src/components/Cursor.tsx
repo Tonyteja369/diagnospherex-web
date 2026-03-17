@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import './Cursor.css';
+import '../styles/Cursor.css';
 
 const Cursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [ripples, setRipples] = useState<{ x: number, y: number, id: number }[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const updateMousePosition = (e: MouseEvent) => {
+      if (isMobile) return;
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
     const handleMouseOver = (e: MouseEvent) => {
+      if (isMobile) return;
       if ((e.target as HTMLElement).tagName.toLowerCase() === 'button' || (e.target as HTMLElement).tagName.toLowerCase() === 'a' || (e.target as HTMLElement).closest('button') || (e.target as HTMLElement).closest('a')) {
         setIsHovering(true);
       } else {
@@ -21,6 +28,7 @@ const Cursor = () => {
     };
 
     const handleMouseClick = (e: MouseEvent) => {
+      if (isMobile) return;
       const newRipple = { x: e.clientX, y: e.clientY, id: Date.now() };
       setRipples(prev => [...prev, newRipple]);
       setTimeout(() => {
@@ -33,11 +41,14 @@ const Cursor = () => {
     window.addEventListener('click', handleMouseClick);
 
     return () => {
+      window.removeEventListener('resize', checkMobile);
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
       window.removeEventListener('click', handleMouseClick);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <>

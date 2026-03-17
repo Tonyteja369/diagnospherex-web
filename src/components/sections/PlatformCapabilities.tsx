@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Brain, Activity, ShieldAlert } from 'lucide-react';
-import './PlatformCapabilities.css';
+import '../../styles/PlatformCapabilities.css';
 
 const PANELS = [
   {
@@ -205,7 +205,7 @@ const PlatformCapabilities = () => {
   };
 
   return (
-    <section className="capabilities-section" id="technology">
+    <section className="capabilities-section" id="features">
       {/* Cursor energy field canvas */}
       <EnergyField />
       <div className="vp-grid-bg" />

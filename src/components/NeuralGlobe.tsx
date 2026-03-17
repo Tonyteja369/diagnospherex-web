@@ -2,7 +2,7 @@ import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
-import './NeuralGlobe.css';
+import '../styles/NeuralGlobe.css';
 
 const NODE_COUNT = 1500;
 const RADIUS = 3;

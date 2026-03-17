@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import './AIHeroPanel.css';
+import '../styles/AIHeroPanel.css';
 
 const STATUS_MESSAGES = [
   'Initializing neural model...',

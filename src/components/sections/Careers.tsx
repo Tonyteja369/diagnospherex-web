@@ -1,41 +1,42 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
-import './Careers.css';
+import { useNavigate } from 'react-router-dom';
+import '../../styles/Careers.css';
 
 const ROLES = [
   {
     title: 'AI Research Intern',
-    tags: ['Remote', 'Internship', '3–6 months'],
+    tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #6236FF22, #2FD3FF22)',
     overview:
-      'Assist in developing AI models for clinical report interpretation and medical signal analysis.',
+      'Focus on exploring ideas around artificial intelligence in healthcare and medical decision support.',
   },
   {
     title: 'Biomedical Engineering Intern',
-    tags: ['Remote', 'Internship', '3–6 months'],
+    tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #2FD3FF22, #6236FF22)',
     overview:
-      'Work on biosignal processing, physiological data pipelines, and clinical AI integration.',
+      'Focus on exploring biomedical signals and healthcare technology concepts.',
   },
   {
-    title: 'Frontend Developer Intern',
-    tags: ['Remote', 'Internship', '3–6 months'],
+    title: 'Frontend Development Intern',
+    tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #6236FF22, #a855f722)',
     overview:
-      'Build premium, animation-rich React interfaces for the DiagnoSphereX AI platform.',
+      'Focus on designing and exploring user interfaces for healthcare applications.',
   },
   {
-    title: 'Product Coordinator',
-    tags: ['Remote', 'Part-time', '3–6 months'],
+    title: 'Product Research Intern',
+    tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #22d3ee22, #6236FF22)',
     overview:
-      'Coordinate product development cycles, user research, and roadmap planning for healthcare AI.',
+      'Focus on researching healthcare challenges and product ideas.',
   },
   {
-    title: 'Technical Coordinator',
-    tags: ['Remote', 'Part-time', '3–6 months'],
+    title: 'Technical Exploration Intern',
+    tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #6236FF22, #0ea5e922)',
     overview:
-      'Manage technical documentation, sprint delivery, and cross-team AI feature coordination.',
+      'Focus on exploring technical tools and development concepts for healthcare platforms.',
   },
 ];
 
@@ -56,6 +57,7 @@ const RoleCard = ({
   const [hovered, setHovered] = useState(false);
   const [pulsing, setPulsing] = useState(false);
   const rafRef = useRef<number>();
+  const navigate = useNavigate();
 
   /* Neural pulse every 5–8 second offset per card */
   useEffect(() => {
@@ -162,7 +164,12 @@ const RoleCard = ({
 
       {/* Apply button */}
       <div className="card-footer">
-        <button className="apply-btn">Apply Now</button>
+        <button 
+          className="apply-btn"
+          onClick={() => navigate('/careers/apply')}
+        >
+          Apply Now
+        </button>
       </div>
     </div>
   );
@@ -205,14 +212,12 @@ const Careers = () => {
 
       <div className="container">
         <div className="careers-header">
-          <p className="careers-eyebrow">We Are Hiring</p>
+          <p className="careers-eyebrow">Join the Exploration Phase</p>
           <h2 className="section-title">
-            Join the Future of <span className="text-gradient">Medical AI</span>
+            Founding Internship Program – <span className="text-gradient">DiagnoSphere X</span>
           </h2>
           <p className="careers-desc">
-            DiagnoSphereX is expanding its research and development team.
-            We are looking for curious minds passionate about building intelligent
-            healthcare technologies that improve clinical decision-making and patient understanding.
+            DiagnoSphere X is currently in the early exploration phase. We are inviting passionate students and innovators to participate in our Founding Internship Program to help explore ideas at the intersection of artificial intelligence and healthcare.
           </p>
         </div>
       </div>

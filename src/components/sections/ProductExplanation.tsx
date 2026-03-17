@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FileText, Stethoscope, Microscope } from 'lucide-react';
-import './ProductExplanation.css';
+import '../../styles/ProductExplanation.css';
 
 const ProductExplanation = () => {
   return (

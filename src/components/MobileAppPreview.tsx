@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Upload, Info } from 'lucide-react';
-import './MobileAppPreview.css';
+import '../styles/MobileAppPreview.css';
 
 /* ---- Screen 1: AI Dashboard ---- */
 const Screen1Dashboard = () => {

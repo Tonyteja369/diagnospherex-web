@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './LogoShowcase.css';
+import '../../styles/LogoShowcase.css';
 
 const logos = [
   { src: '/logo1.png', alt: 'Globe Icon', label: 'Icon Mark' },
@@ -25,7 +25,7 @@ const LogoShowcase = () => {
               onMouseLeave={() => setHoveredIdx(null)}
             >
               <div className="logo-acc-bg">
-                <img src={logo.src} alt={logo.alt} className="logo-acc-img" />
+                <img src={logo.src} alt={logo.alt} className="logo-acc-img" loading="lazy" />
                 <span className="logo-acc-label">{logo.label}</span>
               </div>
             </div>

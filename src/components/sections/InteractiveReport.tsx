@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, FileText, Brain, FlaskConical, AlertTriangle, CheckCircle, Info, Stethoscope, Microscope } from 'lucide-react';
-import './InteractiveReport.css';
+import '../../styles/InteractiveReport.css';
 
 const DEMOS = [
   {
@@ -124,7 +124,7 @@ const InteractiveReport = () => {
   const demo = DEMOS[active];
 
   return (
-    <section className="interactive-report-section" id="report-demo">
+    <section className="interactive-report-section" id="demo">
       <div className="report-header">
         <motion.h2
           className="section-title"

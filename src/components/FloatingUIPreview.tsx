@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UploadCloud, FileText, CheckCircle, RefreshCw } from 'lucide-react';
-import './FloatingUIPreview.css';
+import '../styles/FloatingUIPreview.css';
 
 const FloatingUIPreview = () => {
   const [step, setStep] = useState(0);

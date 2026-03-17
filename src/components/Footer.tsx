@@ -1,5 +1,5 @@
 import { Github, Linkedin, Instagram, Mail, MapPin, Phone } from 'lucide-react';
-import './Footer.css';
+import '../styles/Footer.css';
 
 const Footer = () => {
   return (
@@ -67,6 +67,13 @@ const Footer = () => {
         <div className="founder-badge">
           Built and led by <span className="text-white font-semibold">Tharun Tej</span> <span className="separator mx-2 opacity-50">•</span> Founder – DiagnoSphereX
         </div>
+        
+        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '16px', fontSize: '0.9rem', color: 'var(--color-text-dim)' }}>
+          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+          <span className="opacity-50">•</span>
+          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+        </div>
+
         <p className="footer-message mt-4 max-w-2xl mx-auto">
           Stay connected for updates on AI-powered healthcare tools, research progress, and development of the DiagnoSphereX platform.
         </p>

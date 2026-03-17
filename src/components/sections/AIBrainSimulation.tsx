@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import './AIBrainSimulation.css';
+import '../../styles/AIBrainSimulation.css';
 
 const HEALTH_WORDS = [
   'Neural', 'Synapse', 'Cortex', 'Hemoglobin', 'Diagnosis',

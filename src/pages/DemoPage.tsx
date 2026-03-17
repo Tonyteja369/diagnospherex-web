@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, FileText, CheckCircle, RefreshCw, Activity, ArrowRight } from 'lucide-react';
-import './DemoPage.css';
+import '../styles/DemoPage.css';
 
 const DemoExperience = () => {
   const [processingState, setProcessingState] = useState<'idle' | 'uploading' | 'analyzing' | 'generating' | 'complete'>('idle');

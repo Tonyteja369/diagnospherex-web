@@ -1,7 +1,7 @@
 
 import { motion } from 'framer-motion';
 import { Shield, Users, Lightbulb, User } from 'lucide-react';
-import './SecurityCareersAbout.css';
+import '../../styles/SecurityCareersAbout.css';
 
 const SecurityCareersAbout = () => {
   return (
