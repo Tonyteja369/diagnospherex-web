@@ -16,12 +16,14 @@ import LogoShowcase from '../components/sections/LogoShowcase';
 import CallToAction from '../components/sections/CallToAction';
 import DemoPage from '../pages/DemoPage';
 import EarlyAccessModal from '../components/EarlyAccessModal';
+import GlobalHaptics from '../components/GlobalHaptics';
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
+      <GlobalHaptics />
       <AnimatedBackground />
       <Cursor />
       <Navbar onOpenModal={() => setIsModalOpen(true)} />

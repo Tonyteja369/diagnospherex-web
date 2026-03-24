@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, FileText, Brain, FlaskConical, AlertTriangle, CheckCircle, Info, Stethoscope, Microscope } from 'lucide-react';
+import { Activity, FileText, Brain, FlaskConical, AlertTriangle, CheckCircle, Info, Stethoscope, Users } from 'lucide-react';
 import '../../styles/InteractiveReport.css';
 
 const DEMOS = [
@@ -8,102 +8,106 @@ const DEMOS = [
     id: 0,
     tab: 'Blood Test',
     Icon: FlaskConical,
-    title: 'Analyze Blood Test Report',
+    title: 'Analyze Blood Test in Telugu',
     input: {
       heading: 'Complete Blood Count (CBC)',
       rows: [
-        { label: 'Hemoglobin',  value: '9.6 g/dL',      status: 'low' },
+        { label: 'Haemoglobin',  value: '9.6 g/dL',      status: 'low' },
         { label: 'WBC',         value: '13,800 /µL',     status: 'high' },
         { label: 'Platelets',   value: '220,000 /µL',    status: 'normal' },
         { label: 'CRP',         value: '28 mg/L',        status: 'high' },
       ],
-      note: 'Patient reports fatigue and mild fever for three days.',
+      note: 'ICMR Reference Range applied. Patient reports fatigue and mild fever for three days.',
     },
     explanation: {
-      summary: 'Your blood test shows two important findings.',
+      summary: 'మీ రక్త పరీక్ష రెండు ముఖ్యమైన విషయాలను చూపిస్తుంది.',
       points: [
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'Hemoglobin is lower than normal. This protein carries oxygen in the blood — a low level may explain tiredness and weakness.' },
-        { Icon: Activity, color: '#ef4444', text: 'White blood cell count and CRP are elevated. These markers typically rise when the body is fighting an infection or inflammation.' },
+        { Icon: AlertTriangle, color: '#f59e0b', text: 'Haemoglobin తక్కువగా ఉంది — ICMR Indian range 12–16 g/dL. ఇది అలసట మరియు బలహీనతను వివరిస్తుంది.' },
+        { Icon: Activity, color: '#ef4444', text: 'White blood cell count మరియు CRP పెరిగాయి. ఇవి శరీరం ఇన్ఫెక్షన్‌తో పోరాడుతున్నట్టు చూపిస్తాయి.' },
       ],
-      meaning: 'The results may indicate a mild infection along with anemia.',
-      next:    'A doctor may suggest further evaluation and possibly treatment for the infection.',
+      meaning: 'ఫలితాలు రక్తహీనత మరియు తేలికపాటి ఇన్ఫెక్షన్‌ను సూచిస్తున్నాయి.',
+      next:    'మీ డాక్టర్‌ను 48 గంటలలోపు కలవండి. Iron మరియు antibiotic చికిత్స అవసరం కావచ్చు.',
     },
   },
   {
     id: 1,
-    tab: 'ECG',
+    tab: 'Pre-Surgery',
     Icon: Activity,
-    title: 'Explain ECG Findings',
+    title: 'ICMR Reference Ranges Check',
     input: {
-      heading: 'ECG Report Summary',
+      heading: 'Pre-Operative Blood Panel',
       rows: [
-        { label: 'Heart Rate',   value: '108 bpm',           status: 'high' },
-        { label: 'Rhythm',       value: 'Sinus Tachycardia', status: 'high' },
-        { label: 'ST Segment',   value: 'Mild elevation L2/3', status: 'high' },
+        { label: 'Blood Glucose (Fasting)', value: '118 mg/dL',  status: 'high' },
+        { label: 'HbA1c',                  value: '6.1%',        status: 'high' },
+        { label: 'Creatinine',             value: '1.1 mg/dL',   status: 'normal' },
+        { label: 'PT/INR',                 value: '1.2',         status: 'normal' },
+        { label: 'Haemoglobin',            value: '11.8 g/dL',   status: 'low' },
       ],
-      note: 'Patient reports chest discomfort and palpitations.',
+      note: 'ICMR Indian reference ranges applied. Pre-surgery fitness evaluation.',
     },
     explanation: {
-      summary: 'Your ECG shows the heart is beating faster than normal — called sinus tachycardia.',
+      summary: 'Your pre-surgery panel shows two items your surgeon should know about.',
       points: [
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'A faster heart rate can occur due to stress, fever, dehydration, or other conditions.' },
-        { Icon: Activity, color: '#ef4444', text: 'A small ST elevation was detected. This can appear when the heart muscle is under extra stress.' },
+        { Icon: AlertTriangle, color: '#f59e0b', text: 'Fasting glucose is borderline high by ICMR standards. Surgery teams routinely manage blood sugar levels — inform your anaesthetist.' },
+        { Icon: Info, color: '#3b82f6', text: 'Haemoglobin is slightly low. Your surgeon may discuss pre-op iron supplementation to reduce transfusion risk.' },
+        { Icon: CheckCircle, color: '#10b981', text: 'Creatinine and PT/INR are within ICMR normal range — kidney function and clotting look stable.' },
       ],
-      meaning: 'This ECG pattern suggests the heart may be working harder than usual.',
-      next:    'A doctor may review symptoms and possibly perform additional tests to rule out heart-related issues.',
+      meaning: 'Fit for surgery with the glucose and haemoglobin noted for your care team.',
+      next:    'Share these results with your surgeon and anaesthetist before your procedure date.',
     },
   },
   {
     id: 2,
-    tab: 'MRI',
+    tab: 'Multi-Report',
     Icon: Brain,
-    title: 'Interpret MRI Summary',
+    title: 'Upload Family Member Report',
     input: {
-      heading: 'MRI Brain Report',
+      heading: 'Cross-Document Analysis — 2 Reports',
       rows: [
-        { label: 'Finding',       value: 'Hyperintense lesion, left frontal WM', status: 'high' },
-        { label: 'Mass Effect',   value: 'None observed', status: 'normal' },
-        { label: 'Hemorrhage',    value: 'No evidence', status: 'normal' },
-        { label: 'Impression',    value: 'Nonspecific white matter change', status: 'neutral' },
+        { label: 'Vitamin D (Report 1)',  value: '14 ng/mL',       status: 'low' },
+        { label: 'Calcium (Report 1)',    value: '8.1 mg/dL',      status: 'low' },
+        { label: 'Thyroid TSH (Rep 2)',   value: '5.8 mIU/L',      status: 'high' },
+        { label: 'Cholesterol (Rep 2)',   value: '228 mg/dL',      status: 'high' },
+        { label: 'Ferritin (Rep 1)',      value: '8 ng/mL',        status: 'low' },
       ],
-      note: 'Radiology impression: Likely nonspecific white matter change.',
+      note: 'DiagnoSphereX Cross-Reference AI reading two reports simultaneously.',
     },
     explanation: {
-      summary: 'Your MRI shows a very small change in a specific area of the brain\'s white matter.',
+      summary: 'Reading both reports together reveals a connected pattern.',
       points: [
-        { Icon: CheckCircle, color: '#10b981', text: 'There is NO evidence of bleeding or a brain tumor — this is an important reassuring finding.' },
-        { Icon: Info, color: '#3b82f6', text: 'Small white matter changes can occur due to aging, migraines, or minor blood vessel changes and are often not concerning.' },
+        { Icon: AlertTriangle, color: '#f59e0b', text: 'Vitamin D deficiency (ICMR cutoff: 20 ng/mL) is suppressing Calcium absorption — these two values are directly linked.' },
+        { Icon: AlertTriangle, color: '#f59e0b', text: 'Low Ferritin combined with high TSH is a known pattern — thyroid function often suffers when iron stores are depleted.' },
+        { Icon: Activity, color: '#ef4444', text: 'Cholesterol at 228 mg/dL exceeds ICMR Indian guidance. Combined with thyroid stress, this warrants immediate cardiologist review.' },
       ],
-      meaning: 'The change is usually considered mild and often does not cause symptoms.',
-      next:    'A doctor may correlate MRI findings with your symptoms before deciding if further evaluation is needed.',
+      meaning: 'Three inter-connected deficiencies identified across two reports.',
+      next:    'Ask your doctor about Vitamin D + Iron supplementation together, and a thyroid ultrasound within 2 weeks.',
     },
   },
   {
     id: 3,
-    tab: 'Metabolic',
-    Icon: Microscope,
-    title: 'Understand Lab Results',
+    tab: 'Family Vault',
+    Icon: Users,
+    title: 'Understand Lab Results in Telugu',
     input: {
-      heading: 'Metabolic Panel & Urinalysis',
+      heading: 'Family Vault — Mother\'s Diabetes Panel',
       rows: [
-        { label: 'Blood Glucose', value: '152 mg/dL',     status: 'high' },
-        { label: 'Creatinine',    value: '1.4 mg/dL',     status: 'high' },
-        { label: 'Sodium',        value: '138 mmol/L',    status: 'normal' },
-        { label: 'Potassium',     value: '4.2 mmol/L',    status: 'normal' },
-        { label: 'Urine Protein', value: 'Trace',         status: 'neutral' },
-        { label: 'Urine Glucose', value: 'Negative',      status: 'normal' },
+        { label: 'Blood Glucose (PP)',  value: '198 mg/dL',    status: 'high' },
+        { label: 'HbA1c',              value: '7.4%',          status: 'high' },
+        { label: 'Creatinine',         value: '1.3 mg/dL',     status: 'high' },
+        { label: 'Urine Microalbumin', value: '42 mg/g',       status: 'high' },
+        { label: 'Sodium',             value: '139 mmol/L',    status: 'normal' },
       ],
-      note: 'Urinalysis: Protein trace, Glucose negative.',
+      note: 'Family Vault: Encrypted per-member record. ICMR Indian diabetic reference ranges applied.',
     },
     explanation: {
-      summary: 'Your metabolic panel shows two values slightly outside the normal range.',
+      summary: 'అమ్మ రక్త పరీక్ష నాలుగు విషయాలను వెల్లడిస్తుంది.',
       points: [
-        { Icon: Activity, color: '#ef4444', text: 'Blood glucose is higher than normal. Persistently elevated values may suggest problems with blood sugar regulation.' },
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'Creatinine is slightly elevated. This marker helps doctors understand how well the kidneys are functioning.' },
-        { Icon: CheckCircle, color: '#10b981', text: 'Sodium and potassium levels are within normal range — electrolyte balance looks stable.' },
+        { Icon: AlertTriangle, color: '#ef4444', text: 'Post-prandial glucose 198 మరియు HbA1c 7.4% — ICMR ప్రకారం మధుమేహం నియంత్రణలో లేదు.' },
+        { Icon: AlertTriangle, color: '#f59e0b', text: 'Creatinine మరియు Microalbumin — ఇవి కలిసి కిడ్నీ ప్రారంభ సంకేతాలు చూపిస్తున్నాయి.' },
+        { Icon: CheckCircle, color: '#10b981', text: 'Sodium సాధారణంగా ఉంది — ఎలక్ట్రోలైట్ బ్యాలెన్స్ స్థిరంగా ఉంది.' },
       ],
-      meaning: 'Results may suggest early blood sugar imbalance and mild kidney stress.',
-      next:    'A doctor may recommend monitoring blood sugar levels and repeating kidney function tests.',
+      meaning: 'మధుమేహం మేనేజ్‌మెంట్ మారాలి మరియు కిడ్నీ పర్యవేక్షణ అవసరం.',
+      next:    '48 గంటలలో నెఫ్రాలజిస్ట్‌ను కలవండి. Metformin మోతాదు సమీక్ష అడగండి.',
     },
   },
 ];
@@ -125,17 +129,18 @@ const InteractiveReport = () => {
 
   return (
     <section className="interactive-report-section" id="demo">
-      <div className="report-header">
+      <div className="container">
+        <div className="report-header">
         <motion.h2
           className="section-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Clinical Demo: <span className="text-gradient">Professional Analysis</span>
+          Clinical Demo: <span className="text-gradient">Telugu Report Analysis</span>
         </motion.h2>
         <p className="section-subtitle">
-          Select a sample below to see how DiagnoSphereX provides clinical insights from complex medical data.
+          Select a sample below to see how DiagnoSphereX explains real Indian blood test values using ICMR reference ranges — in plain English and Telugu.
         </p>
       </div>
 
@@ -208,16 +213,17 @@ const InteractiveReport = () => {
               <p className="meaning-text">{demo.explanation.meaning}</p>
             </div>
             <div className="next-block">
-              <p className="next-label">Clinical Recommendation</p>
+              <p className="next-label">Your 48-Hour Action Plan</p>
               <p className="next-text">{demo.explanation.next}</p>
             </div>
             <p className="disclaimer">
               <Stethoscope size={12} style={{ marginRight: '6px', display: 'inline' }} />
-              DiagnoSphereX provides clinical decision support insights only. This is not a diagnosis. Always consult a licensed physician.
+              DiagnoSphereX provides ICMR-calibrated insights only. Always consult a licensed physician.
             </p>
           </div>
         </motion.div>
       </AnimatePresence>
+      </div>
     </section>
   );
 };

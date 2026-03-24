@@ -1,234 +1,371 @@
+/* =====================================================
+   EARLY ACCESS MODAL — Mobile-First Responsive
+   ===================================================== */
+
+/* ── Backdrop ── */
 .modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(6, 11, 26, 0.85);
-  backdrop-filter: blur(8px);
+  inset: 0;
+  background: rgba(6, 6, 20, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 9999;
 }
 
+/* ── Wrapper (centring container) ── */
 .modal-wrapper {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10000;
   pointer-events: none;
-  padding: 20px;
+  /* Safe margins on all sides */
+  padding: 16px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
+/* ── Modal Panel ── */
 .early-access-modal {
-  width: 100%;
-  max-width: 500px;
-  background: linear-gradient(145deg, rgba(20, 20, 35, 0.85), rgba(10, 10, 20, 0.95));
-  border: 1px solid rgba(98, 54, 255, 0.3);
-  border-radius: 20px;
-  padding: 32px;
   pointer-events: auto;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  overflow: hidden;
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
+
+  /* Glassmorphism dark panel */
+  background: linear-gradient(
+    145deg,
+    rgba(18, 18, 32, 0.97) 0%,
+    rgba(10, 10, 22, 0.99) 100%
+  );
+  border: 1px solid rgba(98, 54, 255, 0.35);
+  border-radius: 24px;
+  padding: 36px 32px 32px;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  /* Allow content to scroll inside on small screens */
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  /* Prevent background scroll bleed */
+  overscroll-behavior: contain;
 }
 
+/* ── Close Button ── */
 .modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: -8px -8px 8px 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
-  transition: color 0.2s;
-  padding: 4px;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
 }
 
 .modal-close:hover {
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
 }
 
+/* ── Modal Content ── */
+.modal-content {
+  clear: both;
+}
+
 .modal-title {
-  font-size: 1.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.55rem;
   font-weight: 700;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #fff, #a78bfa);
+  background: linear-gradient(135deg, #fff 30%, #a78bfa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
 }
 
 .modal-desc {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 24px;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
+.modal-desc strong {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Form ── */
 .ea-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
+  width: 100%;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-group label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.03em;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 12px 16px;
+  border-radius: 12px;
+  padding: 12px 14px;
   color: #fff;
   font-family: inherit;
   font-size: 0.95rem;
   transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-electric-purple);
-  box-shadow: 0 0 0 2px rgba(98, 54, 255, 0.2);
+  border-color: rgba(98, 54, 255, 0.7);
+  box-shadow: 0 0 0 3px rgba(98, 54, 255, 0.18);
+  background: rgba(255, 255, 255, 0.07);
 }
 
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.form-group option {
+  background: #111120;
+  color: #fff;
+}
+
+/* ── Side-by-side row (desktop) ── */
 .row-group {
   flex-direction: row;
-  gap: 16px;
+  gap: 12px;
 }
 
 .half-width {
   flex: 1;
+  min-width: 0;   /* prevent overflow in flex */
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
+/* ── Submit Button ── */
 .ea-submit {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 8px;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 14px;
 }
 
-/* Success State */
+/* ── Success State ── */
 .modal-success {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  gap: 4px;
 }
 
 .success-icon-wrapper {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .drop-shadow-glow {
-  filter: drop-shadow(0 0 12px rgba(47, 211, 255, 0.6));
+  filter: drop-shadow(0 0 14px rgba(47, 211, 255, 0.65));
 }
 
 .email-preview {
-  margin: 20px 0;
   width: 100%;
+  margin: 16px 0;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  text-align: left;
+  border-radius: 14px;
   overflow: hidden;
+  text-align: left;
 }
 
 .email-header {
-  padding: 12px 16px;
+  padding: 10px 16px;
   background: rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .email-subj {
   font-weight: 600;
-  color: var(--color-cyan);
+  color: var(--color-cyan, #22D3EE);
 }
 
 .email-body {
-  padding: 16px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.65);
   line-height: 1.6;
 }
 
-.email-body p {
-  margin-bottom: 10px;
-}
+.email-body p { margin-bottom: 8px; }
+.email-body p:last-child { margin-bottom: 0; }
+.email-sig { margin-top: 12px !important; color: rgba(255, 255, 255, 0.4) !important; }
 
-.email-body p:last-child {
-  margin-bottom: 0;
-}
+.close-btn { width: 100%; }
 
-.email-sig {
-  margin-top: 16px !important;
-  color: rgba(255, 255, 255, 0.5);
-}
+/* =====================================================
+   ── MOBILE RESPONSIVE (max-width: 600px) ──
+   Mobile-first: override base at most breakpoints
+   ===================================================== */
+@media (max-width: 600px) {
 
-.close-btn {
-  width: 100%;
-}
-
-/* ── Mobile Responsive ── */
-@media (max-width: 767px) {
+  /* Wrapper: safe 16px margin all around, vertically centred */
   .modal-wrapper {
-    padding: 12px;
-    align-items: flex-end; /* sheet-style from bottom on mobile */
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
   }
 
+  /* Modal: full viewport width minus safe-area margins */
   .early-access-modal {
-    max-width: 100%;
-    border-radius: 24px 24px 0 0;
-    padding: 24px 18px 32px;
-    max-height: 90vh;
+    width: 100%;
+    max-width: calc(100vw - 32px);
+    border-radius: 20px;
+    padding: 20px 16px 24px;
+    /* Fill screen height if needed, scroll inside */
+    max-height: calc(100dvh - 32px);
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   .modal-title {
-    font-size: 1.25rem;
-    padding-right: 32px; /* space for close btn */
+    font-size: 1.2rem;
+    padding-right: 0;
   }
 
-  .row-group {
-    flex-direction: column;
-    gap: 12px;
+  .modal-desc {
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+    line-height: 1.5;
   }
 
+  .ea-form {
+    gap: 11px;
+  }
+
+  .form-group label {
+    font-size: 0.74rem;
+  }
+
+  /* Full-width inputs, prevent iOS zoom (font-size >= 16px) */
   .form-group input,
   .form-group select,
   .form-group textarea {
-    font-size: 16px; /* prevents iOS zoom on focus */
-    min-height: 48px;
+    font-size: 16px;
+    padding: 11px 12px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Stack side-by-side fields vertically on mobile */
+  .row-group {
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .half-width {
+    width: 100%;
+    flex: none;
+  }
+
+  /* Submit button full-width */
+  .ea-submit {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    margin-top: 4px;
+  }
+
+  /* Close button stays top-right, always clickable */
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    margin: -6px -6px 6px 0;
+  }
+
+  .email-body {
+    font-size: 0.8rem;
     padding: 12px 14px;
+  }
+}
+
+/* ── Very small phones (320px) ── */
+@media (max-width: 360px) {
+  .early-access-modal {
+    padding: 16px 12px 20px;
+    border-radius: 16px;
+  }
+
+  .modal-title {
+    font-size: 1.08rem;
+  }
+
+  .modal-desc {
+    font-size: 0.78rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px 11px;
   }
 
   .ea-submit {
-    min-height: 52px;
-    font-size: 1rem;
-  }
-
-  .email-preview {
-    margin: 12px 0;
+    padding: 12px 16px;
+    font-size: 0.9rem;
   }
 }

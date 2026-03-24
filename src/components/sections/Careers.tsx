@@ -8,35 +8,28 @@ const ROLES = [
     tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #6236FF22, #2FD3FF22)',
     overview:
-      'Focus on exploring ideas around artificial intelligence in healthcare and medical decision support.',
+      'Help fine-tune LLaMA 3 on biomedical datasets and ICMR reference ranges. Build the zero-hallucination validation layer. This is real ML work on a real product.',
   },
   {
     title: 'Biomedical Engineering Intern',
     tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #2FD3FF22, #6236FF22)',
     overview:
-      'Focus on exploring biomedical signals and healthcare technology concepts.',
+      'Help build and verify the ICMR Indian clinical reference range database. Your biomedical knowledge directly makes DiagnoSphereX more accurate for Indian patients.',
   },
   {
     title: 'Frontend Development Intern',
     tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #6236FF22, #a855f722)',
     overview:
-      'Focus on designing and exploring user interfaces for healthcare applications.',
+      'Build the React PWA interface. The upload screen, results display, Telugu output rendering, and family vault dashboard. Real product, real users in 12 weeks.',
   },
   {
     title: 'Product Research Intern',
     tags: ['Remote', 'Internship', 'Exploration Phase'],
     gradient: 'linear-gradient(135deg, #22d3ee22, #6236FF22)',
     overview:
-      'Focus on researching healthcare challenges and product ideas.',
-  },
-  {
-    title: 'Technical Exploration Intern',
-    tags: ['Remote', 'Internship', 'Exploration Phase'],
-    gradient: 'linear-gradient(135deg, #6236FF22, #0ea5e922)',
-    overview:
-      'Focus on exploring technical tools and development concepts for healthcare platforms.',
+      'Go to hospitals and clinics in Vijayawada. Talk to real patients. Understand how Telugu families actually use health reports. Your field research shapes the product directly.',
   },
 ];
 
@@ -81,7 +74,6 @@ const RoleCard = ({
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       setMouse({ x, y });
-      // Apply 3D tilt + magnetic shift via CSS vars
       const rotX = ((y - 50) / 50) * -6;
       const rotY = ((x - 50) / 50) * 6;
       const shiftX = ((x - 50) / 50) * 8;
@@ -134,7 +126,7 @@ const RoleCard = ({
       {pulsing && <div className="pulse-ring" />}
 
       {/* Top animated motion banner */}
-      <div className={`card-top-banner card-banner-${(index % 5) + 1}`}>
+      <div className={`card-top-banner card-banner-${(index % 4) + 1}`}>
         <div className="banner-orb banner-orb-1" />
         <div className="banner-orb banner-orb-2" />
         <div className="banner-orb banner-orb-3" />
@@ -155,7 +147,7 @@ const RoleCard = ({
           ))}
         </div>
 
-        {/* Expanded overview on hover */}
+        {/* Always-visible overview */}
         <div className={`role-overview ${hovered ? 'visible' : ''}`}>
           <p className="overview-label">Role Overview</p>
           <p className="overview-text">{role.overview}</p>
@@ -164,7 +156,7 @@ const RoleCard = ({
 
       {/* Apply button */}
       <div className="card-footer">
-        <button 
+        <button
           className="apply-btn"
           onClick={() => navigate('/careers/apply')}
         >
@@ -208,16 +200,16 @@ const Careers = () => {
 
   return (
     <section className="careers-section" id="careers">
-      {/* Background particles canvas handled by AnimatedBackground globally */}
-
       <div className="container">
         <div className="careers-header">
-          <p className="careers-eyebrow">Join the Exploration Phase</p>
+          <p className="careers-eyebrow">JOIN THE FOUNDING TEAM</p>
           <h2 className="section-title">
-            Founding Internship Program – <span className="text-gradient">DiagnoSphere X</span>
+            Founding Internship Program — <span className="text-gradient">DiagnoSphereX</span>
           </h2>
           <p className="careers-desc">
-            DiagnoSphere X is currently in the early exploration phase. We are inviting passionate students and innovators to participate in our Founding Internship Program to help explore ideas at the intersection of artificial intelligence and healthcare.
+            DiagnoSphereX is a solo-founded startup building health intelligence for Indian families.
+            We are looking for passionate students who want to build something real, not just add an
+            internship certificate to their resume.
           </p>
         </div>
       </div>

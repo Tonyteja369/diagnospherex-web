@@ -17,7 +17,8 @@ const EarlyAccessForm = ({ onSuccessClose }: EarlyAccessFormProps) => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const stateKey = e.target.name.toLowerCase();
+    setFormData({ ...formData, [stateKey]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

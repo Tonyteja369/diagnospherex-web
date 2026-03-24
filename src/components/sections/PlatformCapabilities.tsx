@@ -1,40 +1,32 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Brain, Activity, ShieldAlert } from 'lucide-react';
+import { FileText, Brain, Activity } from 'lucide-react';
 import '../../styles/PlatformCapabilities.css';
 
 const PANELS = [
   {
     Icon: FileText,
-    title: 'AI Medical Report Simplifier',
-    desc: 'Transforms complex medical reports into clear explanations that are easier for clinicians and patients to understand.',
+    title: 'Report Analyzer',
+    desc: 'Upload any blood test PDF. Every value explained in plain Telugu using ICMR Indian reference ranges calibrated to Indian age, gender, and regional population. Not WHO global averages.',
     accent: '#6236FF',
     accentB: '#2FD3FF',
     label: 'REPORT AI',
   },
   {
     Icon: Brain,
-    title: 'Clinical Documentation Generator',
-    desc: 'Automatically converts medical inputs and patient information into structured clinical documentation.',
+    title: 'Family Health Vault',
+    desc: 'One account manages the complete health history of up to 6 family members. Every record AES-256 encrypted independently. Only you hold the key. Never lose a report again.',
     accent: '#2FD3FF',
     accentB: '#6236FF',
-    label: 'DOC GEN',
+    label: 'FAMILY AI',
   },
   {
     Icon: Activity,
-    title: 'Symptom Intelligence Engine',
-    desc: 'Analyzes symptoms and clinical indicators to support diagnostic reasoning and clinical decision-making.',
+    title: 'Instant Health Intelligence',
+    desc: 'Upload multiple documents together. DiagnoSphereX reads them simultaneously, finds connections between values across documents, and tells you exactly what to ask your doctor in the next 48 hours.',
     accent: '#a855f7',
     accentB: '#2FD3FF',
-    label: 'SYMPTOM AI',
-  },
-  {
-    Icon: ShieldAlert,
-    title: 'Drug Interaction Analyzer',
-    desc: 'Evaluates medication combinations and flags possible interactions or contraindications in real time.',
-    accent: '#2FD3FF',
-    accentB: '#a855f7',
-    label: 'DRUG CHECK',
+    label: 'CROSS-REF AI',
   },
 ];
 
@@ -45,7 +37,7 @@ const STRIDE  = PANEL_W + GAP;
 /* ─────────────── Single floating panel ─────────────── */
 const ToolPanel = ({
   panel,
-  offset,   // position relative to active (−2…+2)
+  offset,
   isActive,
 }: {
   panel: (typeof PANELS)[number];
@@ -59,7 +51,6 @@ const ToolPanel = ({
 
   const absOff = Math.abs(offset);
 
-  // 3-D depth values per offset
   const scale   = isActive ? 1   : absOff === 1 ? 0.88 : 0.80;
   const tz      = isActive ? 0   : absOff === 1 ? -80  : -120;
   const ry      = offset   > 0   ? -(10 * absOff) : (10 * absOff);
@@ -97,7 +88,7 @@ const ToolPanel = ({
         }}
       />
 
-      {/* Depth shadow under panel (VisionOS trick) */}
+      {/* Depth shadow under panel */}
       <div className="vp-floor-shadow" />
 
       {/* Content */}
@@ -146,7 +137,6 @@ const EnergyField = () => {
       const { width: W, height: H } = canvas;
       ctx.clearRect(0, 0, W, H);
 
-      // Cursor glow energy
       const mx = mouseRef.current.x || W / 2;
       const my = mouseRef.current.y || H / 2;
       const grd = ctx.createRadialGradient(mx, my, 0, mx, my, 220);
@@ -156,7 +146,6 @@ const EnergyField = () => {
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, W, H);
 
-      // Flowing ring
       const r = 90 + 20 * Math.sin(frameRef.current * 0.025);
       ctx.beginPath();
       ctx.arc(mx, my, r, 0, Math.PI * 2);
@@ -212,17 +201,17 @@ const PlatformCapabilities = () => {
 
       <div className="container">
         <div className="capabilities-header">
-          <p className="vp-eyebrow">Platform Principles</p>
-          <motion.h2 
+          <p className="vp-eyebrow">Platform Capabilities</p>
+          <motion.h2
             className="section-title"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Security-First <span className="text-gradient">System Design</span>
+            Telugu Health Intelligence <span className="text-gradient">for Every Indian Family</span>
           </motion.h2>
           <p className="vp-sub">
-            DiagnoSphereX is being developed with privacy and security as foundational system principles.
+            Built on ICMR Indian clinical standards — not WHO global averages. Designed for Vijayawada. Built for every Indian household.
           </p>
         </div>
       </div>

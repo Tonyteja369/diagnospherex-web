@@ -1,101 +1,102 @@
-import { useEffect, useState } from 'react';
-import { Upload, Info } from 'lucide-react';
+import { Search, Bell, Home, FileText, Pill, Activity, AlertTriangle, ShieldCheck, Camera, HardDrive, BellRing, BadgeCheck } from 'lucide-react';
 import '../styles/MobileAppPreview.css';
 
-/* ---- Screen 1: AI Dashboard ---- */
-const Screen1Dashboard = () => {
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
-  const [accuracy, setAccuracy] = useState(0);
-  const [barW, setBarW] = useState(0);
-
-  useEffect(() => {
-    // Count-up animation
-    const dur = 1200;
-    const steps = 40;
-    let i = 0;
-    const t = setInterval(() => {
-      i++;
-      const p = i / steps;
-      setCount1(Math.round(1284 * p));
-      setCount2(Math.round(342 * p));
-      setAccuracy(parseFloat((94.2 * p).toFixed(1)));
-      if (i >= steps) clearInterval(t);
-    }, dur / steps);
-    // Chart bar animation
-    setTimeout(() => setBarW(72), 600);
-    return () => { clearInterval(t); };
-  }, []);
-
+/* ---- Screen 1: Medicine Details ---- */
+const ScreenMedicine = () => {
   return (
-    <div className="app-screen screen1">
+    <div className="app-screen screen-medicine">
       {/* Header */}
-      <div className="app-header">
+      <div className="med-header">
         <div className="nav-left">
-          <div className="app-logo-dot" />
-          <span className="nav-brand">DiagnoSphereX</span>
+          <div className="app-logo-box">
+            <div className="app-logo-dot" />
+            <div className="app-logo-bg" />
+          </div>
+          <span className="nav-brand text-lg font-bold">DiagnoSphereX</span>
         </div>
-        <div className="app-avatar">DW</div>
+        <Bell size={16} fill="#6236FF" className="text-purple drop-shadow-glow" />
+      </div>
+
+      {/* Search Bar */}
+      <div className="med-search-bar">
+        <Search size={14} className="text-secondary" />
+        <span className="search-placeholder">Enter medicine name or brand</span>
+      </div>
+
+      {/* Main Medicine Card */}
+      <div className="med-card main-med-card">
+        <div className="med-title-row">
+          <span className="med-name">Augmentin 625</span>
+          <span className="med-badge rx">RX ONLY</span>
+        </div>
+        <div className="med-subtitle">Amoxycillin (500mg) + Clavulanic Acid (125mg)</div>
+        
+        <div className="med-info-grid">
+          <div className="med-info-box">
+            <span className="info-label">COMPOSITION</span>
+            <span className="info-val">Penicillin Type</span>
+          </div>
+          <div className="med-info-box">
+            <span className="info-label">DOSAGE</span>
+            <span className="info-val">Twice Daily</span>
+          </div>
+          <div className="med-info-box">
+            <span className="info-label">CATEGORY</span>
+            <span className="info-val">Antibiotic</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Safety Section */}
+      <div className="section-title mt-2">SAFETY & INTERACTIONS</div>
+      <div className="med-card safety-card">
+        <div className="safety-icon-wrapper">
+          <AlertTriangle size={16} className="text-warning" fill="#b45309" color="#fcd34d" />
+        </div>
+        <div className="safety-content">
+          <span className="safety-title">Moderate Interaction</span>
+          <p className="safety-desc">This medicine may interact with oral contraceptives and Methotrexate. Consult your doctor if you are on blood thinners.</p>
+        </div>
+      </div>
+
+      {/* Savings Section */}
+      <div className="section-title mt-2 flex justify-between">
+        <span>SMART SAVINGS</span>
+        <span className="gov-approved-text text-success flex items-center gap-1">
+          <BadgeCheck size={10} fill="#10b981" color="#fff" /> GOVT APPROVED
+        </span>
       </div>
       
-      <div className="app-greeting">Good morning, Dr. Williams</div>
-      <div className="app-sub">Clinical Intelligence Overview</div>
-
-      {/* Stats grid */}
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-value">{count1.toLocaleString()}</div>
-          <div className="stat-label">Analyses</div>
+      <div className="med-card savings-card">
+        <div className="savings-header">
+          <div className="savings-left">
+            <span className="jan-aushadhi-label text-success">JAN AUSHADHI ALTERNATIVE</span>
+            <span className="generic-name">Amoxy-Clav 625 Generic</span>
+          </div>
+          <div className="savings-right text-right">
+            <span className="old-price strike text-secondary">₹120.00</span>
+            <span className="new-price text-success">₹24.50</span>
+          </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-value">{count2}</div>
-          <div className="stat-label">Reports Today</div>
+        
+        <div className="savings-banner bg-success-dim text-success">
+          <span className="piggy text-success">💰</span> Save ₹95.50 (79% cheaper)
         </div>
-        <div className="stat-card highlight">
-          <div className="stat-value">{accuracy}%</div>
-          <div className="stat-label">Accuracy</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-value">6.4s</div>
-          <div className="stat-label">Avg. Speed</div>
-        </div>
-      </div>
-
-      {/* Mini chart */}
-      <div className="glass-card chart-card">
-        <div className="card-title">Last 7 Days Activity</div>
-        <div className="mini-chart">
-          {[40, 65, 50, 80, 60, 90, 75].map((h, i) => (
-            <div key={i} className="bar-wrap">
-              <div className="bar" style={{ height: `${h}%`, animationDelay: `${i * 80}ms` }} />
-            </div>
-          ))}
-        </div>
-        <div className="chart-legend">
-          <span className="legend-dot purple" />Analyses
-          <span className="legend-dot cyan" />Reports
-        </div>
-      </div>
-
-      {/* AI Insight card */}
-      <div className="glass-card insight-card">
-        <div className="insight-tag">Clinical Insight</div>
-        <p className="insight-text">
-          Inflammatory markers detected. Elevated CRP and WBC suggest acute response.
-        </p>
-        <div className="confidence-bar">
-          <div className="confidence-fill" style={{ width: `${barW}%` }} />
-          <span className="confidence-label">Confidence: 92%</span>
-        </div>
-        <button className="app-btn">View Detailed Analysis</button>
+        
+        <button className="med-btn btn-success mt-2">FIND NEARBY STORES</button>
       </div>
 
       {/* Bottom nav */}
       <div className="bottom-nav">
-        {['Home', 'Reports', 'AI', 'Patients', 'More'].map(n => (
-          <div key={n} className={`nav-item ${n === 'Home' ? 'active' : ''}`}>
-            <div className="nav-dot" />
-            <span>{n}</span>
+        {[
+          { icon: <Home size={16} />, label: 'Home' },
+          { icon: <FileText size={16} />, label: 'Reports' },
+          { icon: <Pill size={16} />, label: 'Medicine', active: true },
+          { icon: <Activity size={16} />, label: 'History' },
+        ].map(n => (
+          <div key={n.label} className={`nav-item ${n.active ? 'active' : ''}`}>
+            {n.icon}
+            <span>{n.label}</span>
           </div>
         ))}
       </div>
@@ -103,108 +104,118 @@ const Screen1Dashboard = () => {
   );
 };
 
-/* ---- Screen 2: Report Analyzer ---- */
-const Screen2Analyzer = () => {
-  const [progress, setProgress] = useState(0);
-  const [stage, setStage] = useState(0);
-
-  useEffect(() => {
-    // Animate progress
-    let p = 0;
-    const t = setInterval(() => {
-      p = (p + 0.3) % 101;
-      setProgress(p);
-    }, 60);
-    // Cycle stages
-    const s = setInterval(() => setStage(n => (n + 1) % 4), 1500);
-    return () => { clearInterval(t); clearInterval(s); };
-  }, []);
-
-  const stages = [
-    'Analyzing laboratory values...',
-    'Mapping medical terminology...',
-    'Detecting abnormal markers...',
-    'Generating clinical insights...',
-  ];
-
+/* ---- Screen 2: Language Selection ---- */
+const ScreenLanguage = () => {
   return (
-    <div className="app-screen screen2">
-      {/* Header */}
-      <div className="app-header">
-        <div className="nav-left">
-          <div className="app-logo-dot" />
-          <span className="nav-brand">DiagnoSphereX</span>
-        </div>
-      </div>
+    <div className="app-screen screen-onboard px-4 pb-4">
+      <div className="onboard-content mt-10">
+        <h1 className="onboard-title">Choose your<br/>language.</h1>
+        <p className="onboard-subtitle">Tailoring your health journey to your preferred dialect for precision and comfort.</p>
 
-      <div className="app-greeting">Report Assistant</div>
-      <div className="app-sub">Transform clinical data into clear insights.</div>
-
-      {/* Upload section */}
-      <div className="glass-card upload-card">
-        <div className="upload-icon"><Upload size={20} color="#2FD3FF" /></div>
-        <div className="upload-title">Process Medical Report</div>
-        <div className="upload-formats">
-          {['PDF', 'DICOM', 'LAB', 'NOTES'].map(f => (
-            <span key={f} className="format-tag">{f}</span>
-          ))}
-        </div>
-        <button className="app-btn">Explore Lab Report</button>
-      </div>
-
-      {/* Processing card */}
-      <div className="glass-card process-card">
-        <div className="card-title">System Analysis Status</div>
-        <div className="stage-list">
-          {stages.map((s, i) => (
-            <div key={i} className={`stage-item ${i === stage ? 'active' : i < stage ? 'done' : ''}`}>
-              <div className="stage-dot" />
-              <span>{s}</span>
+        <div className="lang-options mt-6">
+          <div className="lang-box active">
+            <div className="lang-left">
+              <span className="lang-text">తెలుగు</span>
+              <span className="lang-sub">TELUGU</span>
             </div>
-          ))}
-        </div>
-        <div className="process-progress-label">
-          Progress <span className="pct">{Math.round(progress)}%</span>
-        </div>
-        <div className="progress-track">
-          <div className="progress-fill" style={{ width: `${progress}%` }}>
-            <div className="progress-glow" />
+            <div className="lang-check checked"><BadgeCheck size={18} fill="#6236FF" color="#fff" strokeWidth={1}/></div>
           </div>
+          
+          <div className="lang-box">
+            <div className="lang-left">
+              <span className="lang-text" style={{fontFamily: 'sans-serif'}}>हिन्दी</span>
+              <span className="lang-sub">HINDI</span>
+            </div>
+            <div className="lang-check empty" />
+          </div>
+
+          <div className="lang-box">
+            <div className="lang-left">
+              <span className="lang-text" style={{fontFamily: 'sans-serif'}}>தமிழ்</span>
+              <span className="lang-sub">TAMIL</span>
+            </div>
+            <div className="lang-check empty" />
+          </div>
+        </div>
+
+        <div className="text-center mt-4">
+          <span className="link-text text-sm hover:underline cursor-pointer">See more languages</span>
         </div>
       </div>
 
-      {/* Insights panel */}
-      <div className="glass-card results-card">
-        <div className="card-title">Clinical Summary</div>
-        <p className="insight-text">
-          Findings suggest mild anemia and acute inflammatory response.
-        </p>
-        <div className="markers">
-          <span className="marker low">Hb – Low</span>
-          <span className="marker high">WBC – High</span>
+      <div className="onboard-footer mt-auto pt-6">
+        <div className="pagination flex justify-center gap-2 mb-4">
+          <div className="page-dot"></div>
+          <div className="page-dot active"></div>
+          <div className="page-dot"></div>
+          <div className="page-dot"></div>
         </div>
-        <div className="recommendation">
-          <Info size={10} style={{marginRight: '4px', display: 'inline'}} />
-          Consult physician for clinical correlation.
-        </div>
-        <button className="app-btn secondary">Generate Clinical Summary</button>
-      </div>
-
-      {/* Bottom nav */}
-      <div className="bottom-nav">
-        {['Home', 'Reports', 'Asst', 'Vault', 'User'].map(n => (
-          <div key={n} className={`nav-item ${n === 'Reports' ? 'active' : ''}`}>
-            <div className="nav-dot" />
-            <span>{n}</span>
-          </div>
-        ))}
+        <button className="onboard-btn btn-primary w-full">Continue</button>
+        <p className="footer-note text-center mt-4 text-xs">You can always change your language preference later in settings.</p>
       </div>
     </div>
   );
 };
+
+/* ---- Screen 3: Permissions ---- */
+const ScreenPermissions = () => {
+  return (
+    <div className="app-screen screen-onboard px-4 pb-4">
+      <div className="onboard-content mt-6">
+        <span className="step-tag text-xs font-bold tracking-widest text-secondary mb-2 block">STEP 3 OF 3</span>
+        <h1 className="onboard-title leading-tight">A few permissions to<br/>get started.</h1>
+        <p className="onboard-subtitle mt-2">DiagnoSphereX uses these to provide real-time health insights and personalized care tracking.</p>
+
+        <div className="perm-list mt-6 space-y-3">
+          <div className="perm-box bg-panel rounded-xl p-3 flex items-center gap-3">
+            <Camera size={20} className="text-secondary flex-shrink-0" />
+            <div className="perm-info flex-1">
+              <span className="perm-title block text-sm font-semibold text-white">Camera</span>
+              <span className="perm-desc block text-xs text-secondary leading-snug">For scanning prescriptions and lab results.</span>
+            </div>
+            <div className="perm-toggle on"><div className="toggle-thumb" /></div>
+          </div>
+
+          <div className="perm-box bg-panel rounded-xl p-3 flex items-center gap-3">
+            <HardDrive size={20} className="text-secondary flex-shrink-0" />
+            <div className="perm-info flex-1">
+              <span className="perm-title block text-sm font-semibold text-white">Storage</span>
+              <span className="perm-desc block text-xs text-secondary leading-snug">For saving reports and offline access.</span>
+            </div>
+            <div className="perm-toggle off"><div className="toggle-thumb" /></div>
+          </div>
+
+          <div className="perm-box bg-panel rounded-xl p-3 flex items-center gap-3">
+            <BellRing size={20} className="text-secondary flex-shrink-0" />
+            <div className="perm-info flex-1">
+              <span className="perm-title block text-sm font-semibold text-white">Notifications</span>
+              <span className="perm-desc block text-xs text-secondary leading-snug">For health reminders and AI alerts.</span>
+            </div>
+            <div className="perm-toggle on"><div className="toggle-thumb" /></div>
+          </div>
+        </div>
+
+        <div className="flex justify-center mt-5">
+          <div className="secure-badge flex items-center gap-2 bg-black-dim px-3 py-1.5 rounded-full border border-panel">
+            <ShieldCheck size={12} className="text-purple" />
+            <span className="text-[10px] uppercase font-bold tracking-wider text-secondary">SECURE & ENCRYPTED</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="onboard-footer mt-auto pt-6">
+        <button className="onboard-btn btn-primary w-full shadow-purple-glow">Allow All and Continue</button>
+        <div className="text-center mt-4">
+          <span className="link-text text-sm cursor-pointer text-secondary hover:text-white transition-colors">Skip for now</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ---- Phone Frame Wrapper ---- */
-const PhoneFrame = ({ children, tilt }: { children: React.ReactNode; tilt?: string }) => (
-  <div className="phone-frame" style={{ transform: tilt }}>
+const PhoneFrame = ({ children, tilt, className = "" }: { children: React.ReactNode; tilt?: string; className?: string }) => (
+  <div className={`phone-frame ${className}`} style={{ transform: tilt }}>
     <div className="phone-notch" />
     <div className="phone-screen">{children}</div>
     <div className="phone-home-bar" />
@@ -213,34 +224,19 @@ const PhoneFrame = ({ children, tilt }: { children: React.ReactNode; tilt?: stri
 
 /* ---- Main Export ---- */
 const MobileAppPreview = () => (
-  <div className="mobile-preview-container">
-    {/* Decorative background elements to fill space */}
+  <div className="mobile-preview-container three-phones">
     <div className="preview-bg-glow"></div>
-    <div className="floating-element badge-1">
-      <div className="badge-icon">
-        <Upload size={14} color="#2FD3FF" />
-      </div>
-      <div className="badge-text">
-        <span className="badge-title">Data Sync</span>
-        <span className="badge-sub">Real-time active</span>
-      </div>
-    </div>
     
-    <div className="floating-element badge-2">
-      <div className="badge-icon purple">
-        <Info size={14} color="#6236FF" />
-      </div>
-      <div className="badge-text">
-        <span className="badge-title">AI Engine</span>
-        <span className="badge-sub">99.9% Uptime</span>
-      </div>
-    </div>
-
-    <PhoneFrame tilt="rotate(-4deg) translateY(10px)">
-      <Screen1Dashboard />
+    <PhoneFrame className="phone-side phone-left">
+      <ScreenPermissions />
     </PhoneFrame>
-    <PhoneFrame tilt="rotate(3deg) translateY(-10px)">
-      <Screen2Analyzer />
+    
+    <PhoneFrame className="phone-center z-10 shadow-center">
+      <ScreenMedicine />
+    </PhoneFrame>
+    
+    <PhoneFrame className="phone-side phone-right">
+      <ScreenLanguage />
     </PhoneFrame>
   </div>
 );

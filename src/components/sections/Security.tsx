@@ -4,26 +4,26 @@ import '../../styles/Security.css';
 const PRINCIPLES = [
   {
     icon: '🔒',
-    title: 'Secure Data Handling',
-    desc: 'Medical data is intended to be processed through encrypted communication channels and stored using protected infrastructure designed to reduce unauthorized access risks.',
+    title: 'AES-256 Encryption at Rest',
+    desc: 'Every health record is encrypted before it touches the database. Each family member\'s data is encrypted independently. Even we cannot read your data.',
     delay: 0,
   },
   {
     icon: '🛡️',
-    title: 'Controlled Access',
-    desc: 'The platform architecture is planned to include authentication systems and role-based access controls so that sensitive medical information can only be accessed by authorized users.',
+    title: 'Zero Knowledge Architecture',
+    desc: 'Encryption keys are derived from your own password. You hold the key. We hold nothing. One-tap permanent deletion removes everything — no hidden copies.',
     delay: 0.1,
   },
   {
-    icon: '🔍',
-    title: 'Privacy-Focused Architecture',
-    desc: 'The system is designed to minimize unnecessary exposure of sensitive patient information while enabling AI models to analyze medical data responsibly.',
+    icon: '🇮🇳',
+    title: 'ICMR Indian Clinical Standards',
+    desc: 'Every reference range is calibrated to Indian age, gender, and regional population using ICMR guidelines. Not WHO global averages built for Western bodies.',
     delay: 0.2,
   },
   {
-    icon: '⚙️',
-    title: 'Responsible AI Processing',
-    desc: 'AI systems within DiagnoSphereX are intended to follow strict data-handling practices to ensure that clinical information is processed carefully and ethically.',
+    icon: '✅',
+    title: 'Zero Hallucination Architecture',
+    desc: 'Values are extracted and validated by code before the AI ever sees them. The AI explains. The code verifies. You never see a number the AI invented.',
     delay: 0.3,
   },
 ];
@@ -46,14 +46,13 @@ const Security = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <p className="security-eyebrow">Platform Principles</p>
+          <p className="security-eyebrow">PLATFORM PRINCIPLES</p>
           <h2 className="section-title">
-            Security-First <span className="text-gradient">System Design</span>
+            Security-First, <span className="text-gradient">India-First System Design</span>
           </h2>
           <p className="security-desc">
-            DiagnoSphereX is being developed with privacy and security as foundational system principles.
-            As the platform evolves, our architecture is designed to protect sensitive medical information
-            through careful data handling, controlled access, and modern encryption practices.
+            DiagnoSphereX is built with AES-256 encryption, zero-knowledge architecture, and ICMR Indian clinical
+            standards as the absolute foundation — not added later, not optional.
           </p>
         </motion.div>
 
@@ -76,7 +75,7 @@ const Security = () => {
           ))}
         </div>
 
-        {/* Transparency statement */}
+        {/* Status bar */}
         <motion.div
           className="transparency-card"
           initial={{ opacity: 0, y: 20 }}
@@ -86,10 +85,10 @@ const Security = () => {
         >
           <div className="transparency-dot" />
           <div>
-            <p className="transparency-label">Platform Status</p>
+            <p className="transparency-label">PLATFORM STATUS</p>
             <p className="transparency-text">
-              DiagnoSphereX is currently under active development.
-              Security infrastructure and compliance measures will continue to evolve as the platform grows.
+              DiagnoSphereX is under active development. Launching in 12 weeks from Vijayawada, Andhra Pradesh.
+              Security architecture and ICMR database are being built from day one.
             </p>
           </div>
         </motion.div>

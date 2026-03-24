@@ -3,11 +3,12 @@ import { motion } from 'framer-motion';
 import '../../styles/AIBrainSimulation.css';
 
 const HEALTH_WORDS = [
-  'Neural', 'Synapse', 'Cortex', 'Hemoglobin', 'Diagnosis',
-  'ECG', 'MRI', 'AI', 'Clinical', 'Pathology',
-  'Cells', 'Genome', 'Cardio', 'Neuro', 'Immunity',
-  'Protein', 'Enzyme', 'Plasma', 'Anemia', 'Insulin',
-  'Antibody', 'Receptor', 'DNA', 'Biomarker', 'Cholesterol',
+  'Haemoglobin', 'Creatinine', 'Vitamin D', 'B12', 'Potassium',
+  'ICMR', 'Ferritin', 'Thyroid', 'Diabetes', 'Anaemia',
+  'Cholesterol', 'Platelets', 'Sodium', 'Glucose', 'Protein',
+  'Calcium', 'Bilirubin', 'Urea', 'Insulin', 'Telugu',
+  'Vijayawada', 'Indian', 'Validation', 'Encryption', 'Cross-Reference',
+  'Family Vault', 'Zero Hallucination', 'DISHA', 'AES-256', 'Report AI',
 ];
 
 interface Particle {
@@ -67,16 +68,13 @@ const AIBrainSimulation = () => {
       mkParticle(canvas.width, canvas.height)
     );
 
-    // Spawn them at random times
     particles.forEach(p => { p.life = Math.floor(Math.random() * p.maxLife); });
 
-    // Node points for the brain mesh — dense cluster of points
     const NUM_NODES = 300;
     const nodes = Array.from({ length: NUM_NODES }, () => {
-      // Cluster around center-ish
       const angle = Math.random() * Math.PI * 2;
       const r = Math.random();
-      const dist = r * r * 0.38; // more toward center
+      const dist = r * r * 0.38;
       return {
         bx: 0.5 + Math.cos(angle) * dist,
         by: 0.5 + Math.sin(angle) * dist * 0.75,
@@ -93,7 +91,6 @@ const AIBrainSimulation = () => {
       const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
 
-      // Background glow – central brain mass
       const cx = W * 0.5, cy = H * 0.5;
       const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W, H) * 0.5);
       bg.addColorStop(0,   'rgba(98,54,255,0.18)');
@@ -103,7 +100,6 @@ const AIBrainSimulation = () => {
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, W, H);
 
-      // Pulsing glow ring
       const ringR = Math.min(W, H) * (0.30 + 0.02 * Math.sin(t * 0.04));
       const ring = ctx.createRadialGradient(cx, cy, ringR * 0.7, cx, cy, ringR);
       ring.addColorStop(0, 'rgba(98,54,255,0)');
@@ -114,14 +110,12 @@ const AIBrainSimulation = () => {
       ctx.arc(cx, cy, ringR, 0, Math.PI * 2);
       ctx.fill();
 
-      // Draw nodes
       const actualNodes = nodes.map(n => {
         const x = n.bx * W + Math.sin(t * n.speed + n.phase) * n.wobble * W;
         const y = n.by * H + Math.cos(t * n.speed * 0.7 + n.phase) * n.wobble * H;
         return { x, y, hue: n.hue, size: n.size };
       });
 
-      // Connections
       ctx.lineWidth = 0.6;
       for (let i = 0; i < actualNodes.length; i++) {
         for (let j = i + 1; j < actualNodes.length; j++) {
@@ -139,9 +133,7 @@ const AIBrainSimulation = () => {
         }
       }
 
-      // Draw node dots
       actualNodes.forEach(n => {
-        // Mouse repel
         const mx = mouseRef.current.x, my = mouseRef.current.y;
         const mdx = n.x - mx, mdy = n.y - my;
         const md = Math.sqrt(mdx * mdx + mdy * mdy);
@@ -156,7 +148,6 @@ const AIBrainSimulation = () => {
         ctx.fill();
       });
 
-      // Word particles
       particles.forEach((p, i) => {
         p.life++;
         if (p.life >= p.maxLife) {
@@ -167,7 +158,6 @@ const AIBrainSimulation = () => {
         const fade = p.life / p.maxLife;
         p.alpha = fade < 0.1 ? fade * 10 : (fade > 0.85 ? (1 - fade) * 6.67 : 0.85);
 
-        // Mouse repel for words
         const mx = mouseRef.current.x, my = mouseRef.current.y;
         const mdx = p.x - mx, mdy = p.y - my;
         const md = Math.sqrt(mdx * mdx + mdy * mdy);
@@ -176,13 +166,11 @@ const AIBrainSimulation = () => {
           p.vy += (mdy / md) * 0.5;
         }
 
-        // Slow friction
         p.vx *= 0.98;
         p.vy *= 0.98;
         p.x += p.vx;
         p.y += p.vy;
 
-        // Soft gravity toward glow center
         const cgx = p.x - cx, cgy = p.y - cy;
         const cd = Math.sqrt(cgx * cgx + cgy * cgy);
         if (cd > Math.min(W, H) * 0.35) {
@@ -213,7 +201,7 @@ const AIBrainSimulation = () => {
 
   return (
     <section className="brain-section" id="technology">
-      <div className="brain-content">
+      <div className="brain-content container">
         <motion.div
           className="brain-text"
           initial={{ opacity: 0, x: -50 }}
@@ -225,8 +213,10 @@ const AIBrainSimulation = () => {
             Visual AI <span className="text-gradient">Neural Engine</span>
           </h2>
           <p className="brain-description">
-            Watch thousands of neural signals and medical keywords process clinical reasoning in real-time.
-            Move your cursor through the simulation to interact with the field.
+            Watch DiagnoSphereX process a real Telugu blood report in real time — cross-referencing values
+            against ICMR Indian clinical standards, detecting connections between documents, running the
+            zero-hallucination guard check, and building your 48-hour action plan. Every signal you see
+            is a real step in the reasoning chain.
           </p>
         </motion.div>
 
