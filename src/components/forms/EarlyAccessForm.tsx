@@ -30,6 +30,7 @@ const EarlyAccessForm = ({ onSuccessClose }: EarlyAccessFormProps) => {
       const submissionData = new FormData(formElement);
       submissionData.append('_subject', `New Early Access Request: ${formData.name}`);
       submissionData.append('_template', 'table');
+      submissionData.append('_autoresponse', 'Thank you for requesting early access to DiagnoSphereX! You have successfully joined the waitlist for free. We will notify you as soon as your spot opens up.');
 
       try {
         await fetch('https://formsubmit.co/ajax/diagnospherex@gmail.com', {
