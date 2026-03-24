@@ -123,7 +123,7 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
                 className="btn-primary ripple-btn glow-effect"
                 onClick={onOpenModal}
               >
-                Join Early Access
+                Join the waitlist for free
               </button>
 
               <div className="social-proof-badge">

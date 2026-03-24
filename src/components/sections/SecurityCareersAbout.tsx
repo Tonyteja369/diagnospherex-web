@@ -106,7 +106,7 @@ const SecurityCareersAbout = () => {
         >
           <div className="cta-glow" />
           <h2 className="cta-headline">Experience the Future of Medical Intelligence</h2>
-          <button className="btn-primary ripple-btn glow-effect cta-btn">Join Early Access</button>
+          <button className="btn-primary ripple-btn glow-effect cta-btn">Join the waitlist for free</button>
         </motion.div>
       </section>
     </>

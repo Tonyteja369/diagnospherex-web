@@ -59,7 +59,7 @@ const EarlyAccessForm = ({ onSuccessClose }: EarlyAccessFormProps) => {
           exit={{ opacity: 0, x: 20 }}
           className="modal-content"
         >
-          <h2 className="modal-title">Request Early Access</h2>
+          <h2 className="modal-title">Join the waitlist for free</h2>
           <p className="modal-desc">
             Join the exploration phase of DiagnoSphere X. <strong>Be among the first 100 users</strong> to experience our AI-powered intelligent healthcare platform.
           </p>
@@ -143,7 +143,7 @@ const EarlyAccessForm = ({ onSuccessClose }: EarlyAccessFormProps) => {
                   Sending Request...
                 </>
               ) : (
-                "Request Early Access"
+                "Join the waitlist for free"
               )}
             </motion.button>
           </form>

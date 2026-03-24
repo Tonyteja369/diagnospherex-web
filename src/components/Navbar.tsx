@@ -76,7 +76,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
             className="btn-primary ripple-btn glow-effect cta-nav"
             onClick={onOpenModal}
           >
-            Join Early Access
+            Join the waitlist for free
           </button>
         </div>
 
@@ -112,7 +112,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
               if (onOpenModal) onOpenModal();
             }}
           >
-            Join Early Access
+            Join the waitlist for free
           </button>
         </motion.div>
       )}
