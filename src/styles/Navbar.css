@@ -96,6 +96,14 @@
   white-space: nowrap;
 }
 
+.navbar-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
 .navbar-actions {
   display: flex;
   align-items: center;

@@ -25,22 +25,33 @@ const charVariants: Variants = {
 };
 
 const LiquidText = ({ text }: { text: string }) => {
-  const chars = text.split('');
+  const words = text.split(' ');
+  let charIndexGlobal = 0;
   return (
-    <span className="liquid-word" aria-label={text}>
-      {chars.map((ch, i) => (
-        <motion.span
-          key={i}
-          className={ch === ' ' ? 'liquid-space' : 'liquid-char liquid-gradient-mask'}
-          custom={i}
-          variants={charVariants}
-          initial="hidden"
-          animate="visible"
-          style={{ display: 'inline-block', transformOrigin: 'bottom center' }}
-        >
-          {ch === ' ' ? '\u00a0' : ch}
-        </motion.span>
-      ))}
+    <span className="liquid-text-container" style={{ display: 'inline-flex', flexWrap: 'wrap', columnGap: '0.28em', rowGap: '0.1em' }}>
+      {words.map((word, wIdx) => {
+        const chars = word.split('');
+        return (
+          <span key={wIdx} className="liquid-word" style={{ whiteSpace: 'nowrap', display: 'inline-block' }}>
+            {chars.map((ch) => {
+              const idx = charIndexGlobal++;
+              return (
+                <motion.span
+                  key={idx}
+                  className="liquid-char liquid-gradient-mask"
+                  custom={idx}
+                  variants={charVariants}
+                  initial="hidden"
+                  animate="visible"
+                  style={{ display: 'inline-block', transformOrigin: 'bottom center', '--i': idx } as any}
+                >
+                  {ch}
+                </motion.span>
+              );
+            })}
+          </span>
+        );
+      })}
     </span>
   );
 };

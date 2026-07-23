@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import ThemeToggle from './ui/ThemeToggle';
 import '../styles/Navbar.css';
 
 interface NavbarProps {
@@ -99,7 +98,6 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
         </nav>
 
         <div className="navbar-actions desktop-only">
-          <ThemeToggle />
           <button 
             className="btn-primary ripple-btn glow-effect cta-nav"
             onClick={onOpenModal}
@@ -108,16 +106,13 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
           </button>
         </div>
 
-        <div className="mobile-only flex items-center gap-2">
-          <ThemeToggle />
-          <button 
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        <button 
+          className="mobile-menu-btn mobile-only"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
       {/* Mobile Menu */}

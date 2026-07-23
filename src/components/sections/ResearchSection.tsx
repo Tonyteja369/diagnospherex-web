@@ -30,7 +30,7 @@ const RESEARCH_PILLARS = [
     title: 'Brain Intelligence',
     subtitle: 'NeuroSenseX',
     status: 'Active Development',
-    statusColor: '#2FD3FF',
+    statusColor: '#00F5FF',
     description: 'An advanced EEG intelligence platform focused on explainable brain signal analysis, neuroscience research, AI-assisted clinical decision support, biomedical visualization, and intelligent research workflows.',
     areas: ['EEG Intelligence', 'Brain Signal Processing', 'Neuroscience', 'Explainable AI', 'Brain Visualization'],
   },
@@ -39,7 +39,7 @@ const RESEARCH_PILLARS = [
     title: 'Cardiac Intelligence',
     subtitle: 'MedQuantum-NIN',
     status: 'Research Paper in Preparation',
-    statusColor: '#a855f7',
+    statusColor: '#7928CA',
     description: 'An ongoing research initiative exploring quantum-inspired computational frameworks for explainable ECG intelligence, uncertainty-aware biomedical signal analysis, and interpretable cardiac AI.',
     areas: ['ECG Intelligence', 'Signal Processing', 'Wavelets', 'Quantum-Inspired Computing', 'Explainable Cardiac AI'],
   },
@@ -49,7 +49,7 @@ const RESEARCH_PILLARS = [
     subtitle: 'Human Intelligence Engine (HIE)',
     badge: 'Flagship Research Program (2026–2035 Vision)',
     status: 'Research Vision',
-    statusColor: '#6236FF',
+    statusColor: '#8B5CF6',
     description: 'The Human Intelligence Engine (HIE) is DiagnoSphereX’s flagship research program dedicated to developing explainable physiological intelligence capable of understanding human biology through multimodal biomedical signals, trustworthy AI, and transparent computational reasoning.',
     areas: ['Multimodal Intelligence', 'Computational Medicine', 'Physiological Computing', 'Human-Centered AI', 'Biomedical Foundation Models'],
     longTermGoals: ['Brain Intelligence', 'Cardiac Intelligence', 'Physiological Intelligence', 'Human-AI Collaboration', 'Biomedical Foundation Models', 'Computational Medicine'],
@@ -77,18 +77,22 @@ const PHILOSOPHY_PRINCIPLES = [
   {
     title: 'Scientific Rigor',
     desc: 'Built upon reproducible research, peer validation, and clinical methodologies.',
+    color: '#00F5FF'
   },
   {
     title: 'Explainability',
     desc: 'Every AI decision should be transparent, traceable, and understandable by humans.',
+    color: '#7928CA'
   },
   {
     title: 'Human-Centered Design',
     desc: 'Technology should empower clinicians, researchers, and patients—never replace them.',
+    color: '#3B82F6'
   },
   {
     title: 'Responsible Innovation',
     desc: 'Privacy, ethics, and security are integrated from the beginning—not added later.',
+    color: '#10B981'
   },
 ];
 
@@ -124,7 +128,7 @@ const ResearchSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Research & <span className="text-gradient">Innovation</span>
+            <span className="text-gradient">Research</span>
           </motion.h2>
 
           <motion.p
@@ -189,7 +193,7 @@ const ResearchSection: React.FC = () => {
                 <div
                   className="pillar-glow"
                   style={{
-                    background: `radial-gradient(circle at 20% 20%, ${pillar.statusColor}15, transparent 70%)`,
+                    background: `radial-gradient(circle at 20% 20%, ${pillar.statusColor}22, transparent 70%)`,
                   }}
                 />
 
@@ -201,8 +205,8 @@ const ResearchSection: React.FC = () => {
                     className="pillar-status-badge"
                     style={{
                       color: pillar.statusColor,
-                      borderColor: `${pillar.statusColor}44`,
-                      background: `${pillar.statusColor}12`,
+                      borderColor: `${pillar.statusColor}55`,
+                      background: `${pillar.statusColor}18`,
                     }}
                   >
                     {pillar.status}
@@ -269,34 +273,25 @@ const ResearchSection: React.FC = () => {
             </button>
           </div>
 
-          <div className="publications-table overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-white/10 text-xs text-dim uppercase tracking-wider">
-                  <th className="py-3 px-4">Project</th>
-                  <th className="py-3 px-4">Category</th>
-                  <th className="py-3 px-4">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {PUBLICATIONS.map((pub, idx) => (
-                  <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors text-sm">
-                    <td className="py-3 px-4 font-semibold text-white">{pub.project}</td>
-                    <td className="py-3 px-4 text-dim">{pub.type}</td>
-                    <td className="py-3 px-4">
-                      <span className="text-xs px-2.5 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
-                        {pub.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="publications-list flex flex-col gap-3">
+            {PUBLICATIONS.map((pub, idx) => (
+              <div key={idx} className="pub-row glass-panel flex items-center justify-between p-4 rounded-xl border border-white/10">
+                <div className="pub-info">
+                  <h4 className="font-semibold text-white text-base">{pub.project}</h4>
+                  <span className="text-xs text-dim">{pub.type}</span>
+                </div>
+                <div className="pub-status">
+                  <span className="text-xs px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
+                    {pub.status}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* ── Research Philosophy Section ── */}
-        <div className="philosophy-block text-center max-w-4xl mx-auto">
+        <div className="philosophy-block text-center max-w-4xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple/10 border border-purple/30 text-purple text-xs font-semibold uppercase mb-4">
             <ShieldCheck size={14} />
             <span>Guiding Principles</span>
@@ -308,9 +303,13 @@ const ResearchSection: React.FC = () => {
 
           <div className="philosophy-grid grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
             {PHILOSOPHY_PRINCIPLES.map((item, idx) => (
-              <div key={idx} className="philo-card glass-panel p-5 rounded-xl border border-white/10">
-                <h4 className="font-semibold text-white text-base mb-1">{item.title}</h4>
-                <p className="text-xs text-dim leading-relaxed">{item.desc}</p>
+              <div key={idx} className="philo-card glass-panel p-5 rounded-xl border border-white/10 relative overflow-hidden">
+                <div 
+                  className="absolute top-0 left-0 w-1 h-full" 
+                  style={{ background: item.color }}
+                />
+                <h4 className="font-semibold text-white text-base mb-1 ml-2">{item.title}</h4>
+                <p className="text-xs text-dim leading-relaxed ml-2">{item.desc}</p>
               </div>
             ))}
           </div>

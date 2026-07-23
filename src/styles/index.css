@@ -1,36 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --color-electric-purple: #6236FF;
-  --color-neon-blue: #3B82F6;
-  --color-cyan: #22D3EE;
-  --color-bg-black: #0A0A0F;
+  --color-electric-purple: #7928CA; /* Brighter high-end purple */
+  --color-neon-blue: #0070F3;       /* Brighter cobalt blue */
+  --color-cyan: #00F5FF;            /* Ultra bright cyan */
+  --color-bg-black: #050508;        /* Deeper rich black background for liquid UI */
   --color-text-primary: #FFFFFF;
-  --color-text-secondary: #9CA3AF;
+  --color-text-secondary: #A0AEC0;
 
-  --gradient-ai: linear-gradient(135deg, var(--color-electric-purple), var(--color-neon-blue), var(--color-cyan));
+  --gradient-ai: linear-gradient(135deg, #7928CA, #0070F3, #00F5FF);
   
-  --glass-bg: rgba(255, 255, 255, 0.09); /* Brighter glass base tint */
-  --glass-border: rgba(255, 255, 255, 0.14); /* Refractive border highlight */
-  --glass-blur: blur(20px) saturate(190%); /* Saturated Gaussian blur for rich aesthetics */
+  --glass-bg: rgba(10, 10, 20, 0.65); /* Rich dark translucent premium glass */
+  --glass-border: rgba(255, 255, 255, 0.12); /* Ultra-fine meniscus refractive border */
+  --glass-blur: blur(28px) saturate(220%); /* Highly saturated glass refraction */
 
   /* Tokenized Glass Properties */
-  --glass-blur-light: 20px;
-  --glass-tint-primary: rgba(10, 132, 255, 0.25);
-  --glass-tint-teal: rgba(48, 209, 88, 0.25);
-  --glass-radius: 16px;
-}
-
-[data-theme="light"] {
-  --color-bg-black: #F8FAFC;
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
-
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(148, 163, 184, 0.3);
-
-  --glass-tint-primary: rgba(98, 54, 255, 0.1);
-  --glass-tint-teal: rgba(34, 211, 238, 0.1);
+  --glass-blur-light: 28px;
+  --glass-tint-primary: rgba(121, 40, 202, 0.3);
+  --glass-tint-teal: rgba(0, 245, 255, 0.3);
+  --glass-radius: 20px;
 }
 
 * {
