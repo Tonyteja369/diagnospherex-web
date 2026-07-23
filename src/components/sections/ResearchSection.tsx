@@ -142,7 +142,7 @@ const ResearchSection: React.FC = () => {
           </motion.p>
 
           <motion.p
-            className="research-intro-text text-sm text-dim max-w-3xl mx-auto mt-4"
+            className="research-intro-text"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -153,7 +153,7 @@ const ResearchSection: React.FC = () => {
         </div>
 
         {/* ── Research Metrics ── */}
-        <div className="research-metrics-grid mb-16">
+        <div className="research-metrics-grid">
           {METRICS.map((m, i) => {
             const Icon = m.icon;
             return (
@@ -177,7 +177,7 @@ const ResearchSection: React.FC = () => {
         </div>
 
         {/* ── Research Pillars Grid ── */}
-        <div className="research-pillars-grid mb-20">
+        <div className="research-pillars-grid">
           {RESEARCH_PILLARS.map((pillar, i) => {
             const Icon = pillar.icon;
             return (
@@ -222,9 +222,9 @@ const ResearchSection: React.FC = () => {
                 <p className="pillar-desc">{pillar.description}</p>
 
                 {pillar.longTermGoals && (
-                  <div className="pillar-goals mt-3">
+                  <div className="pillar-goals">
                     <span className="goals-label">Long-Term Research Goals</span>
-                    <div className="goals-grid mt-2">
+                    <div className="goals-grid">
                       {pillar.longTermGoals.map((g, idx) => (
                         <div key={idx} className="goal-item">
                           <CheckCircle2 size={12} className="text-cyan" />
@@ -235,9 +235,9 @@ const ResearchSection: React.FC = () => {
                   </div>
                 )}
 
-                <div className="pillar-areas mt-4 pt-3 border-t border-white/10">
+                <div className="pillar-areas">
                   <span className="areas-label">Research Areas / Domains</span>
-                  <div className="areas-tags mt-2">
+                  <div className="areas-tags">
                     {pillar.areas.map((area, idx) => (
                       <span key={idx} className="area-tag">
                         {area}
@@ -247,7 +247,7 @@ const ResearchSection: React.FC = () => {
                 </div>
 
                 {pillar.cta && (
-                  <button className="rc-cta mt-4">
+                  <button className="rc-cta">
                     <span>{pillar.cta}</span>
                     <ArrowRight size={14} />
                   </button>
@@ -258,30 +258,30 @@ const ResearchSection: React.FC = () => {
         </div>
 
         {/* ── Publications & Research Section ── */}
-        <div className="publications-block glass-panel p-8 rounded-2xl mb-20">
-          <div className="pub-header flex items-center justify-between flex-wrap gap-4 mb-6">
-            <div>
-              <div className="flex items-center gap-2">
+        <div className="publications-block glass-panel">
+          <div className="pub-header">
+            <div className="pub-title-group">
+              <div className="pub-title-icon-wrap">
                 <BookOpen size={20} className="text-purple" />
-                <h3 className="text-xl font-bold text-white">Publications & Research</h3>
+                <h3 className="pub-block-title">Publications & Research</h3>
               </div>
-              <p className="text-sm text-dim mt-1">Ongoing academic research, whitepapers, and platform studies.</p>
+              <p className="pub-block-subtitle">Ongoing academic research, whitepapers, and platform studies.</p>
             </div>
-            <button className="btn-secondary text-xs px-4 py-2 flex items-center gap-2">
+            <button className="pub-action-btn">
               <span>View Research</span>
               <ArrowRight size={14} />
             </button>
           </div>
 
-          <div className="publications-list flex flex-col gap-3">
+          <div className="publications-list">
             {PUBLICATIONS.map((pub, idx) => (
-              <div key={idx} className="pub-row glass-panel flex items-center justify-between p-4 rounded-xl border border-white/10">
+              <div key={idx} className="pub-row glass-panel">
                 <div className="pub-info">
-                  <h4 className="font-semibold text-white text-base">{pub.project}</h4>
-                  <span className="text-xs text-dim">{pub.type}</span>
+                  <h4 className="pub-project-title">{pub.project}</h4>
+                  <span className="pub-project-type">{pub.type}</span>
                 </div>
                 <div className="pub-status">
-                  <span className="text-xs px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
+                  <span className="pub-status-tag">
                     {pub.status}
                   </span>
                 </div>
@@ -291,25 +291,25 @@ const ResearchSection: React.FC = () => {
         </div>
 
         {/* ── Research Philosophy Section ── */}
-        <div className="philosophy-block text-center max-w-4xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple/10 border border-purple/30 text-purple text-xs font-semibold uppercase mb-4">
+        <div className="philosophy-block">
+          <div className="philosophy-badge-wrap">
             <ShieldCheck size={14} />
             <span>Guiding Principles</span>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-4">Our Research Philosophy</h3>
-          <p className="text-base text-dim mb-8 leading-relaxed">
+          <h3 className="philosophy-title">Our Research Philosophy</h3>
+          <p className="philosophy-intro">
             At DiagnoSphereX, we believe that trustworthy healthcare AI begins with scientific rigor, transparency, and human oversight. Every research initiative is developed with a strong focus on explainability, reproducibility, responsible AI, and real-world clinical relevance. Our goal is not to replace healthcare professionals, but to build intelligent technologies that amplify human expertise and accelerate biomedical innovation.
           </p>
 
-          <div className="philosophy-grid grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+          <div className="philosophy-grid">
             {PHILOSOPHY_PRINCIPLES.map((item, idx) => (
-              <div key={idx} className="philo-card glass-panel p-5 rounded-xl border border-white/10 relative overflow-hidden">
+              <div key={idx} className="philo-card glass-panel">
                 <div 
-                  className="absolute top-0 left-0 w-1 h-full" 
+                  className="philo-card-bar" 
                   style={{ background: item.color }}
                 />
-                <h4 className="font-semibold text-white text-base mb-1 ml-2">{item.title}</h4>
-                <p className="text-xs text-dim leading-relaxed ml-2">{item.desc}</p>
+                <h4 className="philo-card-title">{item.title}</h4>
+                <p className="philo-card-desc">{item.desc}</p>
               </div>
             ))}
           </div>
