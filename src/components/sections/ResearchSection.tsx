@@ -247,10 +247,15 @@ const ResearchSection: React.FC = () => {
                 </div>
 
                 {pillar.cta && (
-                  <button className="rc-cta">
+                  <a 
+                    href="https://linkedin.com/in/tharuntej-diagnospherex" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="rc-cta"
+                  >
                     <span>{pillar.cta}</span>
                     <ArrowRight size={14} />
-                  </button>
+                  </a>
                 )}
               </motion.div>
             );
@@ -267,10 +272,15 @@ const ResearchSection: React.FC = () => {
               </div>
               <p className="pub-block-subtitle">Ongoing academic research, whitepapers, and platform studies.</p>
             </div>
-            <button className="pub-action-btn">
+            <a 
+              href="https://linkedin.com/in/tharuntej-diagnospherex" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="pub-action-btn"
+            >
               <span>View Research</span>
               <ArrowRight size={14} />
-            </button>
+            </a>
           </div>
 
           <div className="publications-list">
