@@ -7,6 +7,8 @@ import HeroSection from '../components/sections/HeroSection';
 import TrustBanner from '../components/sections/TrustBanner';
 import ProductExplanation from '../components/sections/ProductExplanation';
 import PlatformCapabilities from '../components/sections/PlatformCapabilities';
+import ResearchSection from '../components/sections/ResearchSection';
+import ResearchRoadmap from '../components/sections/ResearchRoadmap';
 import AIBrainSimulation from '../components/sections/AIBrainSimulation';
 import InteractiveReport from '../components/sections/InteractiveReport';
 import Security from '../components/sections/Security';
@@ -34,6 +36,8 @@ const LandingPage = () => {
         <ProductExplanation />
         <DemoPage />
         <PlatformCapabilities />
+        <ResearchSection />
+        <ResearchRoadmap />
         <AIBrainSimulation />
         <InteractiveReport />
         <Security />

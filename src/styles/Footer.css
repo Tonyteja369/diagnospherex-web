@@ -148,6 +148,38 @@
 .inline { display: inline-block; }
 .opacity-50 { opacity: 0.5; }
 
+/* Footer research initiative line */
+.footer-research-line {
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.frl-label {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.frl-name {
+  color: rgba(98, 54, 255, 0.7);
+  font-weight: 600;
+}
+
+.frl-separator {
+  opacity: 0.3;
+  margin: 0 2px;
+}
+
+.frl-powered {
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .footer-links {
     gap: 40px;

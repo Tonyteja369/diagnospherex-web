@@ -169,6 +169,7 @@ const RoleCard = ({
 
 /* ── Main Section ── */
 const Careers = () => {
+  const navigate = useNavigate();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -239,6 +240,64 @@ const Careers = () => {
       </div>
 
       <p className="drag-hint">← drag to explore →</p>
+
+      {/* ── Internship Program Section ── */}
+      <div className="internship-program container">
+        <div className="ip-header">
+          <h3 className="section-title ip-title">
+            Research <span className="text-gradient">Internship Program</span>
+          </h3>
+          <p className="ip-subtitle">
+            Work with DiagnoSphereX on next-generation AI and biomedical research.
+          </p>
+        </div>
+
+        {/* Available Roles */}
+        <div className="ip-roles-grid">
+          {[
+            { title: 'AI/ML Intern', icon: '🤖' },
+            { title: 'Full Stack Developer Intern', icon: '💻' },
+            { title: 'Biomedical Engineering Intern', icon: '🧬' },
+            { title: 'Python Developer Intern', icon: '🐍' },
+            { title: 'Research Intern', icon: '🔬' },
+            { title: 'UI/UX Design Intern', icon: '🎨' },
+            { title: 'Agentic AI Intern', icon: '🧠' },
+          ].map((role, i) => (
+            <div key={i} className="ip-role-chip glass-panel">
+              <span className="ip-role-icon">{role.icon}</span>
+              <span className="ip-role-title">{role.title}</span>
+              <span className="ip-role-badge">Open</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Benefits */}
+        <div className="ip-benefits">
+          <h4 className="ip-benefits-title">What You Get</h4>
+          <div className="ip-benefits-grid">
+            {[
+              'Research Experience',
+              'Startup Exposure',
+              'Certificate',
+              'Letter of Recommendation (Performance Based)',
+              'Flexible Remote Collaboration',
+              'Opportunity to contribute to real healthcare innovation',
+            ].map((b, i) => (
+              <div key={i} className="ip-benefit-item">
+                <span className="ip-check">✔</span>
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <button
+          className="btn-primary ripple-btn glow-effect ip-apply-btn"
+          onClick={() => navigate('/careers/apply')}
+        >
+          Apply for Internship
+        </button>
+      </div>
     </section>
   );
 };

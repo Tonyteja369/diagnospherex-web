@@ -38,26 +38,33 @@
   gap: 7px;
   padding: 9px 20px;
   border-radius: 30px;
-  border: 1px solid rgba(98, 54, 255, 0.25);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.85rem;
   font-weight: 500;
   font-family: 'Outfit', sans-serif;
   cursor: pointer;
-  transition: all 220ms ease;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity;
 }
 
 .demo-tab:hover {
-  border-color: rgba(98, 54, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%);
   color: #fff;
+  transform: translateY(-1px);
 }
 
 .demo-tab-active {
-  background: linear-gradient(90deg, rgba(98,54,255,0.25), rgba(47,211,255,0.15));
-  border-color: rgba(98, 54, 255, 0.6);
+  background: linear-gradient(90deg, rgba(98,54,255,0.35), rgba(47,211,255,0.22)) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
   color: #fff;
-  box-shadow: 0 0 18px rgba(98, 54, 255, 0.3);
+  box-shadow: 
+    0 8px 24px rgba(98, 54, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* ── Split panel container ── */

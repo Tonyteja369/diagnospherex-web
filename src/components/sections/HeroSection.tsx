@@ -67,6 +67,17 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
           {/* ── LEFT: Text + CTA ── */}
           <div className="hero-text-container">
 
+            {/* Research Status Badge */}
+            <motion.div
+              className="research-status-badge"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <span className="rsb-dot" />
+              <span>Flagship Research Initiative</span>
+            </motion.div>
+
             {/* Liquid Headline */}
             <h1 className="hero-headline" aria-label="From Reports to Real Insights Instantly">
               <motion.span
@@ -132,7 +143,19 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
                   <div className="avatar" style={{ background: '#EC4899', left: '16px' }} />
                   <div className="avatar" style={{ background: '#10B981', left: '32px' }} />
                 </div>
-                <span><strong>50+</strong> early users joining</span>
+                <span>👨‍⚕️ <strong>50+</strong> Researchers, Students & Early Healthcare Innovators</span>
+              </div>
+
+              {/* Internship Hiring Badge */}
+              <div className="internship-badge">
+                <div className="ib-header">
+                  <span className="ib-icon">🎓</span>
+                  <div>
+                    <span className="ib-title">Research Internship Applications Open</span>
+                    <span className="ib-tags">Biomedical AI · Full Stack · AI Agents · Healthcare Research</span>
+                  </div>
+                </div>
+                <a href="#careers" className="ib-cta">Apply Now →</a>
               </div>
             </motion.div>
           </div>

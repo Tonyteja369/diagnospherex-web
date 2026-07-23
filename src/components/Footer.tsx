@@ -77,6 +77,13 @@ const Footer = () => {
         <p className="footer-message mt-4 max-w-2xl mx-auto">
           Stay connected for updates on AI-powered healthcare tools, research progress, and development of the DiagnoSphereX platform.
         </p>
+
+        <div className="footer-research-line">
+          <span className="frl-label">Flagship Research Initiative:</span>{' '}
+          <span className="frl-name">Human Intelligence Engine (HIE)</span>
+          <span className="frl-separator">·</span>
+          <span className="frl-powered">Powered by DiagnoSphereX Research</span>
+        </div>
       </div>
     </footer>
   );

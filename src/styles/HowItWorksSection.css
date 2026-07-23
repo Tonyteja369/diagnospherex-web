@@ -1,0 +1,152 @@
+/* =========================================================
+   HOW IT WORKS SECTION – Continuous Liquid Pour
+   ========================================================= */
+
+.how-it-works-section {
+  padding: 120px 0 80px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--liquid-black);
+}
+
+.how-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+}
+
+.how-eyebrow {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.8);
+}
+
+.how-sub {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  margin-top: 18px;
+  letter-spacing: 0.05em;
+}
+
+/* ── Flow Container ── */
+.how-flow-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 60px;
+}
+
+/* Vertical fluid stream line */
+.flow-vertical-stream {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  bottom: 10px;
+  width: 6px;
+  background: var(--liquid-black-depressed);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.flow-stream-liquid-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #0A84FF 0%, #30D158 50%, #6236FF 100%);
+  box-shadow: 0 0 15px rgba(48, 209, 88, 0.4);
+  border-radius: 3px;
+}
+
+/* Nodes List */
+.flow-nodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.flow-node-item {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.flow-node-marker-wrap {
+  position: absolute;
+  left: -60px;
+  top: 0;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-node-marker-glow {
+  position: absolute;
+  inset: -10px;
+  filter: blur(8px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.flow-node-marker {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--liquid-black-depressed);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.flow-node-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flow-node-title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.9);
+}
+
+.flow-node-desc {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  max-width: 650px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .how-flow-container {
+    padding-left: 48px;
+  }
+  .flow-vertical-stream {
+    left: 14px;
+  }
+  .flow-node-marker-wrap {
+    left: -48px;
+    width: 34px;
+    height: 34px;
+  }
+  .flow-node-marker {
+    width: 28px;
+    height: 28px;
+  }
+}

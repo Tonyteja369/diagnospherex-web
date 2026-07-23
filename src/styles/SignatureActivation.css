@@ -19,12 +19,23 @@
 .founder-name-display {
   text-align: center;
   padding: 60px 80px;
-  background: rgba(98, 54, 255, 0.06);
-  border: 1px solid rgba(98, 54, 255, 0.2);
-  border-radius: 24px;
-  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: var(--glass-radius);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  
+  /* GPU Hardware Acceleration */
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+
   position: relative;
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .founder-name-display::before {
