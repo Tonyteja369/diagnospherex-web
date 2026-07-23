@@ -1,17 +1,19 @@
+import React from 'react';
 import { Github, Linkedin, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import '../styles/Footer.css';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="footer glass-panel">
       <div className="footer-content">
         {/* Left Side: Brand and Description */}
         <div className="footer-brand">
-          <div className="footer-logo">
-            <span className="logo-text">Diagno<span className="text-gradient">Sphere</span>X</span>
+          <div className="footer-logo flex items-center gap-2">
+            <span className="logo-text text-xl">Diagno<span className="text-gradient">Sphere</span>X</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-cyan/10 border border-cyan/30 text-cyan font-medium">Research</span>
           </div>
-          <p className="footer-tagline">
-            AI-powered tools designed to simplify medical information and assist healthcare decision-making.
+          <p className="footer-tagline mt-3">
+            Building Explainable Biomedical Intelligence systems through research, signal processing, neuroscience, and responsible AI.
           </p>
         </div>
         
@@ -26,17 +28,17 @@ const Footer = () => {
             </div>
             
             <div className="contact-item">
-              <span className="contact-label"><Phone size={14} className="mr-2 inline" /> Phone</span>
+              <span className="contact-label"><Phone size={14} className="mr-2 inline text-cyan" /> Phone</span>
               <span className="contact-value text-white">+91 7036834428</span>
             </div>
             
             <div className="contact-item">
-              <span className="contact-label"><Mail size={14} className="mr-2 inline" /> Email</span>
+              <span className="contact-label"><Mail size={14} className="mr-2 inline text-cyan" /> Email</span>
               <a href="mailto:diagnospherex@gmail.com" className="contact-value link text-cyan">diagnospherex@gmail.com</a>
             </div>
             
             <div className="contact-item">
-              <span className="contact-label"><MapPin size={14} className="mr-2 inline" /> Location</span>
+              <span className="contact-label"><MapPin size={14} className="mr-2 inline text-cyan" /> Location</span>
               <span className="contact-value text-white">Andhra Pradesh, India</span>
             </div>
           </div>
@@ -68,22 +70,36 @@ const Footer = () => {
           Built and led by <span className="text-white font-semibold">Tharun Tej</span> <span className="separator mx-2 opacity-50">•</span> Founder – DiagnoSphereX
         </div>
         
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '16px', fontSize: '0.9rem', color: 'var(--color-text-dim)' }}>
+        <div className="footer-research-line mt-4">
+          <span className="frl-title font-semibold text-white">DiagnoSphereX Research</span>
+          <span className="frl-sub text-dim">Building Explainable Biomedical Intelligence.</span>
+          <div className="frl-projects flex items-center justify-center gap-2 mt-2 text-xs text-cyan">
+            <span>Human Intelligence Engine (HIE)</span>
+            <span>•</span>
+            <span>NeuroSenseX</span>
+            <span>•</span>
+            <span>MedQuantum-NIN</span>
+          </div>
+          <div className="frl-tags flex items-center justify-center gap-2 mt-2 text-xs text-dim opacity-70">
+            <span>Research</span>
+            <span>•</span>
+            <span>Engineering</span>
+            <span>•</span>
+            <span>Healthcare</span>
+            <span>•</span>
+            <span>Innovation</span>
+          </div>
+        </div>
+
+        <div className="flex gap-4 justify-center mt-4 text-xs text-dim">
           <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
           <span className="opacity-50">•</span>
           <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
         </div>
 
-        <p className="footer-message mt-4 max-w-2xl mx-auto">
-          Stay connected for updates on AI-powered healthcare tools, research progress, and development of the DiagnoSphereX platform.
+        <p className="footer-copyright mt-4 text-xs text-dim opacity-60">
+          © 2026 DiagnoSphereX Research. All rights reserved.
         </p>
-
-        <div className="footer-research-line">
-          <span className="frl-label">Flagship Research Initiative:</span>{' '}
-          <span className="frl-name">Human Intelligence Engine (HIE)</span>
-          <span className="frl-separator">·</span>
-          <span className="frl-powered">Powered by DiagnoSphereX Research</span>
-        </div>
       </div>
     </footer>
   );

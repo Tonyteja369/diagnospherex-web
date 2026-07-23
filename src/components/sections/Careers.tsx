@@ -1,39 +1,82 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { 
+  Cpu, 
+  Code, 
+  Dna, 
+  Terminal, 
+  Microscope, 
+  LayoutDashboard, 
+  BrainCircuit, 
+  CheckCircle2, 
+  Sparkles,
+  GraduationCap
+} from 'lucide-react';
 import '../../styles/Careers.css';
 
 const ROLES = [
   {
     title: 'AI Research Intern',
-    tags: ['Remote', 'Internship', 'Exploration Phase'],
+    tags: ['Remote', 'Internship', 'Research'],
     gradient: 'linear-gradient(135deg, #6236FF22, #2FD3FF22)',
     overview:
-      'Help fine-tune LLaMA 3 on biomedical datasets and ICMR reference ranges. Build the zero-hallucination validation layer. This is real ML work on a real product.',
+      'Help fine-tune biomedical foundation models and clinical datasets. Build zero-hallucination validation layers for explainable AI reasoning.',
   },
   {
     title: 'Biomedical Engineering Intern',
-    tags: ['Remote', 'Internship', 'Exploration Phase'],
+    tags: ['Remote', 'Internship', 'Signal Intelligence'],
     gradient: 'linear-gradient(135deg, #2FD3FF22, #6236FF22)',
     overview:
-      'Help build and verify the ICMR Indian clinical reference range database. Your biomedical knowledge directly makes DiagnoSphereX more accurate for Indian patients.',
+      'Analyze ECG/EEG signal processing pipelines and reference datasets. Your biomedical engineering expertise directly shapes explainable signal intelligence.',
   },
   {
     title: 'Frontend Development Intern',
-    tags: ['Remote', 'Internship', 'Exploration Phase'],
+    tags: ['Remote', 'Internship', 'Web Architecture'],
     gradient: 'linear-gradient(135deg, #6236FF22, #a855f722)',
     overview:
-      'Build the React PWA interface. The upload screen, results display, Telugu output rendering, and family vault dashboard. Real product, real users in 12 weeks.',
+      'Build performant, glassmorphic React interfaces, visualization canvases, and high-frequency real-time signal monitoring dashboards.',
   },
   {
-    title: 'Product Research Intern',
-    tags: ['Remote', 'Internship', 'Exploration Phase'],
+    title: 'Agentic AI Intern',
+    tags: ['Remote', 'Internship', 'AI Agents'],
     gradient: 'linear-gradient(135deg, #22d3ee22, #6236FF22)',
     overview:
-      'Go to hospitals and clinics in Vijayawada. Talk to real patients. Understand how Telugu families actually use health reports. Your field research shapes the product directly.',
+      'Research multi-agent orchestration for clinical decision support, autonomous research workflows, and multimodal data verification.',
   },
 ];
 
-/* ── Single card with all effects ── */
+const INTERNSHIP_ROLES = [
+  { title: 'AI/ML Intern', icon: Cpu },
+  { title: 'Full Stack Developer Intern', icon: Code },
+  { title: 'Biomedical Engineering Intern', icon: Dna },
+  { title: 'Python Developer Intern', icon: Terminal },
+  { title: 'Research Intern', icon: Microscope },
+  { title: 'UI/UX Design Intern', icon: LayoutDashboard },
+  { title: 'Agentic AI Intern', icon: BrainCircuit },
+];
+
+const RESEARCH_DISCIPLINES = [
+  'AI Research',
+  'Biomedical Engineering',
+  'Neuroscience',
+  'Machine Learning',
+  'Healthcare AI',
+  'Signal Processing',
+  'Computational Medicine',
+];
+
+const BENEFITS = [
+  'Research Experience',
+  'Startup Experience',
+  'AI Development',
+  'Biomedical Innovation',
+  'Flexible Remote Collaboration',
+  'Performance-Based Recommendation Letter',
+  'Internship Certificate',
+  'Opportunity to contribute to research publications and open-source projects where applicable',
+];
+
+/* ── Single card ── */
 const RoleCard = ({
   role,
   index,
@@ -52,7 +95,6 @@ const RoleCard = ({
   const rafRef = useRef<number>();
   const navigate = useNavigate();
 
-  /* Neural pulse every 5–8 second offset per card */
   useEffect(() => {
     const delay = 3000 + index * 1200;
     const interval = 5000 + index * 700;
@@ -113,7 +155,6 @@ const RoleCard = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Cursor liquid reflection */}
       <div
         className="card-reflection"
         style={{
@@ -122,10 +163,8 @@ const RoleCard = ({
         }}
       />
 
-      {/* Neural pulse ring */}
       {pulsing && <div className="pulse-ring" />}
 
-      {/* Top animated motion banner */}
       <div className={`card-top-banner card-banner-${(index % 4) + 1}`}>
         <div className="banner-orb banner-orb-1" />
         <div className="banner-orb banner-orb-2" />
@@ -134,11 +173,8 @@ const RoleCard = ({
         <div className="banner-ring" />
       </div>
 
-
-      {/* Status badge */}
       <div className="status-badge">STATUS: OPEN</div>
 
-      {/* Content */}
       <div className="card-content">
         <h3 className="role-title">{role.title}</h3>
         <div className="role-tags">
@@ -147,14 +183,12 @@ const RoleCard = ({
           ))}
         </div>
 
-        {/* Always-visible overview */}
         <div className={`role-overview ${hovered ? 'visible' : ''}`}>
           <p className="overview-label">Role Overview</p>
           <p className="overview-text">{role.overview}</p>
         </div>
       </div>
 
-      {/* Apply button */}
       <div className="card-footer">
         <button
           className="apply-btn"
@@ -168,12 +202,10 @@ const RoleCard = ({
 };
 
 /* ── Main Section ── */
-const Careers = () => {
+const Careers: React.FC = () => {
   const navigate = useNavigate();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
-  /* Drag scroll */
   const dragRef = useRef({ dragging: false, startX: 0, scrollLeft: 0 });
 
   const onDragStart = (e: React.MouseEvent) => {
@@ -202,15 +234,16 @@ const Careers = () => {
   return (
     <section className="careers-section" id="careers">
       <div className="container">
-        <div className="careers-header">
-          <p className="careers-eyebrow">JOIN THE FOUNDING TEAM</p>
+        <div className="careers-header text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan text-xs font-semibold uppercase mb-3">
+            <GraduationCap size={14} />
+            <span>Join the Research Team</span>
+          </div>
           <h2 className="section-title">
-            Founding Internship Program — <span className="text-gradient">DiagnoSphereX</span>
+            Research & Engineering <span className="text-gradient">Internship Program</span>
           </h2>
           <p className="careers-desc">
-            DiagnoSphereX is a solo-founded startup building health intelligence for Indian families.
-            We are looking for passionate students who want to build something real, not just add an
-            internship certificate to their resume.
+            Help build the next generation of biomedical intelligence. Work alongside DiagnoSphereX on AI, neuroscience, biomedical engineering, healthcare technology, and computational medicine.
           </p>
         </div>
       </div>
@@ -241,50 +274,47 @@ const Careers = () => {
 
       <p className="drag-hint">← drag to explore →</p>
 
-      {/* ── Internship Program Section ── */}
-      <div className="internship-program container">
+      {/* ── Internship Program Details ── */}
+      <div className="internship-program container mt-12">
         <div className="ip-header">
           <h3 className="section-title ip-title">
-            Research <span className="text-gradient">Internship Program</span>
+            Available <span className="text-gradient">Research Roles</span>
           </h3>
-          <p className="ip-subtitle">
-            Work with DiagnoSphereX on next-generation AI and biomedical research.
-          </p>
+          <div className="disciplines-pills flex flex-wrap justify-center gap-2 mt-4 max-w-2xl mx-auto">
+            {RESEARCH_DISCIPLINES.map((d, i) => (
+              <span key={i} className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-dim">
+                {d}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* Available Roles */}
-        <div className="ip-roles-grid">
-          {[
-            { title: 'AI/ML Intern', icon: '🤖' },
-            { title: 'Full Stack Developer Intern', icon: '💻' },
-            { title: 'Biomedical Engineering Intern', icon: '🧬' },
-            { title: 'Python Developer Intern', icon: '🐍' },
-            { title: 'Research Intern', icon: '🔬' },
-            { title: 'UI/UX Design Intern', icon: '🎨' },
-            { title: 'Agentic AI Intern', icon: '🧠' },
-          ].map((role, i) => (
-            <div key={i} className="ip-role-chip glass-panel">
-              <span className="ip-role-icon">{role.icon}</span>
-              <span className="ip-role-title">{role.title}</span>
-              <span className="ip-role-badge">Open</span>
-            </div>
-          ))}
+        {/* Available Roles Grid with Lucide Icons */}
+        <div className="ip-roles-grid mt-6">
+          {INTERNSHIP_ROLES.map((role, i) => {
+            const Icon = role.icon;
+            return (
+              <div key={i} className="ip-role-chip glass-panel">
+                <div className="ip-role-icon-box text-cyan">
+                  <Icon size={20} />
+                </div>
+                <span className="ip-role-title">{role.title}</span>
+                <span className="ip-role-badge">Open</span>
+              </div>
+            );
+          })}
         </div>
 
         {/* Benefits */}
-        <div className="ip-benefits">
-          <h4 className="ip-benefits-title">What You Get</h4>
+        <div className="ip-benefits mt-10">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Sparkles size={16} className="text-purple" />
+            <h4 className="ip-benefits-title m-0">Program Benefits & Exposure</h4>
+          </div>
           <div className="ip-benefits-grid">
-            {[
-              'Research Experience',
-              'Startup Exposure',
-              'Certificate',
-              'Letter of Recommendation (Performance Based)',
-              'Flexible Remote Collaboration',
-              'Opportunity to contribute to real healthcare innovation',
-            ].map((b, i) => (
+            {BENEFITS.map((b, i) => (
               <div key={i} className="ip-benefit-item">
-                <span className="ip-check">✔</span>
+                <CheckCircle2 size={16} className="text-cyan flex-shrink-0 mt-0.5" />
                 <span>{b}</span>
               </div>
             ))}
@@ -292,7 +322,7 @@ const Careers = () => {
         </div>
 
         <button
-          className="btn-primary ripple-btn glow-effect ip-apply-btn"
+          className="btn-primary ripple-btn glow-effect ip-apply-btn mt-8"
           onClick={() => navigate('/careers/apply')}
         >
           Apply for Internship

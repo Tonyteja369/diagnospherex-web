@@ -69,14 +69,28 @@ const SecurityCareersAbout = () => {
             viewport={{ once: true }}
           >
             <Lightbulb size={32} className="text-cyan mb-4" />
-            <h3 className="section-title text-start">The Vision Behind <br/>DiagnoSphereX</h3>
+            <h3 className="section-title text-start">About <br/>DiagnoSphereX</h3>
             <p className="section-description text-start mt-4">
-              DiagnoSphereX was created to bridge the gap between complex medical information and human understanding.
+              DiagnoSphereX is building explainable biomedical intelligence systems that help clinicians, researchers, medical students, and patients better understand complex medical information through trustworthy artificial intelligence.
               <br/><br/>
-              Modern healthcare produces enormous volumes of diagnostic data. Interpreting this information quickly and accurately can be difficult for both clinicians and patients.
-              <br/><br/>
-              DiagnoSphereX leverages artificial intelligence to simplify this complexity and deliver clear, meaningful insights.
+              Our platform combines explainable AI, biomedical signal intelligence, clinical reasoning support, and privacy-first engineering to make healthcare more transparent and accessible.
             </p>
+
+            <div className="about-sub-block mt-6 pt-6 border-t border-white/10">
+              <h4 className="font-semibold text-white mb-2">Why We Are Building This</h4>
+              <p className="section-description text-start">
+                Healthcare generates enormous amounts of complex information every day, yet understanding it remains challenging for both patients and healthcare professionals. DiagnoSphereX bridges this gap by transforming medical reports and biomedical data into transparent, explainable, and clinically meaningful insights while keeping humans at the center of every decision.
+              </p>
+            </div>
+
+            <div className="about-sub-block mt-4">
+              <h4 className="font-semibold text-white mb-2">Designed For</h4>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {['Patients', 'Medical Students', 'Clinicians', 'Biomedical Researchers', 'Healthcare Innovators'].map((target) => (
+                  <span key={target} className="role-tag">{target}</span>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           <motion.div 
@@ -91,8 +105,15 @@ const SecurityCareersAbout = () => {
             <p className="section-description text-start mt-4">
               DiagnoSphereX is led by <strong>K. Tharun</strong>, a biomedical engineering student dedicated to building advanced AI-driven healthcare systems.
               <br/><br/>
-              The goal of the platform is to make medical knowledge easier to interpret, faster to access, and more useful for real-world healthcare decisions.
+              Building DiagnoSphereX with a vision of advancing explainable biomedical intelligence through research, engineering, and responsible AI.
             </p>
+
+            <div className="about-sub-block mt-6 pt-6 border-t border-white/10">
+              <h4 className="font-semibold text-white mb-2">Our Commitment</h4>
+              <p className="section-description text-start">
+                Privacy, security, explainability, and clinical responsibility are the foundation of everything we build. Our AI is designed to assist—not replace—human expertise while maintaining transparency, accountability, and responsible innovation.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>

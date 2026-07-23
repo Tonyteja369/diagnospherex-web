@@ -1,4 +1,6 @@
+import React from 'react';
 import { motion } from 'framer-motion';
+import { GitBranch } from 'lucide-react';
 import '../../styles/ResearchRoadmap.css';
 
 const MILESTONES = [
@@ -16,31 +18,39 @@ const MILESTONES = [
   },
   {
     year: '',
-    title: 'Human Intelligence Engine',
+    title: 'Human Intelligence Engine Alpha',
     desc: 'Explainable Physiological Intelligence',
     color: '#6236FF',
   },
   {
+    year: '',
+    title: 'Unified Physiological Platform',
+    desc: 'Multimodal Biosignal Intelligence',
+    color: '#3B82F6',
+  },
+  {
     year: 'Future',
-    title: 'Multimodal Biomedical Intelligence',
-    desc: 'Unified Biomedical Signal Platform',
+    title: 'Biomedical Foundation Models',
+    desc: 'Multimodal Intelligence & Human-AI Collaboration',
     color: '#10B981',
   },
 ];
 
-const ResearchRoadmap = () => {
+const ResearchRoadmap: React.FC = () => {
   return (
     <section className="roadmap-section" id="roadmap">
       <div className="container">
         <div className="roadmap-header">
-          <motion.p
-            className="roadmap-eyebrow"
+          <motion.div
+            className="roadmap-eyebrow-badge inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan text-xs font-semibold uppercase mb-3"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            RESEARCH ROADMAP
-          </motion.p>
+            <GitBranch size={14} />
+            <span>Research Roadmap</span>
+          </motion.div>
+          
           <motion.h2
             className="section-title"
             initial={{ opacity: 0, y: 20 }}
@@ -70,7 +80,7 @@ const ResearchRoadmap = () => {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 + i * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0.15 + i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Glowing dot */}
               <div className="node-dot-wrapper">

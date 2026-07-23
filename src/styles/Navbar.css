@@ -96,12 +96,10 @@
   white-space: nowrap;
 }
 
-.navbar-links {
+.navbar-actions {
   display: flex;
-  gap: 40px;
   align-items: center;
-  justify-content: center;
-  flex: 1;
+  gap: 16px;
 }
 
 .nav-link {
@@ -110,11 +108,28 @@
   color: var(--color-text-secondary);
   transition: color 0.3s ease, text-shadow 0.3s ease;
   position: relative;
+  padding: 4px 0;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link.active-nav-link {
   color: var(--color-text-primary);
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6236FF, #2FD3FF);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(98, 54, 255, 0.8);
+}
+
+.active-mobile-link {
+  color: #2FD3FF !important;
+  font-weight: 600 !important;
 }
 
 .primary-btn {

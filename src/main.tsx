@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { ThemeProvider } from './context/ThemeContext.tsx'
 import './styles/index.css'
 import App from './App.tsx'
 import ErrorBoundary from './ErrorBoundary.tsx'
@@ -14,9 +15,11 @@ window.addEventListener('unhandledrejection', (e) => sendError(e.reason?.stack |
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
     </ErrorBoundary>
   </StrictMode>,
 )

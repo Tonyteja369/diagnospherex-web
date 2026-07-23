@@ -1,4 +1,5 @@
 import { motion, Variants } from 'framer-motion';
+import { Sparkles, GraduationCap, Users } from 'lucide-react';
 import HeroPhoneMockups from './HeroPhoneMockups';
 import '../../styles/HeroSection.css';
 
@@ -7,7 +8,7 @@ interface HeroSectionProps {
 }
 
 /* ── Liquid character animation ── */
-const LIQUID_WORDS = ['Real Insights'];
+const LIQUID_WORDS = ['Clinical Intelligence.'];
 
 const charVariants: Variants = {
   hidden: { opacity: 0, y: 40, rotateX: -60 },
@@ -16,7 +17,7 @@ const charVariants: Variants = {
     y: 0,
     rotateX: 0,
     transition: {
-      delay: 0.6 + i * 0.045,
+      delay: 0.6 + i * 0.035,
       duration: 0.55,
       ease: [0.22, 1, 0.36, 1] as const,
     },
@@ -74,12 +75,12 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <span className="rsb-dot" />
+              <Sparkles size={14} className="text-cyan" />
               <span>Flagship Research Initiative</span>
             </motion.div>
 
             {/* Liquid Headline */}
-            <h1 className="hero-headline" aria-label="From Reports to Real Insights Instantly">
+            <h1 className="hero-headline" aria-label="Transforming Complex Medical Data into Explainable Clinical Intelligence">
               <motion.span
                 className="hero-line"
                 custom={0}
@@ -88,24 +89,13 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
                 animate="visible"
                 style={{ display: 'block' }}
               >
-                From Reports to
+                Transforming Complex Medical Data into
               </motion.span>
 
-              {/* LIQUID animated gradient text — character by character */}
+              {/* LIQUID animated gradient text */}
               <span className="hero-line liquid-line" style={{ display: 'block' }}>
                 <LiquidText text={LIQUID_WORDS[0]} />
               </span>
-
-              <motion.span
-                className="hero-line"
-                custom={2}
-                variants={wordVariants}
-                initial="hidden"
-                animate="visible"
-                style={{ display: 'block' }}
-              >
-                <span className="desktop-only-dash">— </span>Instantly
-              </motion.span>
             </h1>
 
             <motion.p
@@ -114,14 +104,7 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              <span className="desktop-only text-inherit">
-                AI That Explains, Not Just Analyzes. Transform complex medical data
-                into clear, actionable intelligence in seconds.
-              </span>
-              <span className="mobile-only text-inherit">
-                AI That Explains, Not Just Analyzes. Transform your medical reports
-                into clear, instant insights built for Indian clinical standards.
-              </span>
+              Explainable AI that helps patients, clinicians, researchers, and healthcare innovators better understand complex medical information with clarity, transparency, and confidence.
             </motion.p>
 
             <motion.div
@@ -143,16 +126,16 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
                   <div className="avatar" style={{ background: '#EC4899', left: '16px' }} />
                   <div className="avatar" style={{ background: '#10B981', left: '32px' }} />
                 </div>
-                <span>👨‍⚕️ <strong>50+</strong> Researchers, Students & Early Healthcare Innovators</span>
+                <span><Users size={14} className="inline mr-1 text-cyan" /> <strong>50+</strong> Researchers, Students & Early Healthcare Innovators</span>
               </div>
 
               {/* Internship Hiring Badge */}
               <div className="internship-badge">
                 <div className="ib-header">
-                  <span className="ib-icon">🎓</span>
+                  <GraduationCap size={20} className="ib-icon text-cyan" />
                   <div>
-                    <span className="ib-title">Research Internship Applications Open</span>
-                    <span className="ib-tags">Biomedical AI · Full Stack · AI Agents · Healthcare Research</span>
+                    <span className="ib-title">Research & Engineering Internship Applications Open</span>
+                    <span className="ib-tags">Biomedical AI • Healthcare • Full Stack • AI Agents • Research</span>
                   </div>
                 </div>
                 <a href="#careers" className="ib-cta">Apply Now →</a>

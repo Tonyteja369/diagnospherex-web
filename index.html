@@ -2,18 +2,67 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/logo1.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="theme-color" content="#050505" />
-    <meta name="description" content="DiagnoSphereX – AI-powered medical diagnostics platform for faster, smarter clinical insights." />
-    <title>DiagnoSphereX – AI Medical Diagnostics</title>
+    <meta name="theme-color" content="#0A0A0F" />
+    
+    <!-- SEO Meta Tags -->
+    <title>DiagnoSphereX – Explainable Biomedical Intelligence & Research</title>
+    <meta name="description" content="Transforming complex medical data into explainable clinical intelligence. DiagnoSphereX Research develops trustworthy AI, EEG/ECG signal processing, and physiological intelligence systems." />
+    <meta name="keywords" content="Biomedical AI, Explainable AI, Human Intelligence Engine, NeuroSenseX, MedQuantum-NIN, Healthcare AI, EEG Intelligence, ECG Intelligence, Medical Research" />
+    <meta name="author" content="Tharun Tej - DiagnoSphereX Research" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://diagnospherex.com/" />
+    <meta property="og:title" content="DiagnoSphereX – Explainable Biomedical Intelligence" />
+    <meta property="og:description" content="Building explainable biomedical intelligence systems that help clinicians, researchers, medical students, and patients better understand complex medical information." />
+    <meta property="og:image" content="/logo1.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="DiagnoSphereX – Explainable Biomedical Intelligence" />
+    <meta property="twitter:description" content="Building explainable biomedical intelligence systems that help clinicians, researchers, medical students, and patients." />
+    <meta property="twitter:image" content="/logo1.png" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://diagnospherex.com/#organization",
+          "name": "DiagnoSphereX Research",
+          "url": "https://diagnospherex.com",
+          "logo": "https://diagnospherex.com/logo1.png",
+          "founder": {
+            "@type": "Person",
+            "name": "Tharun Tej"
+          },
+          "description": "Advancing explainable biomedical intelligence through research, engineering, and responsible AI."
+        },
+        {
+          "@type": "ResearchProject",
+          "name": "Human Intelligence Engine (HIE)",
+          "parentOrganization": { "@id": "https://diagnospherex.com/#organization" },
+          "description": "Flagship research program dedicated to developing explainable physiological intelligence from multimodal biomedical signals."
+        },
+        {
+          "@type": "EducationalOccupationalProgram",
+          "name": "DiagnoSphereX Research & Engineering Internship Program",
+          "provider": { "@id": "https://diagnospherex.com/#organization" },
+          "description": "Work alongside DiagnoSphereX on AI, neuroscience, biomedical engineering, healthcare technology, and computational medicine."
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

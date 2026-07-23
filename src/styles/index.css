@@ -21,6 +21,18 @@
   --glass-radius: 16px;
 }
 
+[data-theme="light"] {
+  --color-bg-black: #F8FAFC;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(148, 163, 184, 0.3);
+
+  --glass-tint-primary: rgba(98, 54, 255, 0.1);
+  --glass-tint-teal: rgba(34, 211, 238, 0.1);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
