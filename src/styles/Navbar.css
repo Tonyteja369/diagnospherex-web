@@ -4,38 +4,24 @@
    ========================================================= */
 
 .navbar-wrapper {
-  position: sticky;
+  position: fixed;
   top: 16px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   z-index: 100;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.35s ease,
-              border-color 0.35s ease,
-              box-shadow 0.35s ease;
   border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 9999px;
-  margin: 12px auto 0;
   max-width: 1180px;
   width: calc(100% - 32px);
   box-shadow: 
     inset 0 1px 0 rgba(255, 255, 255, 0.65),
     0 12px 32px rgba(82, 39, 255, 0.12),
     0 4px 12px rgba(0, 0, 0, 0.05);
-  opacity: 1;
-}
-
-/* Decreased opacity while actively scrolling */
-.navbar-wrapper.is-scrolling {
-  opacity: 0.65;
-  transform: translateY(-2px);
-}
-
-.navbar-wrapper:hover {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+  transition: transform 300ms ease, background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .navbar-wrapper.is-scrolled {

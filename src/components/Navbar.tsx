@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import GlassSurface from './reactbits/GlassSurface';
@@ -17,22 +17,43 @@ const navLinks = [
   { name: 'About', href: '#about' },
 ];
 
+function useScrollDirection() {
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 50) {
+        // Always show near the top of the page
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        // Scrolling down → hide
+        setVisible(false);
+      } else {
+        // Scrolling up → show
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return visible;
+}
+
 const Navbar = ({ onOpenModal }: NavbarProps) => {
+  const visible = useScrollDirection();
   const [scrolled, setScrolled] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
-    let scrollTimer: ReturnType<typeof setTimeout>;
-
     const handleScroll = () => {
-      setIsScrolling(true);
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        setIsScrolling(false);
-      }, 160);
-
       setScrolled(window.scrollY > 30);
 
       // Determine active section for nav link highlighting
@@ -50,10 +71,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimer);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Close mobile menu on Escape key
@@ -88,29 +106,38 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
   return (
     <>
       <header
-        className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''} ${isScrolling ? 'is-scrolling' : ''}`}
+        className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''}`}
         style={{
-          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+          position: 'fixed',
+          top: '16px',
+          left: '0',
+          right: '0',
+          margin: '0 auto',
+          zIndex: 100,
+          maxWidth: '1180px',
+          width: 'calc(100% - 32px)',
+          transform: visible ? 'translateY(0)' : 'translateY(-140%)',
+          transition: 'transform 300ms ease, opacity 300ms ease',
         }}
       >
         <GlassSurface
           width="100%"
-          height={scrolled ? 54 : 68}
+          height={scrolled ? 58 : 72}
           borderRadius={9999}
-          backgroundOpacity={0.12}
-          saturation={1.5}
-          distortionScale={-70}
+          backgroundOpacity={0.85}
+          saturation={1.2}
+          distortionScale={-60}
           redOffset={2}
           greenOffset={6}
           blueOffset={10}
           displace={1.5}
           blur={16}
-          brightness={90}
+          brightness={95}
           opacity={0.95}
           style={{ transition: 'height 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
         >
           <div className="navbar-container">
-            <nav className="navbar-inner" style={{ height: scrolled ? '54px' : '68px', transition: 'height 0.3s ease' }}>
+            <nav className="navbar-inner" style={{ height: scrolled ? '58px' : '72px', transition: 'height 0.3s ease' }}>
               {/* Logo */}
               <a
                 href="#hero"

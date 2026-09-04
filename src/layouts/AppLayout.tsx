@@ -20,31 +20,40 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       {/* Hidden SVG filter for true Liquid Glass refractive distortion */}
       <LiquidGlassFilter />
 
-      {/* Global Background: Continuous WebGL Grainient across entire site */}
-      <Grainient
-        color1="#FF9FFC"
-        color2="#5227FF"
-        color3="#B497CF"
-        timeSpeed={0.25}
-        colorBalance={0.0}
-        warpStrength={1.0}
-        warpFrequency={5.0}
-        warpSpeed={2.0}
-        warpAmplitude={50.0}
-        blendAngle={0.0}
-        blendSoftness={0.05}
-        rotationAmount={500.0}
-        noiseScale={2.0}
-        grainAmount={0.1}
-        grainScale={2.0}
-        grainAnimated={false}
-        contrast={1.5}
-        gamma={1.0}
-        saturation={1.0}
-        centerX={0.0}
-        centerY={0.0}
-        zoom={0.9}
-      />
+      {/* Global Background: Continuous WebGL Grainient fixed layer across entire site */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 0,
+          opacity: 0.95,
+          pointerEvents: 'none',
+        }}
+        aria-hidden="true"
+      >
+        <Grainient
+          color1="#EDE9FE"
+          color2="#DBEAFE"
+          color3="#F5F3FF"
+          timeSpeed={0.15}
+          colorBalance={0.1}
+          warpStrength={0.4}
+          warpFrequency={4}
+          warpSpeed={0.3}
+          warpAmplitude={20}
+          blendAngle={135}
+          blendSoftness={0.4}
+          rotationAmount={40}
+          noiseScale={0}
+          grainAmount={0.02}
+          grainScale={0.3}
+          grainAnimated={false}
+          contrast={1.05}
+          gamma={1.0}
+          saturation={0.85}
+          zoom={1.1}
+        />
+      </div>
 
       <div className="app-layout-root" style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
         {/* Lagged follower liquid cursor */}
