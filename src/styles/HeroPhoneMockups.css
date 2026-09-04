@@ -667,10 +667,10 @@
   }
 }
 
-/* ── Responsive Media Queries: Maintain Exact Desktop Ratio & Scale on All Devices ── */
+/* ── Responsive Media Queries: Maintain Exact Desktop Ratio & Clean Fan Placement on All Devices ── */
 @media (max-width: 1023px) {
   .hpm-phones-row {
-    transform: scale(0.8);
+    transform: scale(0.88);
     transform-origin: center center;
     width: auto;
   }
@@ -678,19 +678,90 @@
 
 @media (max-width: 768px) {
   .hpm-phones-row {
-    transform: scale(calc((100vw - 48px) / 660));
-    transform-origin: center center;
-    width: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
     padding: 0;
+    transform: none !important;
+  }
+
+  .pm-frame-large {
+    width: clamp(185px, 50vw, 220px);
+    height: clamp(370px, 100vw, 440px);
+    border-radius: 36px;
+  }
+
+  .pm-frame-small {
+    width: clamp(150px, 40vw, 180px);
+    height: clamp(300px, 80vw, 360px);
+    border-radius: 30px;
+  }
+
+  .pm-frame-inner {
+    border-radius: 32px;
+    padding: 2.5px;
+  }
+
+  .pm-frame-small .pm-frame-inner {
+    border-radius: 26px;
+    padding: 2px;
+  }
+
+  .pm-screen {
+    border-radius: 28px;
+  }
+
+  .pm-frame-small .pm-screen {
+    border-radius: 22px;
+  }
+
+  .hpm-left {
+    margin-right: -56px;
+    transform: translateY(20px) rotate(-3deg) scale(0.92) !important;
+    z-index: 2;
+    opacity: 0.92;
+    animation: none !important;
+  }
+
+  .hpm-center {
+    z-index: 5;
+    transform: translateY(0) scale(1) !important;
+    animation: none !important;
+  }
+
+  .hpm-right {
+    margin-left: -56px;
+    transform: translateY(20px) rotate(3deg) scale(0.92) !important;
+    z-index: 2;
+    opacity: 0.92;
+    animation: none !important;
   }
 }
 
 @media (max-width: 480px) {
-  .hpm-phones-row {
-    transform: scale(calc((100vw - 32px) / 640));
-    transform-origin: center center;
-    width: auto;
-    padding: 0;
+  .pm-frame-large {
+    width: clamp(175px, 48vw, 205px);
+    height: clamp(350px, 96vw, 410px);
+    border-radius: 32px;
+  }
+
+  .pm-frame-small {
+    width: clamp(140px, 38vw, 165px);
+    height: clamp(280px, 76vw, 330px);
+    border-radius: 26px;
+  }
+
+  .hpm-left {
+    margin-right: -52px;
+  }
+
+  .hpm-right {
+    margin-left: -52px;
   }
 }
+
 

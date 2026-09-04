@@ -1,6 +1,6 @@
 /* =========================================================
    HERO SECTION — Soft Off-White SaaS Layout
-   Linear × Stripe Aesthetic
+   Linear × Stripe Aesthetic · Fully Responsive
    ========================================================= */
 
 .hero-section {
@@ -16,6 +16,7 @@
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 24px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
@@ -30,6 +31,7 @@
   align-items: center;
   gap: 48px;
   min-height: 580px;
+  box-sizing: border-box;
 }
 
 /* ── LEFT: Text Container ── */
@@ -38,6 +40,7 @@
   flex-direction: column;
   align-items: flex-start;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 /* Eyebrow badge */
@@ -47,15 +50,16 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: 20px;
-  background: rgba(237, 233, 254, 0.75);
+  background: rgba(237, 233, 254, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(221, 214, 254, 0.85);
+  border: 1px solid rgba(221, 214, 254, 0.95);
   color: #5227FF;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(82, 39, 255, 0.06);
 }
 
 .hero-eyebrow-badge .badge-icon {
@@ -103,12 +107,12 @@
   align-items: center;
   gap: 10px;
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 30px;
-  box-shadow: var(--shadow-resting);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .avatar-group {
@@ -156,12 +160,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 14px;
-  box-shadow: var(--shadow-resting);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   max-width: 540px;
   width: 100%;
   transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -169,8 +173,8 @@
 
 .internship-badge:hover {
   border-color: rgba(139, 92, 246, 0.4);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: var(--shadow-hover);
+  background: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(82, 39, 255, 0.08);
   transform: translateY(-2px);
 }
 
@@ -239,7 +243,7 @@
   justify-content: center;
   position: relative;
   width: 100%;
-  min-height: 480px;
+  min-height: 560px;
 }
 
 .hero-perspective-wrap {
@@ -255,52 +259,85 @@
   will-change: transform;
 }
 
-@media (max-width: 1023px) {
-  .hero-perspective-wrap {
-    perspective: none !important;
-  }
-  .hero-3d-parallax-element {
-    transform: none !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-3d-parallax-element {
-    transform: none !important;
-  }
-}
-
 /* ── Mobile Responsiveness (< 1024px) ── */
 @media (max-width: 1023px) {
   .hero-content {
-    grid-template-columns: 1fr;
-    gap: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    box-sizing: border-box;
   }
 
   .hero-text-container {
     align-items: center;
+    text-align: center;
     margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-eyebrow-badge {
+    margin: 0 auto 16px auto;
   }
 
   .hero-headline {
-    font-size: clamp(2rem, 6.5vw, 2.85rem);
+    font-size: clamp(1.75rem, 6.8vw, 2.5rem);
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    word-break: break-word;
+    margin: 0 auto 16px auto;
+  }
+
+  .hero-subheadline {
+    font-size: clamp(0.9rem, 3.8vw, 1.02rem);
+    text-align: center;
+    max-width: 95%;
+    margin: 0 auto 28px auto;
+  }
+
+  .hero-actions {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
   }
 
   .hero-cta-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 14px;
+  }
+
+  .hero-cta-group > * {
+    max-width: 100%;
+  }
+
+  .social-proof-badge {
+    margin: 0 auto;
+    max-width: 100%;
   }
 
   .internship-badge {
     margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .hero-visual-container {
     width: 100%;
     max-width: 100%;
-    margin: 0 auto;
-    min-height: auto;
-    height: clamp(380px, 60vw, 520px);
+    margin: 20px auto 0;
+    height: clamp(380px, 105vw, 490px);
     overflow: visible;
     display: flex;
     justify-content: center;
@@ -323,27 +360,22 @@
 
 @media (max-width: 639px) {
   .hero-section {
-    padding: 32px 0 44px;
+    padding: 30px 0 40px;
+  }
+
+  .hero-container {
+    padding: 0 16px;
   }
 
   .hero-headline {
-    font-size: clamp(1.85rem, 8vw, 2.35rem);
-  }
-
-  .hero-cta-group {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .hero-cta-group .btn-primary {
-    width: 100%;
+    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
   }
 
   .internship-badge {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    max-width: 100%;
+    padding: 12px 14px;
   }
 
   .ib-link {
@@ -353,9 +385,9 @@
   }
 
   .hero-visual-container {
-    height: clamp(280px, 85vw, 360px);
-    margin-top: 10px;
-    margin-bottom: 10px;
+    height: clamp(360px, 102vw, 450px);
+    margin-top: 16px;
+    margin-bottom: 0px;
     transform: none !important;
   }
 }

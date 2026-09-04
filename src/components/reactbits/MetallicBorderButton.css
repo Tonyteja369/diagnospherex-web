@@ -1,3 +1,8 @@
+/* =========================================================
+   METALLIC BORDER BUTTON — Apple-Grade Polished Button
+   Clean luxury border · Contained sheen · Zero spin glitch
+   ========================================================= */
+
 .metallic-border-btn {
   position: relative;
   display: inline-flex;
@@ -10,54 +15,48 @@
   font-weight: 600;
   cursor: pointer;
   outline: none;
-  border: none;
-  isolation: isolate;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
-  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.1), 0 1px 3px rgba(15, 23, 42, 0.05);
+  border: 1.5px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 
+    0 2px 8px rgba(82, 39, 255, 0.08),
+    0 1px 3px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
 
 .metallic-border-btn::before {
   content: '';
   position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: conic-gradient(
-    from var(--metallic-angle, 0deg),
-    #5227FF 0%,
-    #8B5CF6 25%,
-    #DDD6FE 45%,
-    #FFFFFF 50%,
-    #DDD6FE 55%,
-    #8B5CF6 75%,
-    #5227FF 100%
-  );
-  z-index: -1;
-  transition: opacity 0.25s ease;
-  animation: rotateMetallicBorder 6s linear infinite;
-}
-
-.metallic-border-btn::after {
-  content: '';
-  position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: #FFFFFF;
-  z-index: -1;
-  transition: background-color 0.2s ease;
-}
-
-@keyframes rotateMetallicBorder {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  background: linear-gradient(
+    135deg,
+    rgba(82, 39, 255, 0.1) 0%,
+    rgba(139, 92, 246, 0.03) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(82, 39, 255, 0.08) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
 .metallic-border-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.22), 0 2px 8px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2px);
+  border-color: #5227FF;
+  box-shadow: 
+    0 8px 24px rgba(82, 39, 255, 0.18),
+    0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.metallic-border-btn:hover::before {
+  opacity: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(82, 39, 255, 0.16) 0%,
+    rgba(139, 92, 246, 0.06) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(82, 39, 255, 0.12) 100%
+  );
 }
 
 .metallic-border-btn:hover .btn-icon-arrow {

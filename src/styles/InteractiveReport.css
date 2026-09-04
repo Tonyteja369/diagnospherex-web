@@ -186,12 +186,10 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.68);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
   border-radius: 18px;
-  box-shadow: var(--shadow-resting);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 @media (min-width: 1024px) {
@@ -367,7 +365,7 @@
 }
 
 .ai-summary-card {
-  background: var(--gradient-soft);
+  background: #F5F3FF;
   border: 1px solid #DDD6FE;
   border-radius: 12px;
   padding: 14px 16px;

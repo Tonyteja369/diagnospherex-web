@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import GlassSurface from './reactbits/GlassSurface';
 import MetallicBorderButton from './reactbits/MetallicBorderButton';
 import '../styles/Navbar.css';
 
@@ -26,13 +25,10 @@ function useScrollDirection() {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY < 50) {
-        // Always show near the top of the page
         setVisible(true);
       } else if (currentScrollY > lastScrollY.current) {
-        // Scrolling down → hide
         setVisible(false);
       } else {
-        // Scrolling up → show
         setVisible(true);
       }
 
@@ -56,7 +52,6 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
-      // Determine active section for nav link highlighting
       const sections = navLinks.map((l) => l.href.substring(1));
       const scrollPos = window.scrollY + 180;
 
@@ -106,102 +101,76 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
   return (
     <>
       <header
-        className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''}`}
+        className={`navbar-wrapper ${scrolled ? 'is-scrolled' : ''}`}
         style={{
-          position: 'fixed',
-          top: '16px',
-          left: '0',
-          right: '0',
-          margin: '0 auto',
-          zIndex: 100,
-          maxWidth: '1180px',
-          width: 'calc(100% - 32px)',
           transform: visible ? 'translateY(0)' : 'translateY(-140%)',
-          transition: 'transform 300ms ease, opacity 300ms ease',
         }}
       >
-        <GlassSurface
-          width="100%"
-          height={scrolled ? 58 : 72}
-          borderRadius={9999}
-          backgroundOpacity={0.12}
-          saturation={1.5}
-          distortionScale={-70}
-          redOffset={2}
-          greenOffset={6}
-          blueOffset={10}
-          displace={1.5}
-          blur={16}
-          brightness={95}
-          opacity={0.95}
-          style={{ transition: 'height 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
-        >
-          <div className="navbar-container">
-            <nav className="navbar-inner" style={{ height: scrolled ? '58px' : '72px', transition: 'height 0.3s ease' }}>
-              {/* Logo */}
-              <a
-                href="#hero"
-                onClick={(e) => handleNavClick(e, '#hero')}
-                className="navbar-logo"
-                aria-label="DiagnoSphereX Home"
+        <div className="navbar-container">
+          <nav className="navbar-inner">
+            {/* Logo in dedicated clean white rounded badge / pill */}
+            <a
+              href="#hero"
+              onClick={(e) => handleNavClick(e, '#hero')}
+              className="navbar-logo-pill"
+              aria-label="DiagnoSphereX Home"
+            >
+              <img src="/logo1.png" alt="DiagnoSphereX Logo" className="navbar-logo-img" />
+              <span className="logo-brand">
+                Diagno<span className="text-gradient">Sphere</span>X
+              </span>
+            </a>
+
+            {/* Desktop Navigation Links */}
+            <div className="navbar-links desktop-only" role="menubar">
+              {navLinks.map((link) => {
+                const sectionId = link.href.substring(1);
+                const isActive = activeSection === sectionId;
+
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`nav-link ${isActive ? 'active-nav-link' : ''}`}
+                    role="menuitem"
+                  >
+                    {link.name}
+                    {isActive && (
+                      <motion.div
+                        className="active-indicator"
+                        layoutId="activeNavIndicator"
+                        transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                      />
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Actions: Desktop CTA & Mobile Hamburger */}
+            <div className="navbar-actions">
+              <MetallicBorderButton
+                size="sm"
+                variant="solid"
+                onClick={handleWaitlistClick}
+                className="cta-nav desktop-only"
               >
-                <img src="/logo1.png" alt="DiagnoSphereX Logo" className="navbar-logo-img" />
-                <span className="logo-brand">
-                  Diagno<span className="text-gradient">Sphere</span>X
-                </span>
-              </a>
+                <span>Join Waitlist</span>
+                <ArrowRight size={14} className="btn-icon-arrow" />
+              </MetallicBorderButton>
 
-              {/* Desktop Navigation Links */}
-              <div className="navbar-links desktop-only" role="menubar">
-                {navLinks.map((link) => {
-                  const sectionId = link.href.substring(1);
-                  const isActive = activeSection === sectionId;
-
-                  return (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className={`nav-link ${isActive ? 'active-nav-link' : ''}`}
-                      role="menuitem"
-                    >
-                      {link.name}
-                      {isActive && (
-                        <motion.div
-                          className="active-indicator"
-                          layoutId="activeNavIndicator"
-                          transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-                        />
-                      )}
-                    </a>
-                  );
-                })}
-              </div>
-
-              {/* Actions: Metallic Border CTA & Hamburger */}
-              <div className="navbar-actions">
-                <MetallicBorderButton
-                  size="sm"
-                  variant="solid"
-                  onClick={handleWaitlistClick}
-                  className="cta-nav"
-                >
-                  <span>Join Waitlist</span>
-                  <ArrowRight size={14} className="btn-icon-arrow" />
-                </MetallicBorderButton>
-
-                <button
-                  className="mobile-menu-btn mobile-only"
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  aria-label="Open navigation menu"
-                  aria-expanded={mobileMenuOpen}
-                >
-                  {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-                </button>
-              </div>
-            </nav>
-          </div>
-        </GlassSurface>
+              <button
+                className="mobile-menu-btn mobile-only"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Open navigation menu"
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
+          </nav>
+        </div>
       </header>
 
       {/* Mobile Menu: Expanding Rectangular Surface Reveal Animation */}
@@ -226,19 +195,16 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
                 opacity: 0,
                 scale: 0.92,
                 y: -20,
-                clipPath: 'polygon(10% 0%, 90% 0%, 90% 20%, 10% 20%)',
               }}
               animate={{
                 opacity: 1,
                 scale: 1,
                 y: 0,
-                clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
               }}
               exit={{
                 opacity: 0,
                 scale: 0.95,
                 y: -10,
-                clipPath: 'polygon(10% 0%, 90% 0%, 90% 10%, 10% 10%)',
               }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >

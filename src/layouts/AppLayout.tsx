@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Cursor from '../components/Cursor';
-import LiquidGlassFilter from '../components/LiquidGlassFilter';
 import Grainient from '../components/reactbits/Grainient';
 import SmoothScroll from '../components/SmoothScroll';
 import { useLiquidGlassTracking } from '../hooks/useLiquidGlassTracking';
@@ -17,43 +16,40 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 
   return (
     <SmoothScroll>
-      {/* Hidden SVG filter for true Liquid Glass refractive distortion */}
-      <LiquidGlassFilter />
-
-      {/* Global Background: Continuous WebGL Grainient fixed layer across entire site */}
+      {/* Global Background: Sleek Pale Ambient Gradient Layer */}
       <div
         style={{
           position: 'fixed',
           inset: 0,
           zIndex: 0,
-          opacity: 0.95,
+          backgroundColor: '#FAFAFE',
           pointerEvents: 'none',
         }}
         aria-hidden="true"
       >
         <Grainient
-          color1="#FF9FFC"
-          color2="#5227FF"
-          color3="#B497CF"
-          timeSpeed={0.25}
-          colorBalance={0.0}
-          warpStrength={1.0}
-          warpFrequency={5.0}
-          warpSpeed={2.0}
-          warpAmplitude={50.0}
-          blendAngle={0.0}
-          blendSoftness={0.05}
-          rotationAmount={500.0}
-          noiseScale={2.0}
-          grainAmount={0.1}
-          grainScale={2.0}
+          color1="#FFFFFF"
+          color2="#F3F0FE"
+          color3="#EAE6FD"
+          timeSpeed={0.02}
+          colorBalance={0.1}
+          warpStrength={0.15}
+          warpFrequency={2.0}
+          warpSpeed={0.1}
+          warpAmplitude={3.0}
+          blendAngle={135.0}
+          blendSoftness={0.5}
+          rotationAmount={10.0}
+          noiseScale={0.0}
+          grainAmount={0.01}
+          grainScale={0.5}
           grainAnimated={false}
-          contrast={1.5}
+          contrast={1.0}
           gamma={1.0}
-          saturation={1.0}
+          saturation={0.5}
           centerX={0.0}
           centerY={0.0}
-          zoom={0.9}
+          zoom={1.0}
         />
       </div>
 
