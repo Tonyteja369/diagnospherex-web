@@ -1,251 +1,120 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FileText, Brain, Activity } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import { FileText, Users, Activity, Sparkles, Zap } from 'lucide-react';
 import '../../styles/PlatformCapabilities.css';
 
-const PANELS = [
+const FEATURES = [
   {
-    Icon: FileText,
-    title: 'Report Analyzer',
-    desc: 'Upload any blood test PDF. Every value explained in plain Telugu using ICMR Indian reference ranges calibrated to Indian age, gender, and regional population. Not WHO global averages.',
-    accent: '#6236FF',
-    accentB: '#2FD3FF',
-    label: 'REPORT AI',
+    icon: FileText,
+    tag: 'Report Analyzer',
+    title: 'ICMR-Calibrated Medical Interpretation',
+    desc: 'Upload any blood test or diagnostic PDF. Every parameter is explained in plain Telugu and English using ICMR Indian reference ranges calibrated to Indian demographics, diet, and regional baselines — not Western averages.',
+    highlight: 'Instant Telugu & English Insights',
+    color: '#8B5CF6',
+    bg: '#EDE9FE',
   },
   {
-    Icon: Brain,
-    title: 'Family Health Vault',
-    desc: 'One account manages the complete health history of up to 6 family members. Every record AES-256 encrypted independently. Only you hold the key. Never lose a report again.',
-    accent: '#2FD3FF',
-    accentB: '#6236FF',
-    label: 'FAMILY AI',
+    icon: Users,
+    tag: 'Family Health Vault',
+    title: 'Zero-Knowledge Longitudinal Vault',
+    desc: 'One account securely manages complete health timelines for up to 6 family members. Every medical record is AES-256 encrypted independently with user-derived keys. Even our engineers cannot access your records.',
+    highlight: 'AES-256 Encrypted Per Member',
+    color: '#3B82F6',
+    bg: '#EFF6FF',
   },
   {
-    Icon: Activity,
-    title: 'Instant Health Intelligence',
-    desc: 'Upload multiple documents together. DiagnoSphereX reads them simultaneously, finds connections between values across documents, and tells you exactly what to ask your doctor in the next 48 hours.',
-    accent: '#a855f7',
-    accentB: '#2FD3FF',
-    label: 'CROSS-REF AI',
+    icon: Activity,
+    tag: 'Instant Intelligence',
+    title: 'Multi-Document Cross-Referencing',
+    desc: 'Upload multiple test reports together. DiagnoSphereX reads them simultaneously, detecting subtle correlations between disparate markers across lab visits, and prepares a concrete 48-hour doctor consult plan.',
+    highlight: 'Cross-Document Correlation',
+    color: '#10B981',
+    bg: '#ECFDF5',
   },
 ];
 
-const PANEL_W = 360;
-const GAP     = 60;
-const STRIDE  = PANEL_W + GAP;
-
-/* ─────────────── Single floating panel ─────────────── */
-const ToolPanel = ({
-  panel,
-  offset,
-  isActive,
-}: {
-  panel: (typeof PANELS)[number];
-  offset: number;
-  isActive: boolean;
-}) => {
-  const ref   = useRef<HTMLDivElement>(null);
-  const [mx,  setMx]  = useState(50);
-  const [my,  setMy]  = useState(50);
-  const [lit, setLit] = useState(false);
-
-  const absOff = Math.abs(offset);
-
-  const scale   = isActive ? 1   : absOff === 1 ? 0.88 : 0.80;
-  const tz      = isActive ? 0   : absOff === 1 ? -80  : -120;
-  const ry      = offset   > 0   ? -(10 * absOff) : (10 * absOff);
-  const opacity = isActive ? 1   : absOff === 1 ? 0.62 : 0.36;
-  const floatDelay = `${(Math.random() * 2).toFixed(1)}s`;
-
-  const onMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    setMx(((e.clientX - r.left) / r.width)  * 100);
-    setMy(((e.clientY - r.top)  / r.height) * 100);
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`vp-panel ${isActive ? 'vp-active' : ''}`}
-      style={{
-        transform: `translateX(${offset * STRIDE}px) scale(${scale}) translateZ(${tz}px) rotateY(${ry}deg)`,
-        opacity,
-        transitionDuration: '350ms',
-        animationDelay: floatDelay,
-        '--accent': panel.accent,
-      } as React.CSSProperties}
-      onMouseMove={onMove}
-      onMouseEnter={() => setLit(true)}
-      onMouseLeave={() => setLit(false)}
-    >
-      {/* Holographic cursor reflection */}
-      <div
-        className="vp-sheen"
-        style={{
-          background: `radial-gradient(circle at ${mx}% ${my}%, rgba(255,255,255,0.22), rgba(47,211,255,0.06) 50%, transparent 70%)`,
-          opacity: lit ? 0.18 : 0,
-        }}
-      />
-
-      {/* Depth shadow under panel */}
-      <div className="vp-floor-shadow" />
-
-      {/* Content */}
-      <div className="vp-badge" style={{ borderColor: panel.accent + '55', color: panel.accent }}>
-        {panel.label}
-      </div>
-
-      <div className="vp-icon-wrap" style={{ background: `linear-gradient(135deg, ${panel.accent}33, ${panel.accentB}22)` }}>
-        <panel.Icon size={28} color={panel.accent} />
-      </div>
-
-      <h3 className="vp-title">{panel.title}</h3>
-      <p  className="vp-desc">{panel.desc}</p>
-
-      {/* Bottom gradient bar */}
-      <div
-        className="vp-bar"
-        style={{ background: `linear-gradient(90deg, ${panel.accent}, ${panel.accentB})` }}
-      />
-    </div>
-  );
+const cardContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
 };
 
-/* ─────────────── Cursor energy field ─────────────── */
-const EnergyField = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef  = useRef({ x: 0, y: 0 });
-  const frameRef  = useRef(0);
-  const rafRef    = useRef<number>();
-
-  useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx    = canvas.getContext('2d')!;
-    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
-    resize();
-    window.addEventListener('resize', resize);
-
-    const onMove = (e: MouseEvent) => {
-      const r = canvas.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top };
-    };
-    canvas.addEventListener('mousemove', onMove);
-
-    const draw = () => {
-      frameRef.current++;
-      const { width: W, height: H } = canvas;
-      ctx.clearRect(0, 0, W, H);
-
-      const mx = mouseRef.current.x || W / 2;
-      const my = mouseRef.current.y || H / 2;
-      const grd = ctx.createRadialGradient(mx, my, 0, mx, my, 220);
-      grd.addColorStop(0,   'rgba(98,54,255,0.12)');
-      grd.addColorStop(0.5, 'rgba(47,211,255,0.05)');
-      grd.addColorStop(1,   'transparent');
-      ctx.fillStyle = grd;
-      ctx.fillRect(0, 0, W, H);
-
-      const r = 90 + 20 * Math.sin(frameRef.current * 0.025);
-      ctx.beginPath();
-      ctx.arc(mx, my, r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(98,54,255,${0.06 + 0.04 * Math.sin(frameRef.current * 0.04)})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      rafRef.current = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => {
-      cancelAnimationFrame(rafRef.current!);
-      window.removeEventListener('resize', resize);
-      canvas.removeEventListener('mousemove', onMove);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="vp-energy-canvas" />;
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
 };
 
-/* ─────────────── Main section ─────────────── */
 const PlatformCapabilities = () => {
-  const [active,  setActive]  = useState(0);
-  const dragRef   = useRef({ dragging: false, startX: 0, distX: 0 });
-
-  const goTo = useCallback((idx: number) => {
-    setActive(Math.max(0, Math.min(PANELS.length - 1, idx)));
-  }, []);
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    dragRef.current = { dragging: true, startX: e.clientX, distX: 0 };
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!dragRef.current.dragging) return;
-    dragRef.current.distX = e.clientX - dragRef.current.startX;
-  };
-
-  const onPointerUp = () => {
-    if (!dragRef.current.dragging) return;
-    dragRef.current.dragging = false;
-    const d = dragRef.current.distX;
-    if (d < -60) goTo(active + 1);
-    else if (d > 60) goTo(active - 1);
-  };
-
   return (
     <section className="capabilities-section" id="features">
-      {/* Cursor energy field canvas */}
-      <EnergyField />
-      <div className="vp-grid-bg" />
-
       <div className="container">
-        <div className="capabilities-header">
-          <p className="vp-eyebrow">Platform Capabilities</p>
-          <motion.h2
-            className="section-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Telugu Health Intelligence <span className="text-gradient">for Every Indian Family</span>
-          </motion.h2>
-          <p className="vp-sub">
-            Built on ICMR Indian clinical standards — not WHO global averages. Designed for Vijayawada. Built for every Indian household.
+
+        {/* Section Header */}
+        <div className="section-header text-center">
+          <span className="eyebrow-tag">
+            <Zap size={13} />
+            Core Platform Capabilities
+          </span>
+          <h2 className="section-title">
+            Engineered for <span className="text-gradient">Clarity, Privacy, and Trust</span>
+          </h2>
+          <p className="section-desc">
+            Traditional lab reports are written for pathologists. DiagnoSphereX translates clinical complexity into actionable, physician-aligned understanding.
           </p>
         </div>
-      </div>
 
-      <div
-        className="vp-stage"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerLeave={onPointerUp}
-      >
-        <div className="vp-track">
-          {PANELS.map((p, i) => (
-            <ToolPanel
-              key={i}
-              panel={p}
-              offset={i - active}
-              isActive={i === active}
-            />
-          ))}
-        </div>
-      </div>
+        {/* 3-Column Responsive Grid */}
+        <motion.div
+          className="capabilities-grid"
+          variants={cardContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          {FEATURES.map((feature) => (
+            <motion.div
+              key={feature.tag}
+              className="capability-card saas-card"
+              variants={cardVariants}
+            >
+              {/* Top Icon Badge */}
+              <div 
+                className="cap-icon-box"
+                style={{ backgroundColor: feature.bg, color: feature.color }}
+              >
+                <feature.icon size={24} />
+              </div>
 
-      <div className="container">
-        <div className="vp-dots">
-          {PANELS.map((_, i) => (
-            <button
-              key={i}
-              className={`vp-dot ${i === active ? 'vp-dot-active' : ''}`}
-              onClick={() => goTo(i)}
-              aria-label={`Go to panel ${i + 1}`}
-            />
+              {/* Tag */}
+              <span className="cap-tag">{feature.tag}</span>
+
+              {/* Title */}
+              <h3 className="cap-title">{feature.title}</h3>
+
+              {/* Description */}
+              <p className="cap-desc">{feature.desc}</p>
+
+              {/* Bottom Feature Pill */}
+              <div className="cap-footer">
+                <span className="cap-highlight">
+                  <Sparkles size={13} className="inline mr-1" />
+                  {feature.highlight}
+                </span>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );

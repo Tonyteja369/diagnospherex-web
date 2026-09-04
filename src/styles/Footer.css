@@ -1,188 +1,255 @@
-.footer {
-  margin-top: 100px;
-  padding: 60px 40px 40px;
-  border-radius: 40px 40px 0 0;
-  border-bottom: none;
-  background: rgba(10, 10, 15, 0.8);
+/* =========================================================
+   FOOTER — Soft Off-White SaaS Layout
+   Linear × Stripe Aesthetic
+   ========================================================= */
+
+.footer-container {
   position: relative;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--border-subtle);
+  padding: 80px 0 40px;
   z-index: 10;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 40px;
-}
-
-.footer-brand {
-  flex: 1.5;
-  min-width: 280px;
-}
-
-.footer-logo {
-  margin-bottom: 16px;
-}
-
-.footer-tagline {
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  max-width: 340px;
-}
-
-.footer-links {
-  display: flex;
-  flex: 2;
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 2fr;
   gap: 60px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  margin-bottom: 50px;
 }
 
-.link-group {
+/* ── Brand Col ── */
+.footer-brand-col {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 200px;
+  align-items: flex-start;
 }
 
-.link-title {
-  color: var(--color-text-primary);
-  font-size: 1.05rem;
-  margin-bottom: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.contact-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-bottom: 8px;
-}
-
-.contact-label {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-}
-
-.contact-value {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.85);
-  transition: color 0.2s;
-}
-
-.contact-value.link:hover {
-  color: var(--color-cyan);
-}
-
-.social-links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.profile-link {
+.footer-brand-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  width: fit-content;
+  margin-bottom: 16px;
+  text-decoration: none;
 }
 
-.profile-link:hover {
-  color: #fff;
-  background: rgba(98, 54, 255, 0.15);
-  border-color: rgba(98, 54, 255, 0.3);
-  transform: translateX(4px);
+.footer-logo-img {
+  height: 32px;
+  width: auto;
 }
 
-.footer-bottom {
-  max-width: 1200px;
-  margin: 60px auto 0;
-  padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
+.footer-logo-text {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
 }
 
-.founder-badge {
-  display: inline-block;
-  padding: 8px 20px;
-  background: linear-gradient(90deg, rgba(98, 54, 255, 0.1), rgba(47, 211, 255, 0.1));
-  border: 1px solid rgba(98, 54, 255, 0.3);
-  border-radius: 30px;
-  color: rgba(255, 255, 255, 0.8);
+.footer-desc {
   font-size: 0.9rem;
-  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 22px;
+  max-width: 380px;
 }
 
-.footer-message {
-  color: rgba(255, 255, 255, 0.5);
+.footer-contact-item, .footer-location-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.85rem;
-  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
 }
 
-/* Base utility overrides since we used Tailwind classes in TSX */
-.text-white { color: #ffffff; }
-.text-cyan { color: #2FD3FF; }
-.font-semibold { font-weight: 600; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-4 { margin-top: 1rem; }
-.mr-2 { margin-right: 0.5rem; }
-.mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.max-w-2xl { max-width: 42rem; }
-.inline { display: inline-block; }
-.opacity-50 { opacity: 0.5; }
+.contact-icon {
+  color: var(--accent-purple);
+  flex-shrink: 0;
+}
 
-/* Footer research initiative line */
-.footer-research-line {
-  margin-top: 20px;
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.35);
-  letter-spacing: 0.02em;
+.footer-email-link {
+  color: var(--accent-purple);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-email-link:hover {
+  color: #6D28D9;
+  text-decoration: underline;
+}
+
+/* ── Links Grid ── */
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.footer-group-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links-list a {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-links-list a:hover {
+  color: var(--accent-purple);
+}
+
+.external-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.internship-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hiring-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #D1FAE5;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ── Social Row ── */
+.footer-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-founder-tag {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+.footer-founder-tag strong {
+  color: var(--text-primary);
+}
+
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-circle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.social-circle-btn:hover {
+  color: var(--accent-purple);
+  border-color: var(--accent-purple-light);
+  background: var(--gradient-soft);
+  transform: translateY(-2px);
+}
+
+/* ── Bottom Bar ── */
+.footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
   flex-wrap: wrap;
+  gap: 14px;
 }
 
-.frl-label {
-  color: rgba(255, 255, 255, 0.4);
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.frl-name {
-  color: rgba(98, 54, 255, 0.7);
-  font-weight: 600;
+.footer-legal-links a {
+  color: var(--text-muted);
+  transition: color 0.2s ease;
 }
 
-.frl-separator {
-  opacity: 0.3;
-  margin: 0 2px;
+.footer-legal-links a:hover {
+  color: var(--text-primary);
 }
 
-.frl-powered {
-  color: rgba(255, 255, 255, 0.3);
-  font-style: italic;
+.dot-sep {
+  opacity: 0.4;
 }
 
-@media (max-width: 768px) {
-  .footer-links {
+/* ── Mobile Responsiveness ── */
+@media (max-width: 1023px) {
+  .footer-top-grid {
+    grid-template-columns: 1fr;
     gap: 40px;
-    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 639px) {
+  .footer-container {
+    padding: 60px 0 32px;
+  }
+
+  .footer-links-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-social-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer-legal-links {
+    flex-wrap: wrap;
+    gap: 8px;
   }
 }

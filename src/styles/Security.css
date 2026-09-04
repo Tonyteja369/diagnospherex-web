@@ -1,236 +1,181 @@
 /* =========================================================
-   SECURITY SECTION – Security-First System Design
+   SECURITY & TRUST — 4-Card Grid
+   Soft Off-White SaaS Aesthetic
    ========================================================= */
 
 .security-section {
-  padding: 100px 20px;
   position: relative;
-  z-index: 10;
-  overflow: hidden;
-}
-
-/* ── Animated grid background ── */
-.security-grid-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(47, 211, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(47, 211, 255, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: gridDrift 15s linear infinite;
-  z-index: 0;
-}
-
-@keyframes gridDrift {
-  0%   { background-position: 0 0; }
-  100% { background-position: 0 40px; }
-}
-
-/* ── Divider glow lines ── */
-.section-divider-glow {
   width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(98, 54, 255, 0.5), rgba(47, 211, 255, 0.4), transparent);
-  box-shadow: 0 0 12px rgba(98, 54, 255, 0.3);
-  position: relative;
-  z-index: 2;
-  margin: 0;
+  padding: 90px 0 100px;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-.security-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-/* ── Header ── */
-.security-header {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 60px;
-}
-
-.security-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #2FD3FF;
-  margin-bottom: 14px;
-}
-
-.security-desc {
-  font-size: 1.05rem;
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  margin-top: 18px;
-}
-
-/* ── 2×2 Principles grid ── */
 .principles-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  margin-bottom: 40px;
+  gap: 24px;
+  margin-top: 48px;
 }
 
-@media (max-width: 700px) {
-  .principles-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ── Principle card ── */
 .principle-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 100%);
-  backdrop-filter: blur(22px) saturate(195%);
-  -webkit-backdrop-filter: blur(22px) saturate(195%);
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2), /* Refraction edge highlight */
-    0 0 25px rgba(98, 54, 255, 0.08);
-
-  /* GPU Hardware Acceleration */
-  will-change: transform, opacity;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-
-  transition: transform 300ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1), border-color 300ms cubic-bezier(0.25, 1, 0.5, 1);
-  animation: cardFloat linear infinite;
-  animation-duration: 5s;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Stagger float phase per card */
-.principle-card:nth-child(1) { animation-delay: 0s; }
-.principle-card:nth-child(2) { animation-delay: -1.25s; }
-.principle-card:nth-child(3) { animation-delay: -2.5s; }
-.principle-card:nth-child(4) { animation-delay: -3.75s; }
-
-@keyframes cardFloat {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-3px); }
+.principle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
 }
 
-.principle-card:hover {
-  transform: translateY(-3px) scale(1.02);
-  border-color: rgba(98, 54, 255, 0.45);
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.55),
-    0 0 35px rgba(98, 54, 255, 0.35);
+.principle-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.principle-icon {
-  font-size: 1.8rem;
-  margin-bottom: 14px;
-  filter: drop-shadow(0 0 8px rgba(98, 54, 255, 0.5));
+.principle-card:hover .principle-icon-wrap {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.principle-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
 }
 
 .principle-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
-  margin: 0 0 12px;
-  line-height: 1.3;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
 }
 
 .principle-desc {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.62);
-  line-height: 1.7;
-  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
-/* ── Transparency statement ── */
+/* Transparency / Status Banner */
 .transparency-card {
+  margin-top: 32px;
+  padding: 20px 24px;
   display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  background: rgba(47, 211, 255, 0.06);
-  border: 1px solid rgba(47, 211, 255, 0.2);
-  border-radius: 16px;
-  padding: 22px 28px;
-  margin-top: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #FFFFFF;
 }
 
-.transparency-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #2FD3FF;
-  box-shadow: 0 0 10px #2FD3FF;
+.transparency-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pulse-indicator {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  margin-top: 4px;
-  animation: dotPulse 2s ease-in-out infinite;
 }
 
-@keyframes dotPulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 10px #2FD3FF; }
-  50%       { opacity: 0.5; box-shadow: 0 0 4px #2FD3FF; }
+.pulse-ping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #10B981;
+  opacity: 0.75;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.pulse-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #059669;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
 }
 
 .transparency-label {
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
+  font-size: 0.76rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: #2FD3FF;
-  font-weight: 600;
-  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+  color: #059669;
+  display: block;
+  margin-bottom: 2px;
 }
 
 .transparency-text {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.58);
-  line-height: 1.7;
-  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 780px;
 }
 
-/* ── Mobile Responsive ── */
-@media (max-width: 767px) {
+.transparency-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-purple);
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #F5F3FF;
+  border: 1px solid #DDD6FE;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.transparency-link:hover {
+  background: #EDE9FE;
+  color: #6D28D9;
+}
+
+/* ── Mobile Responsiveness ── */
+@media (max-width: 1023px) {
+  .transparency-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 639px) {
   .security-section {
-    padding: 64px 16px;
+    padding: 60px 0 70px;
   }
 
-  /* Disable costly grid animation on mobile */
-  .security-grid-bg {
-    animation: none;
-    background-size: 60px 60px;
-    opacity: 0.4;
-  }
-
-  .security-header {
-    margin-bottom: 32px;
-  }
-
-  .security-desc {
-    font-size: 0.95rem;
-  }
-
-  /* 2-col grid → 1 col on mobile */
   .principles-grid {
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-bottom: 24px;
+    margin-top: 32px;
   }
 
   .principle-card {
-    padding: 20px 18px;
-    border-radius: 16px;
-    /* Disable float animations on mobile */
-    animation: none;
-  }
-
-  .transparency-card {
-    flex-direction: column;
-    gap: 12px;
-    padding: 18px 16px;
-    border-radius: 14px;
-  }
-
-  .transparency-text {
-    font-size: 0.88rem;
+    padding: 22px 18px;
   }
 }

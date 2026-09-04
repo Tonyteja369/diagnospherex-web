@@ -4,56 +4,56 @@ import Cursor from '../components/Cursor';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroSection from '../components/sections/HeroSection';
-import TrustBanner from '../components/sections/TrustBanner';
-import ProductExplanation from '../components/sections/ProductExplanation';
-import PlatformCapabilities from '../components/sections/PlatformCapabilities';
-import ResearchSection from '../components/sections/ResearchSection';
-import ResearchRoadmap from '../components/sections/ResearchRoadmap';
-import AIBrainSimulation from '../components/sections/AIBrainSimulation';
 import InteractiveReport from '../components/sections/InteractiveReport';
+import PlatformCapabilities from '../components/sections/PlatformCapabilities';
 import Security from '../components/sections/Security';
-import Careers from '../components/sections/Careers';
-import SignatureActivation from '../components/sections/SignatureActivation';
-import LogoShowcase from '../components/sections/LogoShowcase';
+import WhyBuilding from '../components/sections/WhyBuilding';
 import CallToAction from '../components/sections/CallToAction';
-import DemoPage from '../pages/DemoPage';
 import EarlyAccessModal from '../components/EarlyAccessModal';
-import GlobalHaptics from '../components/GlobalHaptics';
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <>
-      <GlobalHaptics />
+    <div className="landing-page-root">
+      {/* Ambient background: soft drifting gradient blobs */}
       <AnimatedBackground />
+
+      {/* Subtle cursor */}
       <Cursor />
+
+      {/* 1. Nav: Home / Features / Demo / Security / About + CTA */}
       <Navbar onOpenModal={() => setIsModalOpen(true)} />
       
       <main>
+        {/* 2. Hero: Light bg, gradient headline word, phone mockup with soft shadow + float */}
         <HeroSection onOpenModal={() => setIsModalOpen(true)} />
-        <TrustBanner />
-        <ProductExplanation />
-        <DemoPage />
-        <PlatformCapabilities />
-        <ResearchSection />
-        <ResearchRoadmap />
-        <AIBrainSimulation />
+
+        {/* 3. Live Interactive Demo: Moved up, animated progress states */}
         <InteractiveReport />
+
+        {/* 4. Core Features: Report Analyzer / Family Vault / Instant Intelligence */}
+        <PlatformCapabilities />
+
+        {/* 5. Security & Trust: 4-card grid, soft gradient icon backgrounds */}
         <Security />
-        <Careers />
-        <SignatureActivation />
-        <LogoShowcase />
-        <CallToAction />
+
+        {/* 6. Why We're Building This: Condensed 3-card row & founder note */}
+        <WhyBuilding />
+
+        {/* 7. Waitlist CTA: Full-width soft-gradient section, animated button */}
+        <CallToAction onOpenModal={() => setIsModalOpen(true)} />
       </main>
 
+      {/* 8. Footer: About/Careers/Research links, contact email only, social icons */}
       <Footer />
       
+      {/* Waitlist Modal */}
       <EarlyAccessModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
       />
-    </>
+    </div>
   );
 };
 

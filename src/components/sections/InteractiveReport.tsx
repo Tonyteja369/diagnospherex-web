@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, FileText, Brain, FlaskConical, AlertTriangle, CheckCircle, Info, Stethoscope, Users } from 'lucide-react';
+import { FileText, Brain, FlaskConical, AlertTriangle, CheckCircle, Info, Stethoscope, Users, Activity, Sparkles } from 'lucide-react';
 import '../../styles/InteractiveReport.css';
 
 const DEMOS = [
@@ -8,221 +8,330 @@ const DEMOS = [
     id: 0,
     tab: 'Blood Test',
     Icon: FlaskConical,
-    title: 'Analyze Blood Test in Telugu',
+    title: 'Complete Blood Count (CBC)',
+    badge: 'Routine Health Check',
     input: {
-      heading: 'Complete Blood Count (CBC)',
+      heading: 'Haematology Lab Report · Vijayawada Diagnostics',
       rows: [
-        { label: 'Haemoglobin',  value: '9.6 g/dL',      status: 'low' },
-        { label: 'WBC',         value: '13,800 /µL',     status: 'high' },
-        { label: 'Platelets',   value: '220,000 /µL',    status: 'normal' },
-        { label: 'CRP',         value: '28 mg/L',        status: 'high' },
+        { label: 'Haemoglobin',  value: '9.6 g/dL',      status: 'low',    ref: '12.0 – 16.0 g/dL' },
+        { label: 'WBC Count',    value: '13,800 /µL',    status: 'high',   ref: '4,000 – 11,000 /µL' },
+        { label: 'Platelets',    value: '220,000 /µL',   status: 'normal', ref: '150k – 450k /µL' },
+        { label: 'CRP',          value: '28 mg/L',       status: 'high',   ref: '< 6.0 mg/L' },
       ],
-      note: 'ICMR Reference Range applied. Patient reports fatigue and mild fever for three days.',
+      note: 'ICMR Reference Range applied. Patient reports persistent fatigue and low fever for 3 days.',
     },
     explanation: {
-      summary: 'మీ రక్త పరీక్ష రెండు ముఖ్యమైన విషయాలను చూపిస్తుంది.',
+      summary: 'మీ రక్త పరీక్ష రెండు ముఖ్యమైన విషయాలను చూపిస్తుంది (Your blood test highlights two key clinical findings).',
       points: [
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'Haemoglobin తక్కువగా ఉంది — ICMR Indian range 12–16 g/dL. ఇది అలసట మరియు బలహీనతను వివరిస్తుంది.' },
-        { Icon: Activity, color: '#ef4444', text: 'White blood cell count మరియు CRP పెరిగాయి. ఇవి శరీరం ఇన్ఫెక్షన్‌తో పోరాడుతున్నట్టు చూపిస్తాయి.' },
+        { Icon: AlertTriangle, color: 'warning', text: 'Haemoglobin 9.6 g/dL తక్కువగా ఉంది (ICMR standard 12–16 g/dL). ఇది అలసట మరియు బలహీనతను వివరిస్తుంది.' },
+        { Icon: Activity, color: 'danger', text: 'WBC (13,800) మరియు CRP (28 mg/L) పెరిగాయి. శరీరం ఇన్ఫెక్షన్‌తో పోరాడుతున్న సంకేతం.' },
+        { Icon: CheckCircle, color: 'success', text: 'Platelets సాధారణ పరిధిలో ఉన్నాయి (No clotting risk detected).' },
       ],
-      meaning: 'ఫలితాలు రక్తహీనత మరియు తేలికపాటి ఇన్ఫెక్షన్‌ను సూచిస్తున్నాయి.',
-      next:    'మీ డాక్టర్‌ను 48 గంటలలోపు కలవండి. Iron మరియు antibiotic చికిత్స అవసరం కావచ్చు.',
+      meaning: 'Mild microcytic anaemia coupled with an acute inflammatory response.',
+      next: '48 గంటలలోపు మీ వైద్యుడిని సంప్రదించండి. Iron profile మరియు antibiotic సమీక్ష అవసరం కావచ్చు.',
     },
   },
   {
     id: 1,
     tab: 'Pre-Surgery',
     Icon: Activity,
-    title: 'ICMR Reference Ranges Check',
+    title: 'Pre-Operative Fitness Panel',
+    badge: 'Surgical Clearance',
     input: {
-      heading: 'Pre-Operative Blood Panel',
+      heading: 'Pre-Operative Assessment · Hyderabad Clinical Lab',
       rows: [
-        { label: 'Blood Glucose (Fasting)', value: '118 mg/dL',  status: 'high' },
-        { label: 'HbA1c',                  value: '6.1%',        status: 'high' },
-        { label: 'Creatinine',             value: '1.1 mg/dL',   status: 'normal' },
-        { label: 'PT/INR',                 value: '1.2',         status: 'normal' },
-        { label: 'Haemoglobin',            value: '11.8 g/dL',   status: 'low' },
+        { label: 'Fasting Glucose', value: '118 mg/dL',  status: 'high',   ref: '70 – 100 mg/dL' },
+        { label: 'HbA1c',           value: '6.1%',        status: 'high',   ref: '< 5.7%' },
+        { label: 'Creatinine',      value: '1.0 mg/dL',   status: 'normal', ref: '0.7 – 1.2 mg/dL' },
+        { label: 'PT / INR',        value: '1.1',         status: 'normal', ref: '0.8 – 1.2' },
+        { label: 'Haemoglobin',     value: '11.8 g/dL',   status: 'low',    ref: '12.0 – 16.0 g/dL' },
       ],
-      note: 'ICMR Indian reference ranges applied. Pre-surgery fitness evaluation.',
+      note: 'Elective laparoscopic cholecystectomy scheduled in 5 days. ICMR surgical clearance checklist.',
     },
     explanation: {
-      summary: 'Your pre-surgery panel shows two items your surgeon should know about.',
+      summary: 'Your pre-surgery panel is overall viable with two parameters for anaesthesia management.',
       points: [
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'Fasting glucose is borderline high by ICMR standards. Surgery teams routinely manage blood sugar levels — inform your anaesthetist.' },
-        { Icon: Info, color: '#3b82f6', text: 'Haemoglobin is slightly low. Your surgeon may discuss pre-op iron supplementation to reduce transfusion risk.' },
-        { Icon: CheckCircle, color: '#10b981', text: 'Creatinine and PT/INR are within ICMR normal range — kidney function and clotting look stable.' },
+        { Icon: AlertTriangle, color: 'warning', text: 'Fasting glucose is borderline elevated (118 mg/dL). Surgery teams routinely manage glycemic control.' },
+        { Icon: Info, color: 'info', text: 'Haemoglobin at 11.8 g/dL is mildly low. Pre-op iron supplementation may be discussed.' },
+        { Icon: CheckCircle, color: 'success', text: 'Renal function (Creatinine 1.0) and blood coagulation (INR 1.1) are completely optimal.' },
       ],
-      meaning: 'Fit for surgery with the glucose and haemoglobin noted for your care team.',
-      next:    'Share these results with your surgeon and anaesthetist before your procedure date.',
+      meaning: 'Fit for scheduled procedure with perioperative glycemic monitoring recommended.',
+      next: 'Share these results with your surgeon and anaesthetist at your pre-op consultation.',
     },
   },
   {
     id: 2,
     tab: 'Multi-Report',
     Icon: Brain,
-    title: 'Upload Family Member Report',
+    title: 'Cross-Document Longitudinal Analysis',
+    badge: 'Multi-Document AI',
     input: {
-      heading: 'Cross-Document Analysis — 2 Reports',
+      heading: 'Simultaneous Ingestion: 2 Reports (Biochemistry + Endocrinology)',
       rows: [
-        { label: 'Vitamin D (Report 1)',  value: '14 ng/mL',       status: 'low' },
-        { label: 'Calcium (Report 1)',    value: '8.1 mg/dL',      status: 'low' },
-        { label: 'Thyroid TSH (Rep 2)',   value: '5.8 mIU/L',      status: 'high' },
-        { label: 'Cholesterol (Rep 2)',   value: '228 mg/dL',      status: 'high' },
-        { label: 'Ferritin (Rep 1)',      value: '8 ng/mL',        status: 'low' },
+        { label: 'Vitamin D (Doc 1)',  value: '14 ng/mL',    status: 'low',    ref: '20 – 50 ng/mL' },
+        { label: 'Serum Calcium',      value: '8.1 mg/dL',   status: 'low',    ref: '8.5 – 10.5 mg/dL' },
+        { label: 'Thyroid TSH (Doc 2)',value: '5.8 mIU/L',   status: 'high',   ref: '0.4 – 4.2 mIU/L' },
+        { label: 'Total Cholesterol',  value: '228 mg/dL',   status: 'high',   ref: '< 200 mg/dL' },
+        { label: 'Serum Ferritin',     value: '8 ng/mL',     status: 'low',    ref: '15 – 150 ng/mL' },
       ],
-      note: 'DiagnoSphereX Cross-Reference AI reading two reports simultaneously.',
+      note: 'Cross-Reference Engine correlated records across different diagnostic laboratories.',
     },
     explanation: {
-      summary: 'Reading both reports together reveals a connected pattern.',
+      summary: 'Correlating both documents simultaneously uncovers an interconnected deficiency pattern.',
       points: [
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'Vitamin D deficiency (ICMR cutoff: 20 ng/mL) is suppressing Calcium absorption — these two values are directly linked.' },
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'Low Ferritin combined with high TSH is a known pattern — thyroid function often suffers when iron stores are depleted.' },
-        { Icon: Activity, color: '#ef4444', text: 'Cholesterol at 228 mg/dL exceeds ICMR Indian guidance. Combined with thyroid stress, this warrants immediate cardiologist review.' },
+        { Icon: AlertTriangle, color: 'warning', text: 'Vitamin D deficiency (14 ng/mL) is suppressing Calcium absorption — direct metabolic link.' },
+        { Icon: AlertTriangle, color: 'warning', text: 'Depleted iron stores (Ferritin 8 ng/mL) coupled with elevated TSH indicates thyroid stress.' },
+        { Icon: Activity, color: 'danger', text: 'Cholesterol at 228 mg/dL exceeds ICMR guidance, warranting lipid review.' },
       ],
-      meaning: 'Three inter-connected deficiencies identified across two reports.',
-      next:    'Ask your doctor about Vitamin D + Iron supplementation together, and a thyroid ultrasound within 2 weeks.',
+      meaning: 'Synergistic endocrine and micronutrient deficiency identified across independent tests.',
+      next: 'Request combined Vitamin D + Iron therapeutics and an endocrine ultrasound within 2 weeks.',
     },
   },
   {
     id: 3,
     tab: 'Family Vault',
     Icon: Users,
-    title: 'Understand Lab Results in Telugu',
+    title: "Mother's Chronic Health Timeline",
+    badge: 'AES-256 Vault',
     input: {
-      heading: 'Family Vault — Mother\'s Diabetes Panel',
+      heading: 'Encrypted Vault Record · Patient Age 53',
       rows: [
-        { label: 'Blood Glucose (PP)',  value: '198 mg/dL',    status: 'high' },
-        { label: 'HbA1c',              value: '7.4%',          status: 'high' },
-        { label: 'Creatinine',         value: '1.3 mg/dL',     status: 'high' },
-        { label: 'Urine Microalbumin', value: '42 mg/g',       status: 'high' },
-        { label: 'Sodium',             value: '139 mmol/L',    status: 'normal' },
+        { label: 'Post-Prandial Glucose', value: '198 mg/dL', status: 'high',   ref: '< 140 mg/dL' },
+        { label: 'HbA1c',                 value: '7.4%',      status: 'high',   ref: '< 6.5%' },
+        { label: 'Serum Creatinine',       value: '1.3 mg/dL', status: 'high',   ref: '0.6 – 1.1 mg/dL' },
+        { label: 'Urine Microalbumin',    value: '42 mg/g',   status: 'high',   ref: '< 30 mg/g' },
+        { label: 'Serum Sodium',          value: '139 mmol/L',status: 'normal', ref: '135 – 145 mmol/L' },
       ],
-      note: 'Family Vault: Encrypted per-member record. ICMR Indian diabetic reference ranges applied.',
+      note: 'Decrypted locally with user-derived key. Calibrated to Indian diabetic epidemiological ranges.',
     },
     explanation: {
-      summary: 'అమ్మ రక్త పరీక్ష నాలుగు విషయాలను వెల్లడిస్తుంది.',
+      summary: 'అమ్మ రక్త పరీక్ష మధుమేహం మరియు కిడ్నీ పర్యవేక్షణ అవసరాన్ని సూచిస్తుంది.',
       points: [
-        { Icon: AlertTriangle, color: '#ef4444', text: 'Post-prandial glucose 198 మరియు HbA1c 7.4% — ICMR ప్రకారం మధుమేహం నియంత్రణలో లేదు.' },
-        { Icon: AlertTriangle, color: '#f59e0b', text: 'Creatinine మరియు Microalbumin — ఇవి కలిసి కిడ్నీ ప్రారంభ సంకేతాలు చూపిస్తున్నాయి.' },
-        { Icon: CheckCircle, color: '#10b981', text: 'Sodium సాధారణంగా ఉంది — ఎలక్ట్రోలైట్ బ్యాలెన్స్ స్థిరంగా ఉంది.' },
+        { Icon: Activity, color: 'danger', text: 'PP Glucose 198 మరియు HbA1c 7.4% — ICMR మార్గదర్శకాల ప్రకారం గ్లూకోజ్ నియంత్రణ తప్పింది.' },
+        { Icon: AlertTriangle, color: 'warning', text: 'Creatinine (1.3) మరియు Microalbumin (42) ప్రారంభ డయాబెటిక్ నెఫ్రోపతిని సూచిస్తున్నాయి.' },
+        { Icon: CheckCircle, color: 'success', text: 'ఎలక్ట్రోలైట్ స్థాయిలు (Sodium 139) సాధారణంగా ఉన్నాయి.' },
       ],
-      meaning: 'మధుమేహం మేనేజ్‌మెంట్ మారాలి మరియు కిడ్నీ పర్యవేక్షణ అవసరం.',
-      next:    '48 గంటలలో నెఫ్రాలజిస్ట్‌ను కలవండి. Metformin మోతాదు సమీక్ష అడగండి.',
+      meaning: 'Uncontrolled diabetes with early renal stress markers identified.',
+      next: '48 గంటల్లో నెఫ్రాలజిస్ట్‌ని సంప్రదించండి. మధుమేహ మందుల మోతాదు సమీక్షించండి.',
     },
   },
 ];
 
-const StatusPill = ({ status }: { status: string }) => {
-  const styles: Record<string, string> = {
-    high:    'pill-high',
-    low:     'pill-low',
-    normal:  'pill-normal',
-    neutral: 'pill-neutral',
+const CHECKLIST_STEPS = [
+  { label: 'Extract values', sub: 'OCR & PDF parser active', done: true },
+  { label: 'ICMR lookup', sub: 'Indian reference calibrated', done: true },
+  { label: 'Cross-referencing', sub: 'Connecting historical records', done: true },
+  { label: 'Generate insight', sub: 'Clinical reasoning explained', done: true },
+];
+
+const StatusBadge = ({ status }: { status: string }) => {
+  const map: Record<string, { label: string; className: string }> = {
+    high: { label: 'High', className: 'badge-high' },
+    low: { label: 'Low', className: 'badge-low' },
+    normal: { label: 'Normal', className: 'badge-normal' },
   };
-  const labels: Record<string, string> = { high: 'High', low: 'Low', normal: 'Normal', neutral: 'Note' };
-  return <span className={`status-pill ${styles[status] ?? 'pill-neutral'}`}>{labels[status] ?? status}</span>;
+  const item = map[status] || { label: status, className: 'badge-normal' };
+  return <span className={`param-status ${item.className}`}>{item.label}</span>;
 };
 
 const InteractiveReport = () => {
   const [active, setActive] = useState(0);
+  const [currentStep, setCurrentStep] = useState(0);
   const demo = DEMOS[active];
 
+  // Auto-cycle live checklist every 1.6s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentStep((prev) => (prev + 1) % CHECKLIST_STEPS.length);
+    }, 1600);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="interactive-report-section" id="demo">
+    <section className="demo-section" id="demo">
       <div className="container">
-        <div className="report-header">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Clinical Demo: <span className="text-gradient">Telugu Report Analysis</span>
-        </motion.h2>
-        <p className="section-subtitle">
-          Select a sample below to see how DiagnoSphereX explains real Indian blood test values using ICMR reference ranges — in plain English and Telugu.
-        </p>
-      </div>
 
-      {/* Tab selector */}
-      <div className="demo-tabs">
-        {DEMOS.map(d => (
-          <button
-            key={d.id}
-            className={`demo-tab ${active === d.id ? 'demo-tab-active' : ''}`}
-            onClick={() => setActive(d.id)}
+        {/* Section Header */}
+        <div className="section-header text-center">
+          <span className="eyebrow-tag">
+            <Sparkles size={13} />
+            Live Interactive Demo
+          </span>
+          <h2 className="section-title">
+            Explainable AI in Action: <span className="text-gradient">Indian Clinical Context</span>
+          </h2>
+          <p className="section-desc">
+            Select a clinical sample below to see how DiagnoSphereX interprets real medical values using ICMR Indian standards — in plain English and Telugu.
+          </p>
+        </div>
+
+        {/* Live Processing Pipeline Bar */}
+        <div className="demo-pipeline-bar">
+          <div className="pipeline-title">
+            <span className="live-dot" />
+            <span>AI Reasoning Engine</span>
+          </div>
+          <div className="pipeline-steps">
+            {CHECKLIST_STEPS.map((step, idx) => {
+              const isPast = idx < currentStep;
+              const isCurrent = idx === currentStep;
+              return (
+                <div 
+                  key={step.label} 
+                  className={`pipeline-step ${isPast ? 'is-done' : isCurrent ? 'is-active' : 'is-pending'}`}
+                >
+                  <div className="step-circle">
+                    {isPast ? '✓' : isCurrent ? '●' : idx + 1}
+                  </div>
+                  <div className="step-text">
+                    <span className="step-name">{step.label}</span>
+                    <span className="step-sub">{step.sub}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Horizontally Scrollable Tab Chips (Mobile-First) */}
+        <div className="demo-tabs-container">
+          <div className="demo-tabs-track" role="tablist">
+            {DEMOS.map((d) => {
+              const isSelected = active === d.id;
+              return (
+                <button
+                  key={d.id}
+                  role="tab"
+                  aria-selected={isSelected}
+                  className={`demo-tab-chip ${isSelected ? 'active-chip' : ''}`}
+                  onClick={() => setActive(d.id)}
+                >
+                  <d.Icon size={16} className="chip-icon" />
+                  <span>{d.tab}</span>
+                  {isSelected && (
+                    <motion.div 
+                      className="chip-indicator" 
+                      layoutId="activeChipIndicator"
+                      transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Two-Panel Layout (Stacks vertically on Mobile!) */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            className="demo-two-panel"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -10 }}
+            transition={{ duration: 0.15 }}
           >
-            <d.Icon className="tab-icon" size={16} style={{ marginRight: '8px' }} /> {d.tab}
-          </button>
-        ))}
-      </div>
-
-      {/* Split panel */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={active}
-          className="split-panel"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.35 }}
-        >
-          {/* LEFT — original report */}
-          <div className="split-left glass-panel">
-            <div className="panel-label">
-              <FileText size={14} style={{ marginRight: '6px' }} /> Original Medical Report
-            </div>
-            <h3 className="split-heading">{demo.title}</h3>
-            <p className="report-sub">{demo.input.heading}</p>
-            <div className="report-rows">
-              {demo.input.rows.map((r, i) => (
-                <div key={i} className="report-row">
-                  <span className="row-label">{r.label}</span>
-                  <span className="row-value">{r.value}</span>
-                  <StatusPill status={r.status} />
+            {/* Panel 1: Original Report */}
+            <div className="demo-panel panel-original saas-card">
+              <div className="panel-top-bar">
+                <div className="panel-badge-group">
+                  <FileText size={15} className="text-muted" />
+                  <span className="panel-kind">Source Medical Report</span>
                 </div>
-              ))}
-            </div>
-            {demo.input.note && (
-              <div className="clinical-note">
-                <span className="note-label">Clinical Note</span>
-                <p>{demo.input.note}</p>
+                <span className="panel-context-badge">{demo.badge}</span>
               </div>
-            )}
-          </div>
 
-          {/* RIGHT — AI explanation */}
-          <div className="split-right glass-panel">
-            <div className="panel-label ai-label">
-              <Brain size={14} style={{ marginRight: '6px' }} /> DiagnoSphereX Insight
-            </div>
-            <div className="ai-confidence">Confidence Score: 92%<div className="conf-bar"><div className="conf-fill" /></div></div>
-            <p className="ai-summary">{demo.explanation.summary}</p>
-            <div className="ai-points">
-              {demo.explanation.points.map((p, i) => (
-                <div key={i} className="ai-point">
-                  <span className="point-icon">
-                    <p.Icon size={18} color={p.color} />
-                  </span>
-                  <p>{p.text}</p>
+              <div className="panel-body">
+                <h3 className="panel-main-title">{demo.title}</h3>
+                <p className="panel-origin-text">{demo.input.heading}</p>
+
+                <div className="report-table-wrapper">
+                  <table className="report-table">
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Observed</th>
+                        <th>ICMR Standard</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {demo.input.rows.map((row, idx) => (
+                        <tr key={idx}>
+                          <td className="font-semibold">{row.label}</td>
+                          <td className="observed-val">{row.value}</td>
+                          <td className="ref-range">{row.ref}</td>
+                          <td><StatusBadge status={row.status} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              ))}
+
+                <div className="clinical-meta-box">
+                  <span className="meta-label">Clinical Context & ICMR Standard:</span>
+                  <p className="meta-text">{demo.input.note}</p>
+                </div>
+              </div>
             </div>
-            <div className="meaning-block">
-              <p className="meaning-label">Clinical Interpretation</p>
-              <p className="meaning-text">{demo.explanation.meaning}</p>
+
+            {/* Panel 2: AI Clinical Insight */}
+            <div className="demo-panel panel-insight saas-card">
+              <div className="panel-top-bar">
+                <div className="panel-badge-group">
+                  <Brain size={15} style={{ color: 'var(--accent-purple)' }} />
+                  <span className="panel-kind text-purple font-semibold">DiagnoSphereX Clinical Insight</span>
+                </div>
+                {/* Animated Confidence Bar */}
+                <div className="confidence-pill">
+                  <span>Confidence: <strong>92%</strong></span>
+                  <div className="conf-bar-track">
+                    <motion.div 
+                      className="conf-bar-fill"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: '92%' }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="panel-body">
+                <div className="ai-summary-card">
+                  <p className="summary-quote">“{demo.explanation.summary}”</p>
+                </div>
+
+                <div className="ai-findings-list">
+                  {demo.explanation.points.map((p, idx) => {
+                    const colorClass = p.color === 'danger' ? 'icon-danger' : p.color === 'warning' ? 'icon-warning' : p.color === 'info' ? 'icon-info' : 'icon-success';
+                    return (
+                      <div key={idx} className="finding-item">
+                        <div className={`finding-icon-wrap ${colorClass}`}>
+                          <p.Icon size={16} />
+                        </div>
+                        <p className="finding-text">{p.text}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="action-plan-box">
+                  <div className="ap-header">
+                    <Stethoscope size={16} className="text-purple" />
+                    <h4>Recommended 48-Hour Action Plan</h4>
+                  </div>
+                  <p className="ap-content">{demo.explanation.next}</p>
+                </div>
+
+                <div className="demo-disclaimer">
+                  <span>* Calibrated to ICMR population baselines. AI reasoning for patient empowerment — not a replacement for clinical consultation.</span>
+                </div>
+              </div>
             </div>
-            <div className="next-block">
-              <p className="next-label">Your 48-Hour Action Plan</p>
-              <p className="next-text">{demo.explanation.next}</p>
-            </div>
-            <p className="disclaimer">
-              <Stethoscope size={12} style={{ marginRight: '6px', display: 'inline' }} />
-              DiagnoSphereX provides ICMR-calibrated insights only. Always consult a licensed physician.
-            </p>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+
       </div>
     </section>
   );

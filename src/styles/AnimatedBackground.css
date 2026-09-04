@@ -1,10 +1,141 @@
-.animated-bg-canvas {
+/* =========================================================
+   AMBIENT BACKGROUND MOTION — Soft Gradient Blobs
+   Replaces dark starfield with soft drifting ambient glow
+   ========================================================= */
+
+.ambient-background {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  overflow: hidden;
   pointer-events: none;
-  display: block;
+  z-index: 0;
+  background-color: var(--bg-primary);
+}
+
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+  will-change: transform;
+}
+
+/* Blob 1 — Soft Lavender Top Left */
+.ambient-blob-1 {
+  top: -10%;
+  left: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #A78BFA 0%, #C4B5FD 60%, transparent 80%);
+  animation: driftBlob1 26s ease-in-out infinite alternate;
+}
+
+/* Blob 2 — Soft Blue Top Right */
+.ambient-blob-2 {
+  top: 15%;
+  right: -8%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, #818CF8 0%, #93C5FD 60%, transparent 80%);
+  animation: driftBlob2 28s ease-in-out infinite alternate;
+}
+
+/* Blob 3 — Indigo/Periwinkle Center/Bottom */
+.ambient-blob-3 {
+  bottom: 10%;
+  left: 15%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #C4B5FD 0%, #E0E7FF 60%, transparent 80%);
+  animation: driftBlob3 32s ease-in-out infinite alternate;
+}
+
+/* Blob 4 — Soft Sky Blue Bottom Right */
+.ambient-blob-4 {
+  bottom: -15%;
+  right: 10%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #60A5FA 0%, #DBEAFE 60%, transparent 80%);
+  animation: driftBlob4 24s ease-in-out infinite alternate;
+}
+
+@keyframes driftBlob1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(80px, 60px) scale(1.08);
+  }
+  100% {
+    transform: translate(-40px, 100px) scale(0.95);
+  }
+}
+
+@keyframes driftBlob2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-100px, 80px) scale(1.12);
+  }
+  100% {
+    transform: translate(50px, -50px) scale(0.92);
+  }
+}
+
+@keyframes driftBlob3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(70px, -90px) scale(1.06);
+  }
+  100% {
+    transform: translate(-60px, 40px) scale(0.98);
+  }
+}
+
+@keyframes driftBlob4 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-80px, -60px) scale(1.1);
+  }
+  100% {
+    transform: translate(40px, 50px) scale(0.94);
+  }
+}
+
+/* Mobile optimizations: reduce blur radius, lower opacity, disable animation loop */
+@media (max-width: 767px) {
+  .ambient-blob {
+    filter: blur(50px);
+    opacity: 0.08;
+    animation: none !important;
+  }
+  .ambient-blob-1 {
+    width: 320px;
+    height: 320px;
+  }
+  .ambient-blob-2 {
+    width: 350px;
+    height: 350px;
+  }
+  .ambient-blob-3 {
+    display: none;
+  }
+  .ambient-blob-4 {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob {
+    animation: none !important;
+  }
 }

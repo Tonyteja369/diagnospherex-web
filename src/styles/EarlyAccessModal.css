@@ -1,14 +1,14 @@
 /* =====================================================
-   EARLY ACCESS MODAL — Mobile-First Responsive
+   EARLY ACCESS MODAL — Soft Off-White SaaS Aesthetic
    ===================================================== */
 
 /* ── Backdrop ── */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(6, 6, 20, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(20, 20, 31, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 9999;
 }
 
@@ -21,7 +21,6 @@
   justify-content: center;
   z-index: 10000;
   pointer-events: none;
-  /* Safe margins on all sides */
   padding: 16px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -32,36 +31,17 @@
   pointer-events: auto;
   position: relative;
   width: 100%;
-  max-width: 540px;
+  max-width: 500px;
   box-sizing: border-box;
-
-  /* Premium Liquid Glass styling */
-  background: linear-gradient(
-    135deg,
-    rgba(22, 22, 38, 0.92) 0%,
-    rgba(12, 12, 24, 0.96) 100%
-  );
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 24px;
-  padding: 36px 32px 32px;
-  box-shadow:
-    0 32px 80px rgba(0, 0, 0, 0.75),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22); /* refraction top meniscus */
-
-  /* GPU Hardware Acceleration */
-  will-change: transform, opacity;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-
-  /* Allow content to scroll inside on small screens */
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 20px;
+  padding: 32px 28px 28px;
+  box-shadow: 0 24px 64px rgba(20, 20, 31, 0.14), 0 4px 16px rgba(20, 20, 31, 0.04);
   max-height: calc(100dvh - 32px);
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-
-  /* Prevent background scroll bleed */
   overscroll-behavior: contain;
 }
 
@@ -72,23 +52,23 @@
   float: right;
   margin: -8px -8px 8px 0;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
   border-radius: 50%;
   width: 36px;
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.6);
+  color: #64748B;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: #E2E8F0;
+  color: #0F172A;
 }
 
 /* ── Modal Content ── */
@@ -97,282 +77,103 @@
 }
 
 .modal-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.55rem;
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.6rem;
   font-weight: 700;
+  color: var(--text-primary);
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #fff 30%, #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
-.modal-desc {
+.modal-subtitle {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
+  line-height: 1.5;
   margin-bottom: 24px;
-  line-height: 1.55;
 }
 
-.modal-desc strong {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* ── Form ── */
-.ea-form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 100%;
-}
-
+/* ── Form Elements ── */
 .form-group {
+  margin-bottom: 18px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  width: 100%;
-  box-sizing: border-box;
+  gap: 6px;
 }
 
-.form-group label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
-  letter-spacing: 0.03em;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 12px 14px;
-  color: #fff;
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.form-group select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 36px;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: rgba(98, 54, 255, 0.7);
-  box-shadow: 0 0 0 3px rgba(98, 54, 255, 0.18);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: rgba(255, 255, 255, 0.28);
-}
-
-.form-group option {
-  background: #111120;
-  color: #fff;
-}
-
-/* ── Side-by-side row (desktop) ── */
-.row-group {
-  flex-direction: row;
-  gap: 12px;
-}
-
-.half-width {
-  flex: 1;
-  min-width: 0;   /* prevent overflow in flex */
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-/* ── Submit Button ── */
-.ea-submit {
-  width: 100%;
-  margin-top: 8px;
-  padding: 14px 24px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 14px;
-}
-
-/* ── Success State ── */
-.modal-success {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 4px;
-}
-
-.success-icon-wrapper {
-  margin-bottom: 12px;
-}
-
-.drop-shadow-glow {
-  filter: drop-shadow(0 0 14px rgba(47, 211, 255, 0.65));
-}
-
-.email-preview {
-  width: 100%;
-  margin: 16px 0;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  overflow: hidden;
-  text-align: left;
-}
-
-.email-header {
-  padding: 10px 16px;
-  background: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.form-label {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.email-subj {
   font-weight: 600;
-  color: var(--color-cyan, #22D3EE);
+  color: var(--text-primary);
 }
 
-.email-body {
-  padding: 14px 16px;
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.6;
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-medium);
+  background: #FAFAFC;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
-.email-body p { margin-bottom: 8px; }
-.email-body p:last-child { margin-bottom: 0; }
-.email-sig { margin-top: 12px !important; color: rgba(255, 255, 255, 0.4) !important; }
-
-.close-btn { width: 100%; }
-
-/* =====================================================
-   ── MOBILE RESPONSIVE (max-width: 600px) ──
-   Mobile-first: override base at most breakpoints
-   ===================================================== */
-@media (max-width: 600px) {
-
-  /* Wrapper: safe 16px margin all around, vertically centred */
-  .modal-wrapper {
-    padding: 16px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Modal: full viewport width minus safe-area margins */
-  .early-access-modal {
-    width: 100%;
-    max-width: calc(100vw - 32px);
-    border-radius: 20px;
-    padding: 20px 16px 24px;
-    /* Fill screen height if needed, scroll inside */
-    max-height: calc(100dvh - 32px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .modal-title {
-    font-size: 1.2rem;
-    padding-right: 0;
-  }
-
-  .modal-desc {
-    font-size: 0.82rem;
-    margin-bottom: 18px;
-    line-height: 1.5;
-  }
-
-  .ea-form {
-    gap: 11px;
-  }
-
-  .form-group label {
-    font-size: 0.74rem;
-  }
-
-  /* Full-width inputs, prevent iOS zoom (font-size >= 16px) */
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 16px;
-    padding: 11px 12px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Stack side-by-side fields vertically on mobile */
-  .row-group {
-    flex-direction: column;
-    gap: 11px;
-  }
-
-  .half-width {
-    width: 100%;
-    flex: none;
-  }
-
-  /* Submit button full-width */
-  .ea-submit {
-    width: 100%;
-    padding: 13px 20px;
-    font-size: 0.95rem;
-    border-radius: 12px;
-    margin-top: 4px;
-  }
-
-  /* Close button stays top-right, always clickable */
-  .modal-close {
-    width: 32px;
-    height: 32px;
-    margin: -6px -6px 6px 0;
-  }
-
-  .email-body {
-    font-size: 0.8rem;
-    padding: 12px 14px;
-  }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--accent-purple);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
 }
 
-/* ── Very small phones (320px) ── */
-@media (max-width: 360px) {
-  .early-access-modal {
-    padding: 16px 12px 20px;
-    border-radius: 16px;
-  }
+.form-input::placeholder {
+  color: var(--text-muted);
+}
 
-  .modal-title {
-    font-size: 1.08rem;
-  }
+.submit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px !important;
+  font-size: 0.98rem !important;
+}
 
-  .modal-desc {
-    font-size: 0.78rem;
-  }
+.modal-footer-note {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.4;
+}
 
-  .form-group input,
-  .form-group select {
-    padding: 10px 11px;
-  }
+/* Success State */
+.modal-success {
+  text-align: center;
+  padding: 20px 10px;
+}
 
-  .ea-submit {
-    padding: 12px 16px;
-    font-size: 0.9rem;
-  }
+.modal-success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ECFDF5;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  border: 1px solid #D1FAE5;
+}
+
+.modal-success-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.modal-success-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 24px;
 }
