@@ -197,7 +197,7 @@ const RightScreen = () => {
 
 /* ─── Phone Frame ─── */
 const PhoneFrame = ({ children, size = 'normal' }: { children: React.ReactNode; size?: 'large' | 'small' | 'normal' }) => (
-  <div className={`pm-frame pm-frame-${size}`}>
+  <div className={`pm-frame pm-frame-${size} liquid-glass`}>
     <div className="pm-frame-inner">
       <div className="pm-side-btn pm-side-btn-vol1" />
       <div className="pm-side-btn pm-side-btn-vol2" />

@@ -276,7 +276,7 @@ const InteractiveReport = () => {
             </div>
 
             {/* Panel 2: AI Clinical Insight */}
-            <div className="demo-panel panel-insight saas-card">
+            <div className="demo-panel panel-insight saas-card liquid-glass">
               <div className="panel-top-bar">
                 <div className="panel-badge-group">
                   <Brain size={15} style={{ color: 'var(--accent-purple)' }} />

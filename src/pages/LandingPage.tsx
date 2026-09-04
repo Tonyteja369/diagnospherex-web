@@ -13,60 +13,77 @@ import CareersSection from '../components/sections/CareersSection';
 import WhyBuilding from '../components/sections/WhyBuilding';
 import CallToAction from '../components/sections/CallToAction';
 import EarlyAccessModal from '../components/EarlyAccessModal';
+import SmoothScroll from '../components/SmoothScroll';
+import LiquidGlassFilter from '../components/LiquidGlassFilter';
+import ThreeHeroBackground from '../components/ThreeHeroBackground';
+import { useLiquidGlassTracking } from '../hooks/useLiquidGlassTracking';
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Activate dynamic specular highlight tracking on all .liquid-glass surfaces
+  useLiquidGlassTracking();
+
   return (
-    <div className="landing-page-root">
-      {/* Background: Logo-sampled soft radial wash behind hero only */}
-      <AnimatedBackground />
+    <SmoothScroll>
+      {/* Hidden SVG filter for true Liquid Glass refractive distortion */}
+      <LiquidGlassFilter />
 
-      {/* Subtle cursor */}
-      <Cursor />
+      <div className="landing-page-root">
+        {/* Background: Logo-sampled soft radial wash behind hero only */}
+        <AnimatedBackground />
 
-      {/* 1. Nav: Light-default with Dark Toggle, CTA, and Clean Links */}
-      <Navbar onOpenModal={() => setIsModalOpen(true)} />
-      
-      <main>
-        {/* 2. Hero: Light/Dark adaptive with Scroll-Driven 3D Parallax */}
-        <HeroSection onOpenModal={() => setIsModalOpen(true)} />
+        {/* Subtle cursor */}
+        <Cursor />
 
-        {/* 3. Live Interactive Demo: Pinned Walkthrough with Animated States */}
-        <InteractiveReport />
+        {/* 1. Nav: Light-default with Dark Toggle, CTA, and Clean Links */}
+        <Navbar onOpenModal={() => setIsModalOpen(true)} />
+        
+        <main>
+          {/* 2. Hero: Light/Dark adaptive with Scroll-Driven 3D Parallax */}
+          {/* ThreeHeroBackground is positioned absolute inside the hero section */}
+          <div style={{ position: 'relative' }}>
+            <ThreeHeroBackground />
+            <HeroSection onOpenModal={() => setIsModalOpen(true)} />
+          </div>
 
-        {/* 4. Quotes / Testimonials Block: Large Display Type & Radical Whitespace */}
-        <QuotesSection />
+          {/* 3. Live Interactive Demo: Pinned Walkthrough with Animated States */}
+          <InteractiveReport />
 
-        {/* 5. Core Platform Capabilities: 3-Card Grid */}
-        <PlatformCapabilities />
+          {/* 4. Quotes / Testimonials Block: Large Display Type & Radical Whitespace */}
+          <QuotesSection />
 
-        {/* 6. Technical Architecture & Code Snippet: Deterministic ICMR Rules */}
-        <TechCodeSnippet />
+          {/* 5. Core Platform Capabilities: 3-Card Grid */}
+          <PlatformCapabilities />
 
-        {/* 7. Security & Trust: 4-Card Grid & Active Enclave Standards */}
-        <Security />
+          {/* 6. Technical Architecture & Code Snippet: Deterministic ICMR Rules */}
+          <TechCodeSnippet />
 
-        {/* 8. Careers & Internships: 4 Healthcare-Framed Roles + 3-Step Flow */}
-        <CareersSection />
+          {/* 7. Security & Trust: 4-Card Grid & Active Enclave Standards */}
+          <Security />
 
-        {/* 9. Purpose & Founder Story Strip */}
-        <WhyBuilding />
+          {/* 8. Careers & Internships: 4 Healthcare-Framed Roles + 3-Step Flow */}
+          <CareersSection />
 
-        {/* 10. Waitlist CTA: Full-Width Gradient Shimmer Section */}
-        <CallToAction onOpenModal={() => setIsModalOpen(true)} />
-      </main>
+          {/* 9. Purpose & Founder Story Strip */}
+          <WhyBuilding />
 
-      {/* 11. Footer: Clean 4-Column Navigation & Real Contact Email */}
-      <Footer />
-      
-      {/* Priority Waitlist Modal */}
-      <EarlyAccessModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
-    </div>
+          {/* 10. Waitlist CTA: Full-Width Gradient Shimmer Section */}
+          <CallToAction onOpenModal={() => setIsModalOpen(true)} />
+        </main>
+
+        {/* 11. Footer: Clean 4-Column Navigation & Real Contact Email */}
+        <Footer />
+        
+        {/* Priority Waitlist Modal */}
+        <EarlyAccessModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+        />
+      </div>
+    </SmoothScroll>
   );
 };
 
 export default LandingPage;
+

@@ -68,7 +68,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
 
   return (
     <>
-      <header className={`navbar-wrapper ${scrolled ? 'is-scrolled' : ''}`}>
+      <header className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="navbar-container">
           <nav className="navbar-inner">
             {/* Logo */}

@@ -1,52 +1,87 @@
 /* =========================================================
-   CURSOR STYLES — Soft SaaS Aesthetic
+   CUSTOM LIQUID CURSOR — Lagged Follower & Expanding Glass
    ========================================================= */
 
-.liquid-cursor {
+.liquid-cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background-color: var(--accent-purple);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.85;
-  transition: transform 0.15s ease-out;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.4);
 }
 
-.liquid-cursor-trail {
+.liquid-cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 24px;
-  height: 24px;
-  border: 1px solid var(--accent-purple-light);
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9998;
-  opacity: 0.4;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  box-shadow: 
+    inset 1px 1px 0px rgba(124, 58, 237, 0.25),
+    inset -1px -1px 0px rgba(6, 182, 212, 0.25),
+    0 4px 14px rgba(20, 20, 31, 0.06);
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease;
 }
 
-.cursor-ripple {
-  position: fixed;
-  width: 80px;
-  height: 80px;
-  border: 1px solid var(--accent-purple-light);
-  border-radius: 50%;
+[data-theme="dark"] .liquid-cursor-ring {
+  background: rgba(24, 24, 31, 0.35);
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
+/* Expanded state on hover */
+.liquid-cursor-ring.is-expanded {
+  width: 48px;
+  height: 48px;
+  background: rgba(124, 58, 237, 0.12);
+  border-color: var(--accent-purple);
+  box-shadow: 
+    inset 1px 1px 0px rgba(124, 58, 237, 0.4),
+    inset -1px -1px 0px rgba(6, 182, 212, 0.4),
+    0 8px 24px rgba(124, 58, 237, 0.2);
+}
+
+.cursor-label {
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-purple);
+  user-select: none;
   pointer-events: none;
-  z-index: 9997;
-  animation: cursorRippleAnim 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
 
-@keyframes cursorRippleAnim {
-  0% { transform: scale(0.2); opacity: 0.6; border-width: 2px; }
-  100% { transform: scale(2.2); opacity: 0; border-width: 0px; }
+/* Hide custom cursor on touch screens */
+@media (pointer: coarse), (hover: none) {
+  .liquid-cursor-dot,
+  .liquid-cursor-ring {
+    display: none !important;
+  }
 }
 
-@media (pointer: coarse), (max-width: 768px), (prefers-reduced-motion: reduce) {
-  .liquid-cursor, .liquid-cursor-trail, .cursor-ripple {
+@media (prefers-reduced-motion: reduce) {
+  .liquid-cursor-dot,
+  .liquid-cursor-ring {
     display: none !important;
   }
 }

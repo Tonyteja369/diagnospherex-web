@@ -48,7 +48,7 @@ const EarlyAccessModal = ({ isOpen, onClose }: EarlyAccessModalProps) => {
           />
           <div className="modal-wrapper">
             <motion.div
-              className="early-access-modal"
+              className="early-access-modal liquid-glass"
               initial={{ opacity: 0, scale: 0.95, y: 24 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 24 }}

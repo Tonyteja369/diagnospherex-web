@@ -1,83 +1,97 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import '../styles/Cursor.css';
 
-const Cursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [ripples, setRipples] = useState<{ x: number, y: number, id: number }[]>([]);
-  const [isMobile, setIsMobile] = useState(false);
+const Cursor: React.FC = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [cursorText, setCursorText] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  const rawX = useMotionValue(-100);
+  const rawY = useMotionValue(-100);
+
+  // Smooth trailing spring (lerp ~0.15 feel)
+  const springConfig = { stiffness: 350, damping: 26, mass: 0.5 };
+  const smoothX = useSpring(rawX, springConfig);
+  const smoothY = useSpring(rawY, springConfig);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    // Check if device is touch-based
+    if (window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window) {
+      setIsTouchDevice(true);
+      return;
+    }
 
-    const updateMousePosition = (e: MouseEvent) => {
-      if (isMobile) return;
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const handleMouseMove = (e: MouseEvent) => {
+      rawX.set(e.clientX);
+      rawY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+      setIsVisible(false);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
-      if (isMobile) return;
-      if ((e.target as HTMLElement).tagName.toLowerCase() === 'button' || (e.target as HTMLElement).tagName.toLowerCase() === 'a' || (e.target as HTMLElement).closest('button') || (e.target as HTMLElement).closest('a')) {
-        setIsHovering(true);
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const interactive = target.closest(
+        'button, a, [role="button"], input, select, textarea, .saas-card, .demo-tab-chip, .code-tab-btn'
+      );
+
+      if (interactive) {
+        setIsHovered(true);
+        if (target.closest('.demo-panel') || target.closest('.demo-tab-chip')) {
+          setCursorText('Explore');
+        } else if (target.closest('.code-window-container')) {
+          setCursorText('Code');
+        } else {
+          setCursorText('');
+        }
       } else {
-        setIsHovering(false);
+        setIsHovered(false);
+        setCursorText('');
       }
     };
 
-    const handleMouseClick = (e: MouseEvent) => {
-      if (isMobile) return;
-      const newRipple = { x: e.clientX, y: e.clientY, id: Date.now() };
-      setRipples(prev => [...prev, newRipple]);
-      setTimeout(() => {
-        setRipples(prev => prev.filter(r => r.id !== newRipple.id));
-      }, 600);
-    };
-
-    window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('mouseover', handleMouseOver);
-    window.addEventListener('click', handleMouseClick);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.body.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseover', handleMouseOver, { passive: true });
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mouseover', handleMouseOver);
-      window.removeEventListener('click', handleMouseClick);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.body.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [isMobile]);
+  }, [rawX, rawY, isVisible]);
 
-  if (isMobile) return null;
+  if (isTouchDevice) return null;
 
   return (
     <>
+      {/* Small trailing center dot */}
       <motion.div
-        className="liquid-cursor"
-        animate={{
-          x: mousePosition.x - (isHovering ? 20 : 8),
-          y: mousePosition.y - (isHovering ? 20 : 8),
-          scale: isHovering ? 2 : 1,
-          opacity: 1
+        className="liquid-cursor-dot"
+        style={{
+          x: rawX,
+          y: rawY,
+          opacity: isVisible ? (isHovered ? 0 : 1) : 0,
         }}
-        transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
       />
-      {/* Liquid cursor trail */}
+
+      {/* Lagged liquid glass follower ring */}
       <motion.div
-        className="liquid-cursor-trail"
-        animate={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
+        className={`liquid-cursor-ring ${isHovered ? 'is-expanded' : ''}`}
+        style={{
+          x: smoothX,
+          y: smoothY,
+          opacity: isVisible ? 1 : 0,
         }}
-        transition={{ type: 'spring', stiffness: 150, damping: 20, mass: 0.8 }}
-      />
-      {ripples.map((ripple) => (
-        <div
-          key={ripple.id}
-          className="cursor-ripple"
-          style={{ left: ripple.x - 50, top: ripple.y - 50 }}
-        />
-      ))}
+      >
+        {cursorText && <span className="cursor-label">{cursorText}</span>}
+      </motion.div>
     </>
   );
 };
