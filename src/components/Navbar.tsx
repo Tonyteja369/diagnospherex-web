@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import GlassSurface from './reactbits/GlassSurface';
+import SpecularButton from './reactbits/SpecularButton';
 import '../styles/Navbar.css';
 
 interface NavbarProps {
@@ -69,62 +71,85 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
   return (
     <>
       <header className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''}`}>
-        <div className="navbar-container">
-          <nav className="navbar-inner">
-            {/* Logo */}
-            <a href="#hero" className="navbar-logo" aria-label="DiagnoSphereX Home">
-              <img src="/logo1.png" alt="DiagnoSphereX Logo" className="navbar-logo-img" />
-              <span className="logo-brand">Diagno<span className="text-gradient">Sphere</span>X</span>
-            </a>
+        <GlassSurface
+          width="100%"
+          height={72}
+          borderRadius={0}
+          backgroundOpacity={0.05}
+          saturation={1.4}
+          distortionScale={-90}
+          redOffset={2}
+          greenOffset={6}
+          blueOffset={12}
+          displace={2}
+          blur={14}
+          brightness={65}
+          opacity={0.9}
+          mixBlendMode="soft-light"
+        >
+          <div className="navbar-container">
+            <nav className="navbar-inner">
+              {/* Logo */}
+              <a href="#hero" className="navbar-logo" aria-label="DiagnoSphereX Home">
+                <img src="/logo1.png" alt="DiagnoSphereX Logo" className="navbar-logo-img" />
+                <span className="logo-brand">Diagno<span className="text-gradient">Sphere</span>X</span>
+              </a>
 
-            {/* Desktop Navigation Links */}
-            <div className="navbar-links desktop-only" role="menubar">
-              {navLinks.map((link) => {
-                const sectionId = link.href.substring(1);
-                const isActive = activeSection === sectionId;
+              {/* Desktop Navigation Links */}
+              <div className="navbar-links desktop-only" role="menubar">
+                {navLinks.map((link) => {
+                  const sectionId = link.href.substring(1);
+                  const isActive = activeSection === sectionId;
 
-                return (
-                  <a 
-                    key={link.name} 
-                    href={link.href} 
-                    className={`nav-link ${isActive ? 'active-nav-link' : ''}`}
-                    role="menuitem"
-                  >
-                    {link.name}
-                    {isActive && (
-                      <motion.div
-                        className="active-indicator"
-                        layoutId="activeNavIndicator"
-                        transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-                      />
-                    )}
-                  </a>
-                );
-              })}
-            </div>
+                  return (
+                    <a 
+                      key={link.name} 
+                      href={link.href} 
+                      className={`nav-link ${isActive ? 'active-nav-link' : ''}`}
+                      role="menuitem"
+                    >
+                      {link.name}
+                      {isActive && (
+                        <motion.div
+                          className="active-indicator"
+                          layoutId="activeNavIndicator"
+                          transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                        />
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
 
-            {/* Actions: Theme Toggle, CTA & Hamburger */}
-            <div className="navbar-actions">
-              <ThemeToggle />
+              {/* Actions: Theme Toggle, CTA & Hamburger */}
+              <div className="navbar-actions">
+                <ThemeToggle />
 
-              <button 
-                className="btn-primary cta-nav"
-                onClick={onOpenModal}
-              >
-                Join the waitlist
-              </button>
+                <SpecularButton
+                  size="sm"
+                  radius={10}
+                  tint="#8B5CF6"
+                  tintOpacity={0.08}
+                  lineColor="#A78BFA"
+                  baseColor="#6D28D9"
+                  onClick={onOpenModal}
+                  className="cta-nav"
+                >
+                  Join the waitlist
+                </SpecularButton>
 
-              <button 
-                className="mobile-menu-btn mobile-only"
-                onClick={() => setMobileMenuOpen(true)}
-                aria-label="Open navigation menu"
-                aria-expanded={mobileMenuOpen}
-              >
-                <Menu size={22} />
-              </button>
-            </div>
-          </nav>
-        </div>
+                <button 
+                  className="mobile-menu-btn mobile-only"
+                  onClick={() => setMobileMenuOpen(true)}
+                  aria-label="Open navigation menu"
+                  aria-expanded={mobileMenuOpen}
+                >
+                  <Menu size={22} />
+                </button>
+              </div>
+            </nav>
+          </div>
+        </GlassSurface>
       </header>
 
       {/* Mobile Drawer & Scrim */}

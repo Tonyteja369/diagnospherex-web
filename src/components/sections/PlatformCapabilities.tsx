@@ -1,5 +1,5 @@
-import { motion, Variants } from 'framer-motion';
 import { FileText, Users, Activity, Sparkles, Zap } from 'lucide-react';
+import MagicBento from '../reactbits/MagicBento';
 import '../../styles/PlatformCapabilities.css';
 
 const FEATURES = [
@@ -32,28 +32,6 @@ const FEATURES = [
   },
 ];
 
-const cardContainerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
 const PlatformCapabilities = () => {
   return (
     <section className="capabilities-section" id="features">
@@ -74,46 +52,44 @@ const PlatformCapabilities = () => {
         </div>
 
         {/* 3-Column Responsive Grid */}
-        <motion.div
-          className="capabilities-grid"
-          variants={cardContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-        >
+        <div className="capabilities-grid">
           {FEATURES.map((feature) => (
-            <motion.div
+            <MagicBento
               key={feature.tag}
-              className="capability-card saas-card"
-              variants={cardVariants}
+              enableSpotlight={true}
+              enableBorderGlow={true}
+              enableTilt={true}
+              enableMagnetism={true}
+              spotlightRadius={260}
+              glowColor="139, 92, 246"
             >
-              {/* Top Icon Badge */}
-              <div 
-                className="cap-icon-box"
-                style={{ backgroundColor: feature.bg, color: feature.color }}
-              >
-                <feature.icon size={24} />
+              <div className="capability-card saas-card" style={{ height: '100%' }}>
+                {/* Top Icon Badge */}
+                <div 
+                  className="cap-icon-box"
+                  style={{ backgroundColor: feature.bg, color: feature.color }}
+                >
+                  <feature.icon size={24} />
+                </div>
+
+                {/* Tag */}
+                <span className="cap-tag">{feature.tag}</span>
+
+                {/* Title */}
+                <h3 className="cap-title">{feature.title}</h3>
+
+                {/* Description */}
+                <p className="cap-desc">{feature.desc}</p>
+
+                {/* Feature Highlight Pill */}
+                <div className="cap-highlight-pill">
+                  <Sparkles size={12} className="text-purple" />
+                  <span>{feature.highlight}</span>
+                </div>
               </div>
-
-              {/* Tag */}
-              <span className="cap-tag">{feature.tag}</span>
-
-              {/* Title */}
-              <h3 className="cap-title">{feature.title}</h3>
-
-              {/* Description */}
-              <p className="cap-desc">{feature.desc}</p>
-
-              {/* Bottom Feature Pill */}
-              <div className="cap-footer">
-                <span className="cap-highlight">
-                  <Sparkles size={13} className="inline mr-1" />
-                  {feature.highlight}
-                </span>
-              </div>
-            </motion.div>
+            </MagicBento>
           ))}
-        </motion.div>
+        </div>
 
       </div>
     </section>

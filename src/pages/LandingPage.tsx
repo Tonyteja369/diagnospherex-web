@@ -11,6 +11,7 @@ import TechCodeSnippet from '../components/sections/TechCodeSnippet';
 import Security from '../components/sections/Security';
 import CareersSection from '../components/sections/CareersSection';
 import WhyBuilding from '../components/sections/WhyBuilding';
+import LogoShowcase from '../components/sections/LogoShowcase';
 import CallToAction from '../components/sections/CallToAction';
 import EarlyAccessModal from '../components/EarlyAccessModal';
 import SmoothScroll from '../components/SmoothScroll';
@@ -68,7 +69,10 @@ const LandingPage = () => {
           {/* 9. Purpose & Founder Story Strip */}
           <WhyBuilding />
 
-          {/* 10. Waitlist CTA: Full-Width Gradient Shimmer Section */}
+          {/* 10. Brand Identity Showcase: GlassSurface Tiles + MetallicPaint Icon Mark */}
+          <LogoShowcase />
+
+          {/* 11. Waitlist CTA: Full-Width Gradient Shimmer Section */}
           <CallToAction onOpenModal={() => setIsModalOpen(true)} />
         </main>
 

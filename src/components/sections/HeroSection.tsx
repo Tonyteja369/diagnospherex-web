@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, GraduationCap, Users, ArrowRight } from 'lucide-react';
+import SpecularButton from '../reactbits/SpecularButton';
+import ShinyText from '../reactbits/ShinyText';
+import Grainient from '../reactbits/Grainient';
 import HeroPhoneMockups from './HeroPhoneMockups';
 import '../../styles/HeroSection.css';
 
@@ -23,8 +26,18 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
 
   return (
-    <section className="hero-section" id="hero" ref={heroRef}>
-      <div className="hero-container">
+    <section className="hero-section" id="hero" ref={heroRef} style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Soft animated gradient ambient background */}
+      <Grainient
+        color1="#EDE9FE"
+        color2="#DBEAFE"
+        color3="#F5F3FF"
+        timeSpeed={0.15}
+        blendAngle={135}
+        grainAmount={0.02}
+      />
+
+      <div className="hero-container" style={{ position: 'relative', zIndex: 2 }}>
         <div className="hero-content">
 
           {/* ── LEFT: Text Content ── */}
@@ -41,14 +54,22 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
               <span>Flagship Research Initiative · AI Healthcare</span>
             </motion.div>
 
-            {/* Headline with gradient on key words */}
+            {/* Headline with ShinyText accent on key words */}
             <motion.h1 
               className="hero-headline"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
-              Transforming Complex Medical Data into <span className="text-gradient">Clinical Intelligence</span>.
+              Transforming Complex Medical Data into{' '}
+              <ShinyText
+                text="Clinical Intelligence"
+                speed={3}
+                delay={1.5}
+                color="#8B5CF6"
+                shineColor="#DDD6FE"
+                spread={100}
+              />.
             </motion.h1>
 
             {/* Subheadline */}
@@ -69,13 +90,28 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
               transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="hero-cta-group">
-                <button
-                  className="btn-primary"
+                <SpecularButton
+                  size="lg"
+                  radius={12}
+                  tint="#8B5CF6"
+                  tintOpacity={0.08}
+                  blur={0}
+                  textColor="#ffffff"
+                  lineColor="#A78BFA"
+                  baseColor="#6D28D9"
+                  intensity={1}
+                  shineSize={14}
+                  shineFade={45}
+                  thickness={1}
+                  speed={0.35}
+                  followMouse
+                  proximity={220}
+                  autoAnimate={false}
                   onClick={onOpenModal}
                 >
                   Join the waitlist for free
                   <ArrowRight size={16} />
-                </button>
+                </SpecularButton>
 
                 <div className="social-proof-badge">
                   <div className="avatar-group">

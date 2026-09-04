@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, ArrowRight, Brain, Activity, Layout, Network, CheckCircle2, Send, X } from 'lucide-react';
+import { Stepper, Step } from '../reactbits/Stepper';
 import '../../styles/CareersSection.css';
 
 const ROLES = [
@@ -43,24 +44,6 @@ const ROLES = [
     icon: Network,
     bg: '#FFFBEB',
     color: '#D97706',
-  },
-];
-
-const STEPS = [
-  {
-    num: '01',
-    title: 'Apply',
-    desc: 'Submit your resume/LinkedIn and a one-line answer to "Why healthcare AI?". Takes under 3 minutes.',
-  },
-  {
-    num: '02',
-    title: 'Intro Call',
-    desc: 'A friendly 20-minute conversation with founder K. Tharun discussing your background and research vision.',
-  },
-  {
-    num: '03',
-    title: 'Start Building',
-    desc: 'Remote, flexible, and high-impact. Ship real code and biomedical models to thousands of families from week one.',
   },
 ];
 
@@ -168,15 +151,32 @@ const CareersSection = () => {
             <p className="flow-desc">No endless rounds. 3 transparent steps from application to shipping code.</p>
           </div>
 
-          <div className="flow-steps-grid">
-            {STEPS.map((step, idx) => (
-              <div key={step.num} className="flow-step-item">
-                <div className="step-num-badge">{step.num}</div>
-                <h4 className="step-title">{step.title}</h4>
-                <p className="step-desc">{step.desc}</p>
-                {idx < STEPS.length - 1 && <div className="step-connector desktop-only" />}
-              </div>
-            ))}
+          <div className="flow-steps-wrapper" style={{ margin: '32px 0' }}>
+            <Stepper
+              initialStep={1}
+              backButtonText="Back"
+              nextButtonText="Next"
+              activeColor="#8B5CF6"
+            >
+              <Step>
+                <div className="step-content-inner">
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text-primary)' }}>01 — Apply</h3>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Submit your resume/LinkedIn and a one-line answer to "Why healthcare AI?". Takes under 3 minutes.</p>
+                </div>
+              </Step>
+              <Step>
+                <div className="step-content-inner">
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text-primary)' }}>02 — Intro Call</h3>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>A friendly 20-minute conversation with founder K. Tharun discussing your background and research vision.</p>
+                </div>
+              </Step>
+              <Step>
+                <div className="step-content-inner">
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text-primary)' }}>03 — Start Building</h3>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Remote, flexible, high-impact. Ship real code and biomedical models to thousands of families from week one.</p>
+                </div>
+              </Step>
+            </Stepper>
           </div>
 
           <div className="flow-cta-bar">
