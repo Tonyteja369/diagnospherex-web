@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import AnimatedBackground from '../components/AnimatedBackground';
 import Cursor from '../components/Cursor';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -17,6 +16,7 @@ import EarlyAccessModal from '../components/EarlyAccessModal';
 import SmoothScroll from '../components/SmoothScroll';
 import LiquidGlassFilter from '../components/LiquidGlassFilter';
 import ThreeHeroBackground from '../components/ThreeHeroBackground';
+import Grainient from '../components/reactbits/Grainient';
 import { useLiquidGlassTracking } from '../hooks/useLiquidGlassTracking';
 
 const LandingPage = () => {
@@ -30,10 +30,33 @@ const LandingPage = () => {
       {/* Hidden SVG filter for true Liquid Glass refractive distortion */}
       <LiquidGlassFilter />
 
-      <div className="landing-page-root">
-        {/* Background: Logo-sampled soft radial wash behind hero only */}
-        <AnimatedBackground />
+      {/* Entire Site Background: Dynamic Animated WebGL Grainient */}
+      <Grainient
+        color1="#ff08f6"
+        color2="#46005e"
+        color3="#49008e"
+        timeSpeed={0.85}
+        colorBalance={0.0}
+        warpStrength={1.0}
+        warpFrequency={12}
+        warpSpeed={2.0}
+        warpAmplitude={50.0}
+        blendAngle={0.0}
+        blendSoftness={0.05}
+        rotationAmount={500.0}
+        noiseScale={0}
+        grainAmount={0}
+        grainScale={0.2}
+        grainAnimated={false}
+        contrast={1.5}
+        gamma={1.0}
+        saturation={1.0}
+        centerX={0.0}
+        centerY={0.0}
+        zoom={0.9}
+      />
 
+      <div className="landing-page-root">
         {/* Subtle cursor */}
         <Cursor />
 
