@@ -19,11 +19,20 @@ const navLinks = [
 
 const Navbar = ({ onOpenModal }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
+    let scrollTimer: ReturnType<typeof setTimeout>;
+
     const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        setIsScrolling(false);
+      }, 160);
+
       setScrolled(window.scrollY > 30);
 
       // Determine active section for nav link highlighting
@@ -43,6 +52,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
     handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimer);
     };
   }, []);
 
@@ -78,7 +88,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
   return (
     <>
       <header
-        className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''}`}
+        className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''} ${isScrolling ? 'is-scrolling' : ''}`}
         style={{
           transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}

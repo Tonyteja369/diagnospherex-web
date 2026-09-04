@@ -6,8 +6,10 @@
 .footer-container {
   position: relative;
   width: 100%;
-  background-color: #FFFFFF;
-  border-top: 1px solid var(--border-subtle);
+  background-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
   padding: 80px 0 40px;
   z-index: 10;
 }

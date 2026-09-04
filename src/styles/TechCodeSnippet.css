@@ -7,19 +7,21 @@
   position: relative;
   width: 100%;
   padding: 120px 0 130px;
-  background-color: var(--bg-secondary);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background-color: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .code-window-container {
   max-width: 920px;
   margin: 40px auto 0;
-  background: #0E0E15;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
+  background: rgba(14, 14, 21, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 24px 60px rgba(82, 39, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .code-window-container {

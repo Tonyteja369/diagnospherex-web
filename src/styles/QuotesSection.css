@@ -7,8 +7,8 @@
   position: relative;
   width: 100%;
   padding: 120px 0 130px;
-  background-color: var(--bg-primary);
-  border-bottom: 1px solid var(--border-subtle);
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .quotes-grid {

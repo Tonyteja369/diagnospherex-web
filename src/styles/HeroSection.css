@@ -8,7 +8,7 @@
   width: 100%;
   padding: 60px 0 80px;
   overflow: hidden;
-  background-color: var(--bg-primary);
+  background-color: transparent;
 }
 
 .hero-container {
@@ -47,17 +47,19 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: 20px;
-  background: #EDE9FE;
-  border: 1px solid #DDD6FE;
-  color: #7C3AED;
+  background: rgba(237, 233, 254, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(221, 214, 254, 0.85);
+  color: #5227FF;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 20px;
 }
 
 .hero-eyebrow-badge .badge-icon {
-  color: #8B5CF6;
+  color: #5227FF;
 }
 
 /* Headline */
@@ -101,8 +103,10 @@
   align-items: center;
   gap: 10px;
   padding: 8px 16px;
-  background: #FFFFFF;
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 30px;
   box-shadow: var(--shadow-resting);
 }
@@ -152,8 +156,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 18px;
-  background: #FFFFFF;
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 14px;
   box-shadow: var(--shadow-resting);
   max-width: 540px;
@@ -162,7 +168,8 @@
 }
 
 .internship-badge:hover {
-  border-color: var(--accent-purple-light);
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
 }

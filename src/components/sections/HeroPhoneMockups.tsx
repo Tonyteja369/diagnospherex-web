@@ -195,30 +195,54 @@ const RightScreen = () => {
   );
 };
 
-/* ─── Phone Frame ─── */
-const PhoneFrame = ({ children, size = 'normal' }: { children: React.ReactNode; size?: 'large' | 'small' | 'normal' }) => (
-  <div className={`pm-frame pm-frame-${size} liquid-glass`}>
+/* ─── Apple-Tier Phone Frame ─── */
+const PhoneFrame = ({
+  children,
+  size = 'normal',
+}: {
+  children: React.ReactNode;
+  size?: 'large' | 'small' | 'normal';
+}) => (
+  <div className={`pm-frame pm-frame-${size}`}>
+    {/* Specular glass reflection layer across device */}
+    <div className="pm-glass-glare" aria-hidden="true" />
+
+    {/* Hardware buttons on chassis */}
+    <div className="pm-side-btn pm-side-btn-vol1" />
+    <div className="pm-side-btn pm-side-btn-vol2" />
+    <div className="pm-side-btn pm-side-btn-power" />
+    <div className="pm-antenna-band pm-antenna-top" />
+    <div className="pm-antenna-band pm-antenna-bottom" />
+
     <div className="pm-frame-inner">
-      <div className="pm-side-btn pm-side-btn-vol1" />
-      <div className="pm-side-btn pm-side-btn-vol2" />
-      <div className="pm-side-btn pm-side-btn-power" />
       <div className="pm-screen">{children}</div>
       <div className="pm-home-indicator" />
     </div>
   </div>
 );
 
-/* ─── Main Export ─── */
+/* ─── Apple-Style Product Trio Export ─── */
 const HeroPhoneMockups = () => (
-  <div className="hpm-phones-row">
+  <div className="hpm-phones-row" aria-label="DiagnoSphereX Mobile Application Preview">
+    {/* Left Secondary Device: Lab Analysis */}
     <div className="hpm-phone-wrap hpm-left">
-      <PhoneFrame size="small"><LeftScreen /></PhoneFrame>
+      <PhoneFrame size="small">
+        <LeftScreen />
+      </PhoneFrame>
     </div>
+
+    {/* Center Dominant Device: AI Diagnostic Engine (Focal Point) */}
     <div className="hpm-phone-wrap hpm-center">
-      <PhoneFrame size="large"><CenterScreen /></PhoneFrame>
+      <PhoneFrame size="large">
+        <CenterScreen />
+      </PhoneFrame>
     </div>
+
+    {/* Right Secondary Device: Family Health Vault */}
     <div className="hpm-phone-wrap hpm-right">
-      <PhoneFrame size="small"><RightScreen /></PhoneFrame>
+      <PhoneFrame size="small">
+        <RightScreen />
+      </PhoneFrame>
     </div>
   </div>
 );

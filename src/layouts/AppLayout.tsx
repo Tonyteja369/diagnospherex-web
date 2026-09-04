@@ -22,21 +22,21 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 
       {/* Global Background: Continuous WebGL Grainient across entire site */}
       <Grainient
-        color1="#ff08f6"
-        color2="#46005e"
-        color3="#49008e"
-        timeSpeed={0.85}
+        color1="#FF9FFC"
+        color2="#5227FF"
+        color3="#B497CF"
+        timeSpeed={0.25}
         colorBalance={0.0}
         warpStrength={1.0}
-        warpFrequency={12}
+        warpFrequency={5.0}
         warpSpeed={2.0}
         warpAmplitude={50.0}
         blendAngle={0.0}
         blendSoftness={0.05}
         rotationAmount={500.0}
-        noiseScale={0}
-        grainAmount={0}
-        grainScale={0.2}
+        noiseScale={2.0}
+        grainAmount={0.1}
+        grainScale={2.0}
         grainAnimated={false}
         contrast={1.5}
         gamma={1.0}

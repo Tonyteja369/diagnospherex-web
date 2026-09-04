@@ -7,9 +7,9 @@
   position: relative;
   width: 100%;
   padding: 90px 0 100px;
-  background-color: var(--bg-secondary);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background-color: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .principles-grid {

@@ -8,16 +8,12 @@ import CareersSection from '../components/sections/CareersSection';
 import WhyBuilding from '../components/sections/WhyBuilding';
 import LogoShowcase from '../components/sections/LogoShowcase';
 import CallToAction from '../components/sections/CallToAction';
-import ThreeHeroBackground from '../components/ThreeHeroBackground';
 
 const LandingPage = () => {
   return (
     <div className="landing-page-root">
-      {/* 1. Hero Section with low-power 3D particle constellation */}
-      <div style={{ position: 'relative' }}>
-        <ThreeHeroBackground />
-        <HeroSection />
-      </div>
+      {/* 1. Hero Section */}
+      <HeroSection />
 
       {/* 2. Live Interactive Demo */}
       <InteractiveReport />

@@ -1,57 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
 @import './LiquidGlass.css';
 
 /* =========================================================
-   DIAGNOSHEREX – DESIGN SYSTEM v2
-   Apple-Tier Polish · Light-Default with Dark Opt-in Toggle
-   Direct Logo Gradient Sampling: #7C3AED -> #6366F1 -> #06B6D4
+   DIAGNOSHEREX – GLOBAL DESIGN SYSTEM v3
+   Unified WebGL Grainient Atmosphere (#FF9FFC / #5227FF / #B497CF)
+   Translucent Apple-Tier Surfaces · High-Contrast Typography
    ========================================================= */
 
 :root {
-  /* Base Palette (Light Theme - Default) */
-  --bg-primary: #FAFAFC;
-  --bg-secondary: #F4F4F8;
-  --bg-card: #FFFFFF;
-  --bg-card-hover: #FCFCFF;
-  --border-subtle: #EAEAF2;
-  --border-medium: #DCDCE8;
-  --nav-bg: rgba(250, 250, 252, 0.85);
+  /* Translucent Surface Palette (Grainient shows through cleanly) */
+  --bg-primary: transparent;
+  --bg-secondary: transparent;
+  --bg-card: rgba(255, 255, 255, 0.65);
+  --bg-card-hover: rgba(255, 255, 255, 0.82);
+  --border-subtle: rgba(255, 255, 255, 0.45);
+  --border-medium: rgba(255, 255, 255, 0.65);
+  --nav-bg: rgba(255, 255, 255, 0.35);
 
-  /* Typography Colors */
-  --text-primary: #14141F;
-  --text-secondary: #5B5B6E;
-  --text-muted: #8B8B9E;
+  /* High-Contrast Typography against vibrant Grainient */
+  --text-primary: #11111F;     /* Near-black / deep indigo */
+  --text-secondary: #4B4B60;   /* Sophisticated readable neutral */
+  --text-muted: #6B6B80;       /* Muted technical detail */
   --text-on-gradient: #FFFFFF;
 
-  /* Sampled Logo Gradient System (Violet -> Indigo -> Cyan) */
-  --gradient-primary: linear-gradient(135deg, #7C3AED 0%, #6366F1 50%, #06B6D4 100%);
-  --gradient-soft: linear-gradient(135deg, #EDE9FE 0%, #E0E7FF 50%, #DBEAFE 100%);
-  --hero-glow: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, rgba(99, 102, 241, 0.03) 45%, transparent 70%);
-
-  /* Accents */
-  --accent-purple: #8B5CF6;
-  --accent-purple-light: #C4B5FD;
+  /* Brand Accents */
+  --accent-purple: #5227FF;       /* DiagnoSphereX Electric Indigo */
+  --accent-purple-light: #8B5CF6; /* Violet Accent */
   --accent-blue: #3B82F6;
   --accent-cyan: #06B6D4;
+  --accent-pink: #FF9FFC;
+
+  /* Brand Gradient System */
+  --gradient-primary: linear-gradient(135deg, #5227FF 0%, #8B5CF6 50%, #FF9FFC 100%);
+  --gradient-soft: linear-gradient(135deg, rgba(255, 159, 252, 0.25) 0%, rgba(180, 151, 207, 0.2) 50%, rgba(82, 39, 255, 0.15) 100%);
+  --hero-glow: radial-gradient(circle, rgba(82, 39, 255, 0.08) 0%, rgba(139, 92, 246, 0.04) 45%, transparent 70%);
 
   /* Status Colors */
   --success-text: #059669;
-  --success-bg: #ECFDF5;
+  --success-bg: rgba(236, 253, 245, 0.85);
   --warning-text: #D97706;
-  --warning-bg: #FFFBEB;
+  --warning-bg: rgba(255, 251, 235, 0.85);
   --danger-text: #DC2626;
-  --danger-bg: #FEF2F2;
+  --danger-bg: rgba(254, 242, 242, 0.85);
   --info-text: #2563EB;
-  --info-bg: #EFF6FF;
+  --info-bg: rgba(239, 246, 255, 0.85);
 
-  /* Shadows */
-  --shadow-resting: 0 1px 2px rgba(20, 20, 31, 0.04), 0 4px 12px rgba(20, 20, 31, 0.03);
-  --shadow-hover: 0 8px 24px rgba(124, 58, 237, 0.10), 0 2px 8px rgba(20, 20, 31, 0.06);
-  --shadow-dropdown: 0 12px 32px rgba(20, 20, 31, 0.08), 0 2px 6px rgba(20, 20, 31, 0.04);
+  /* Shadows tuned for translucent glass */
+  --shadow-resting: 0 8px 32px 0 rgba(82, 39, 255, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 16px 48px 0 rgba(82, 39, 255, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-dropdown: 0 20px 48px rgba(17, 17, 31, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
 }
-
-/* ── Dark Theme (Opt-in via toggle) ── */
-
 
 * {
   box-sizing: border-box;
@@ -59,7 +57,6 @@
   padding: 0;
 }
 
-/* Global Smooth Cross-Fade for Theme Switching (§1: 300ms ease) */
 body, 
 .navbar-wrapper, 
 .saas-card, 
@@ -73,7 +70,6 @@ body,
 .footer-container, 
 .quote-card,
 .career-card,
-.theme-toggle-btn,
 .mobile-drawer {
   transition: background-color 300ms ease, 
               color 300ms ease, 
@@ -91,7 +87,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-primary);
+  background-color: transparent;
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -122,14 +118,13 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
-/* Apple-Tier Section Spacing (§3: 120-160px desktop, 64-80px mobile) */
 .section-padding {
-  padding: 130px 0;
+  padding: 110px 0;
 }
 
 @media (max-width: 768px) {
   .section-padding {
-    padding: 72px 0;
+    padding: 68px 0;
   }
 }
 
@@ -159,7 +154,7 @@ button {
   font-family: inherit;
 }
 
-/* ── Gradient Text (Sampled Logo Gradient) ── */
+/* ── Gradient Text (Sampled Logo & Brand Colors) ── */
 .text-gradient {
   background: var(--gradient-primary);
   -webkit-background-clip: text;
@@ -182,7 +177,7 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: transform 200ms ease-out, box-shadow 200ms ease-out;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.32);
+  box-shadow: 0 4px 14px rgba(82, 39, 255, 0.32);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -194,7 +189,7 @@ button {
 
 .btn-primary:hover {
   transform: scale(1.02);
-  box-shadow: 0 6px 22px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 6px 22px rgba(82, 39, 255, 0.45);
 }
 
 .btn-primary:active {
@@ -209,7 +204,9 @@ button {
 
 /* ── Secondary Button ── */
 .btn-secondary {
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-medium);
   color: var(--text-primary);
   border-radius: 12px;
@@ -226,26 +223,30 @@ button {
 
 .btn-secondary:hover {
   border-color: var(--accent-purple);
-  background: var(--gradient-soft);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--accent-purple);
   transform: translateY(-1px);
 }
 
-/* ── Card Specification ── */
+/* ── Card Specification: Translucent Glass Surface ── */
 .glass-panel, .saas-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle) !important;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  border-radius: 18px;
   box-shadow: var(--shadow-resting);
   transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 250ms cubic-bezier(0.16, 1, 0.3, 1);
+              border-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              background 250ms ease;
   position: relative;
 }
 
 .glass-panel:hover, .saas-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent-purple-light) !important;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(139, 92, 246, 0.4) !important;
   box-shadow: var(--shadow-hover);
 }
 
@@ -260,9 +261,11 @@ button {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  background: rgba(124, 58, 237, 0.09);
+  background: rgba(82, 39, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: var(--accent-purple);
-  border: 1px solid rgba(124, 58, 237, 0.18);
+  border: 1px solid rgba(82, 39, 255, 0.18);
   margin-bottom: 14px;
 }
 
@@ -271,17 +274,17 @@ button {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.15);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
+  background: rgba(139, 92, 246, 0.35);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-purple);
 }
 
-/* ── Prefers-reduced-motion fallback (§5.7) ── */
+/* ── Prefers-reduced-motion fallback ── */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;

@@ -7,7 +7,7 @@
   position: relative;
   width: 100%;
   padding: 90px 0 100px;
-  background-color: var(--bg-primary);
+  background-color: transparent;
 }
 
 .why-grid {

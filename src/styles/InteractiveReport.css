@@ -7,9 +7,9 @@
   position: relative;
   width: 100%;
   padding: 80px 0 90px;
-  background-color: var(--bg-secondary);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background-color: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .section-header {
@@ -21,8 +21,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #FFFFFF;
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 14px;
   padding: 12px 20px;
   margin-bottom: 28px;
@@ -141,8 +143,10 @@
   gap: 8px;
   padding: 10px 18px;
   min-height: 44px;
-  background: #FFFFFF;
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 30px;
   color: var(--text-secondary);
   font-size: 0.88rem;
@@ -154,15 +158,15 @@
 }
 
 .demo-tab-chip:hover {
-  border-color: var(--accent-purple-light);
+  border-color: rgba(139, 92, 246, 0.5);
   color: var(--text-primary);
-  background: #FCFCFF;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .demo-tab-chip.active-chip {
-  color: #6D28D9;
-  background: #EDE9FE;
-  border-color: #DDD6FE;
+  color: #5227FF;
+  background: rgba(237, 233, 254, 0.85);
+  border-color: rgba(139, 92, 246, 0.6);
 }
 
 .chip-icon {
@@ -181,6 +185,12 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 18px;
+  box-shadow: var(--shadow-resting);
 }
 
 @media (min-width: 1024px) {

@@ -129,8 +129,10 @@ export const Grainient: React.FC<GrainientProps> = ({
       uniform float uZoom;
       uniform float uContrast;
       uniform float uSaturation;
-
-      vec3 hexToRgb(vec3 c) { return c; }
+      uniform float uNoiseScale;
+      uniform float uGrainAmount;
+      uniform float uGrainScale;
+      uniform float uGrainAnimated;
 
       void main() {
         vec2 st = (gl_FragCoord.xy - 0.5 * uResolution.xy) / min(uResolution.x, uResolution.y);
@@ -155,7 +157,15 @@ export const Grainient: React.FC<GrainientProps> = ({
         float gray = dot(col, vec3(0.299, 0.587, 0.114));
         col = mix(vec3(gray), col, uSaturation);
 
-        gl_FragColor = vec4(col, 1.0);
+        // Grain & Noise Texture
+        if (uGrainAmount > 0.0) {
+          vec2 grainCoord = gl_FragCoord.xy * max(0.1, uGrainScale * 0.5);
+          float grainTime = uGrainAnimated > 0.5 ? uTime * 20.0 : 0.0;
+          float noise = fract(sin(dot(grainCoord + grainTime, vec2(12.9898, 78.233))) * 43758.5453);
+          col += (noise - 0.5) * uGrainAmount;
+        }
+
+        gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
       }
     `;
 
@@ -211,6 +221,10 @@ export const Grainient: React.FC<GrainientProps> = ({
     const uZoom = webgl.getUniformLocation(prog, 'uZoom');
     const uContrast = webgl.getUniformLocation(prog, 'uContrast');
     const uSat = webgl.getUniformLocation(prog, 'uSaturation');
+    const uNoiseScaleLoc = webgl.getUniformLocation(prog, 'uNoiseScale');
+    const uGrainAmtLoc = webgl.getUniformLocation(prog, 'uGrainAmount');
+    const uGrainScaleLoc = webgl.getUniformLocation(prog, 'uGrainScale');
+    const uGrainAnimLoc = webgl.getUniformLocation(prog, 'uGrainAnimated');
 
     let animId: number;
     let startTime = performance.now();
@@ -246,6 +260,10 @@ export const Grainient: React.FC<GrainientProps> = ({
       webgl.uniform1f(uZoom, zoom);
       webgl.uniform1f(uContrast, contrast);
       webgl.uniform1f(uSat, saturation);
+      webgl.uniform1f(uNoiseScaleLoc, noiseScale);
+      webgl.uniform1f(uGrainAmtLoc, grainAmount);
+      webgl.uniform1f(uGrainScaleLoc, grainScale);
+      webgl.uniform1f(uGrainAnimLoc, grainAnimated ? 1.0 : 0.0);
 
       webgl.drawArrays(webgl.TRIANGLES, 0, 6);
       animId = requestAnimationFrame(render);
