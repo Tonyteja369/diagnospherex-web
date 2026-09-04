@@ -57,10 +57,7 @@
   border: 1px solid #D1FAE5;
 }
 
-[data-theme="dark"] .hiring-badge {
-  background: rgba(5, 150, 105, 0.18);
-  border-color: rgba(5, 150, 105, 0.3);
-}
+
 
 .role-title {
   font-size: 1.25rem;
@@ -257,5 +254,121 @@
 
   .application-flow-card {
     padding: 28px 18px;
+  }
+}
+
+/* ── Inline Application Stepper ── */
+.career-card--active {
+  box-shadow: 0 0 0 2px #8B5CF6, 0 8px 32px rgba(109,40,217,0.12);
+}
+
+.careers-inline-stepper {
+  padding: 40px;
+  background: var(--bg-card);
+  border-radius: 20px;
+  will-change: height, opacity;
+}
+
+.inline-stepper-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.inline-stepper-role-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.stepper-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.stepper-close-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-purple);
+  background: rgba(139,92,246,0.06);
+}
+
+.inline-step-body {
+  padding: 8px 0;
+}
+
+.inline-step-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.inline-step-note {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.inline-success {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.inline-success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background: #ECFDF5;
+  color: #059669;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.inline-success h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.inline-success p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (max-width: 639px) {
+  .careers-inline-stepper {
+    padding: 24px 18px;
+  }
+
+  .inline-stepper-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stepper-close-btn {
+    align-self: flex-start;
   }
 }

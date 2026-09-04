@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, ArrowRight, Brain, Activity, Layout, Network, CheckCircle2, Send, X } from 'lucide-react';
+import { GraduationCap, ArrowRight, Brain, Activity, Layout, Network, CheckCircle2, ChevronLeft } from 'lucide-react';
 import { Stepper, Step } from '../reactbits/Stepper';
 import '../../styles/CareersSection.css';
 
@@ -48,25 +48,33 @@ const ROLES = [
 ];
 
 const CareersSection = () => {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  // Inline stepper state — null means stepper is hidden
+  const [activeRole, setActiveRole] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    role: 'AI Research Intern',
+    role: '',
     link: '',
     whyHealthcare: '',
   });
 
-  const handleOpenApply = (roleTitle: string) => {
-    setSelectedRole(roleTitle);
-    setFormData((prev) => ({ ...prev, role: roleTitle }));
+  const openStepper = (roleTitle: string) => {
+    setFormData({ name: '', email: '', role: roleTitle, link: '', whyHealthcare: '' });
+    setSubmitted(false);
+    setActiveRole(roleTitle);
+    // Scroll to the stepper
+    setTimeout(() => {
+      document.getElementById('careers-inline-stepper')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
+
+  const closeStepper = () => {
+    setActiveRole(null);
     setSubmitted(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Pre-fill mailto link with applicant information
+  const handleSubmit = () => {
     const subject = encodeURIComponent(`Internship Application: ${formData.role} - ${formData.name}`);
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\nRole: ${formData.role}\nProfile/Resume: ${formData.link}\nWhy Healthcare AI: ${formData.whyHealthcare}`
@@ -98,14 +106,14 @@ const CareersSection = () => {
           {ROLES.map((role, idx) => (
             <motion.div
               key={role.id}
-              className="career-card saas-card"
+              className={`career-card saas-card${activeRole === role.title ? ' career-card--active' : ''}`}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="role-card-top">
-                <div 
+                <div
                   className="role-icon-box"
                   style={{ backgroundColor: role.bg, color: role.color }}
                 >
@@ -117,23 +125,20 @@ const CareersSection = () => {
               <h3 className="role-title">{role.title}</h3>
               <span className="role-subtitle">{role.subtitle}</span>
 
-              {/* Healthcare Impact Statement */}
               <div className="role-impact-box">
-                <p className="role-impact-text">“{role.impact}”</p>
+                <p className="role-impact-text">"{role.impact}"</p>
               </div>
 
-              {/* Skills / Tech */}
               <div className="role-skills-wrap">
                 {role.skills.map((skill) => (
                   <span key={skill} className="role-skill-tag">{skill}</span>
                 ))}
               </div>
 
-              {/* Apply CTA */}
               <div className="role-card-footer">
                 <button
                   className="role-apply-btn"
-                  onClick={() => handleOpenApply(role.title)}
+                  onClick={() => openStepper(role.title)}
                 >
                   <span>Apply for Role</span>
                   <ArrowRight size={14} />
@@ -143,7 +148,7 @@ const CareersSection = () => {
           ))}
         </div>
 
-        {/* 3 Visible Steps Roadmap */}
+        {/* Process Roadmap */}
         <div className="application-flow-card saas-card">
           <div className="flow-header text-center">
             <span className="flow-eyebrow">Transparent Process</span>
@@ -183,7 +188,7 @@ const CareersSection = () => {
             <span>Ready to make an impact? Applications are reviewed rolling weekly.</span>
             <button
               className="btn-primary flow-apply-btn"
-              onClick={() => handleOpenApply('AI Research Intern')}
+              onClick={() => openStepper('AI Research Intern')}
             >
               Start Application
               <ArrowRight size={16} />
@@ -191,118 +196,128 @@ const CareersSection = () => {
           </div>
         </div>
 
-      </div>
-
-      {/* Application Modal */}
-      <AnimatePresence>
-        {selectedRole && (
-          <>
+        {/* ── INLINE APPLICATION STEPPER ── */}
+        <AnimatePresence>
+          {activeRole && (
             <motion.div
-              className="modal-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedRole(null)}
-            />
-            <div className="modal-wrapper">
-              <motion.div
-                className="early-access-modal saas-card"
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button 
-                  className="modal-close" 
-                  onClick={() => setSelectedRole(null)}
-                  aria-label="Close modal"
-                >
-                  <X size={18} />
+              id="careers-inline-stepper"
+              className="careers-inline-stepper saas-card"
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginTop: 32 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              style={{ overflow: 'hidden' }}
+            >
+              {/* Header row */}
+              <div className="inline-stepper-header">
+                <div>
+                  <span className="eyebrow-tag" style={{ marginBottom: 4 }}>Applying for</span>
+                  <h3 className="inline-stepper-role-title">{activeRole}</h3>
+                </div>
+                <button className="stepper-close-btn" onClick={closeStepper} aria-label="Close application form">
+                  <ChevronLeft size={16} />
+                  Cancel
                 </button>
+              </div>
 
-                {!submitted ? (
-                  <form onSubmit={handleSubmit} className="modal-content">
-                    <span className="eyebrow-tag mb-2">Direct Founder Review</span>
-                    <h3 className="modal-title">Apply: {formData.role}</h3>
-                    <p className="modal-subtitle">
-                      Complete this short form. Applications go directly to founder K. Tharun at diagnospherex@gmail.com.
-                    </p>
-
-                    <div className="form-group">
-                      <label className="form-label">Full Name *</label>
-                      <input
-                        type="text"
-                        required
-                        className="form-input"
-                        placeholder="e.g. Ananya Sharma"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">Email Address *</label>
-                      <input
-                        type="email"
-                        required
-                        className="form-input"
-                        placeholder="you@university.edu or gmail.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">LinkedIn or GitHub Profile *</label>
-                      <input
-                        type="url"
-                        required
-                        className="form-input"
-                        placeholder="https://linkedin.com/in/yourprofile"
-                        value={formData.link}
-                        onChange={(e) => setFormData({ ...formData, link: e.target.value })}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">Why healthcare AI? (1–2 sentences) *</label>
-                      <textarea
-                        required
-                        rows={2}
-                        className="form-input"
-                        placeholder="What motivates you to work on explainable medical intelligence?"
-                        value={formData.whyHealthcare}
-                        onChange={(e) => setFormData({ ...formData, whyHealthcare: e.target.value })}
-                      />
-                    </div>
-
-                    <button type="submit" className="btn-primary submit-btn">
-                      <Send size={16} className="inline mr-1" />
-                      Submit Application
-                    </button>
-                  </form>
-                ) : (
-                  <div className="modal-success text-center py-6">
-                    <div className="modal-success-icon">
-                      <CheckCircle2 size={32} />
-                    </div>
-                    <h3 className="modal-success-title">Application Received!</h3>
-                    <p className="modal-success-desc">
-                      Thank you for applying for the {formData.role} role. Your information has been forwarded to diagnospherex@gmail.com. We review every application and respond within 48 hours.
-                    </p>
-                    <button
-                      className="btn-secondary"
-                      onClick={() => setSelectedRole(null)}
-                    >
-                      Close Window
-                    </button>
+              {submitted ? (
+                <motion.div
+                  className="inline-success"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <div className="inline-success-icon">
+                    <CheckCircle2 size={40} />
                   </div>
-                )}
-              </motion.div>
-            </div>
-          </>
-        )}
-      </AnimatePresence>
+                  <h3>Application Sent!</h3>
+                  <p>Your application for <strong>{activeRole}</strong> has been forwarded to diagnospherex@gmail.com. We review every application and respond within 48 hours.</p>
+                  <button className="btn-secondary" onClick={closeStepper} style={{ marginTop: 20 }}>
+                    Back to Careers
+                  </button>
+                </motion.div>
+              ) : (
+                <Stepper
+                  initialStep={1}
+                  backButtonText="Back"
+                  nextButtonText="Continue"
+                  activeColor="#8B5CF6"
+                  onFinalStepCompleted={handleSubmit}
+                >
+                  {/* Step 1 — Personal Details */}
+                  <Step>
+                    <div className="inline-step-body">
+                      <h4 className="inline-step-title">Personal Details</h4>
+                      <div className="form-group">
+                        <label className="form-label">Full Name *</label>
+                        <input
+                          type="text"
+                          required
+                          className="form-input"
+                          placeholder="e.g. Ananya Sharma"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">Email Address *</label>
+                        <input
+                          type="email"
+                          required
+                          className="form-input"
+                          placeholder="you@university.edu"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </Step>
+
+                  {/* Step 2 — Profile Links */}
+                  <Step>
+                    <div className="inline-step-body">
+                      <h4 className="inline-step-title">Profile & Portfolio</h4>
+                      <div className="form-group">
+                        <label className="form-label">LinkedIn or GitHub Profile *</label>
+                        <input
+                          type="url"
+                          required
+                          className="form-input"
+                          placeholder="https://linkedin.com/in/yourprofile"
+                          value={formData.link}
+                          onChange={(e) => setFormData({ ...formData, link: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </Step>
+
+                  {/* Step 3 — Motivation */}
+                  <Step>
+                    <div className="inline-step-body">
+                      <h4 className="inline-step-title">Why Healthcare AI?</h4>
+                      <div className="form-group">
+                        <label className="form-label">Tell us your motivation (1–2 sentences) *</label>
+                        <textarea
+                          required
+                          rows={3}
+                          className="form-input"
+                          placeholder="What motivates you to work on explainable medical intelligence?"
+                          value={formData.whyHealthcare}
+                          onChange={(e) => setFormData({ ...formData, whyHealthcare: e.target.value })}
+                        />
+                      </div>
+                      <p className="inline-step-note">
+                        Clicking <strong>Submit</strong> will open your mail client pre-filled with your application addressed to diagnospherex@gmail.com.
+                      </p>
+                    </div>
+                  </Step>
+                </Stepper>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+      </div>
     </section>
   );
 };

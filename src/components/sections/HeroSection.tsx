@@ -3,15 +3,15 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, GraduationCap, Users, ArrowRight } from 'lucide-react';
 import SpecularButton from '../reactbits/SpecularButton';
 import ShinyText from '../reactbits/ShinyText';
-import Grainient from '../reactbits/Grainient';
 import HeroPhoneMockups from './HeroPhoneMockups';
 import '../../styles/HeroSection.css';
 
-interface HeroSectionProps {
-  onOpenModal?: () => void;
-}
+const handleWaitlistScroll = () => {
+  const el = document.getElementById('waitlist-stepper') || document.getElementById('cta');
+  el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
-const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
+const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
 
   // Scroll-driven 3D parallax (Apple product-page style)
@@ -27,15 +27,6 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
 
   return (
     <section className="hero-section" id="hero" ref={heroRef} style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Soft animated gradient ambient background */}
-      <Grainient
-        color1="#EDE9FE"
-        color2="#DBEAFE"
-        color3="#F5F3FF"
-        timeSpeed={0.15}
-        blendAngle={135}
-        grainAmount={0.02}
-      />
 
       <div className="hero-container" style={{ position: 'relative', zIndex: 2 }}>
         <div className="hero-content">
@@ -107,7 +98,7 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
                   followMouse
                   proximity={220}
                   autoAnimate={false}
-                  onClick={onOpenModal}
+                  onClick={handleWaitlistScroll}
                 >
                   Join the waitlist for free
                   <ArrowRight size={16} />

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import GlassSurface from './reactbits/GlassSurface';
-import SpecularButton from './reactbits/SpecularButton';
+import MetallicBorderButton from './reactbits/MetallicBorderButton';
 import '../styles/Navbar.css';
 
 interface NavbarProps {
@@ -15,7 +14,7 @@ const navLinks = [
   { name: 'Features', href: '#features' },
   { name: 'Demo', href: '#demo' },
   { name: 'Security', href: '#security' },
-  { name: 'About', href: '#about' }
+  { name: 'About', href: '#about' },
 ];
 
 const Navbar = ({ onOpenModal }: NavbarProps) => {
@@ -25,10 +24,10 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 30);
 
       // Determine active section for nav link highlighting
-      const sections = navLinks.map(l => l.href.substring(1));
+      const sections = navLinks.map((l) => l.href.substring(1));
       const scrollPos = window.scrollY + 180;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -39,7 +38,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
         }
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => {
@@ -47,7 +46,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
     };
   }, []);
 
-  // Close mobile drawer on escape
+  // Close mobile menu on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMobileMenuOpen(false);
@@ -56,43 +55,63 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Lock scroll when mobile drawer open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const targetId = href.substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
     }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileMenuOpen]);
+  };
+
+  const handleWaitlistClick = () => {
+    setMobileMenuOpen(false);
+    const ctaEl = document.getElementById('waitlist-stepper') || document.getElementById('cta');
+    if (ctaEl) {
+      ctaEl.scrollIntoView({ behavior: 'smooth' });
+    } else if (onOpenModal) {
+      onOpenModal();
+    }
+  };
 
   return (
     <>
-      <header className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''}`}>
+      <header
+        className={`navbar-wrapper liquid-glass liquid-glass-nav ${scrolled ? 'is-scrolled' : ''}`}
+        style={{
+          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
         <GlassSurface
           width="100%"
-          height={72}
-          borderRadius={0}
-          backgroundOpacity={0.05}
-          saturation={1.4}
-          distortionScale={-90}
+          height={scrolled ? 54 : 68}
+          borderRadius={9999}
+          backgroundOpacity={0.12}
+          saturation={1.5}
+          distortionScale={-70}
           redOffset={2}
           greenOffset={6}
-          blueOffset={12}
-          displace={2}
-          blur={14}
-          brightness={65}
-          opacity={0.9}
-          mixBlendMode="soft-light"
+          blueOffset={10}
+          displace={1.5}
+          blur={16}
+          brightness={90}
+          opacity={0.95}
+          style={{ transition: 'height 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }}
         >
           <div className="navbar-container">
-            <nav className="navbar-inner">
+            <nav className="navbar-inner" style={{ height: scrolled ? '54px' : '68px', transition: 'height 0.3s ease' }}>
               {/* Logo */}
-              <a href="#hero" className="navbar-logo" aria-label="DiagnoSphereX Home">
+              <a
+                href="#hero"
+                onClick={(e) => handleNavClick(e, '#hero')}
+                className="navbar-logo"
+                aria-label="DiagnoSphereX Home"
+              >
                 <img src="/logo1.png" alt="DiagnoSphereX Logo" className="navbar-logo-img" />
-                <span className="logo-brand">Diagno<span className="text-gradient">Sphere</span>X</span>
+                <span className="logo-brand">
+                  Diagno<span className="text-gradient">Sphere</span>X
+                </span>
               </a>
 
               {/* Desktop Navigation Links */}
@@ -102,9 +121,10 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
                   const isActive = activeSection === sectionId;
 
                   return (
-                    <a 
-                      key={link.name} 
-                      href={link.href} 
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className={`nav-link ${isActive ? 'active-nav-link' : ''}`}
                       role="menuitem"
                     >
@@ -121,30 +141,25 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
                 })}
               </div>
 
-              {/* Actions: Theme Toggle, CTA & Hamburger */}
+              {/* Actions: Metallic Border CTA & Hamburger */}
               <div className="navbar-actions">
-                <ThemeToggle />
-
-                <SpecularButton
+                <MetallicBorderButton
                   size="sm"
-                  radius={10}
-                  tint="#8B5CF6"
-                  tintOpacity={0.08}
-                  lineColor="#A78BFA"
-                  baseColor="#6D28D9"
-                  onClick={onOpenModal}
+                  variant="solid"
+                  onClick={handleWaitlistClick}
                   className="cta-nav"
                 >
-                  Join the waitlist
-                </SpecularButton>
+                  <span>Join Waitlist</span>
+                  <ArrowRight size={14} className="btn-icon-arrow" />
+                </MetallicBorderButton>
 
-                <button 
+                <button
                   className="mobile-menu-btn mobile-only"
-                  onClick={() => setMobileMenuOpen(true)}
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   aria-label="Open navigation menu"
                   aria-expanded={mobileMenuOpen}
                 >
-                  <Menu size={22} />
+                  {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
               </div>
             </nav>
@@ -152,7 +167,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
         </GlassSurface>
       </header>
 
-      {/* Mobile Drawer & Scrim */}
+      {/* Mobile Menu: Expanding Rectangular Surface Reveal Animation */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -167,59 +182,55 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
               aria-hidden="true"
             />
 
-            {/* Slide-in Full-Height Drawer */}
-            <motion.aside
-              className="mobile-drawer"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Navigation Menu"
+            {/* Expanding Rectangular Menu Surface */}
+            <motion.div
+              className="mobile-expanding-menu"
+              initial={{
+                opacity: 0,
+                scale: 0.92,
+                y: -20,
+                clipPath: 'polygon(10% 0%, 90% 0%, 90% 20%, 10% 20%)',
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.95,
+                y: -10,
+                clipPath: 'polygon(10% 0%, 90% 0%, 90% 10%, 10% 10%)',
+              }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="mobile-drawer-header">
-                <div className="navbar-logo">
-                  <img src="/logo1.png" alt="DiagnoSphereX Logo" className="navbar-logo-img" />
-                  <span className="logo-brand">Diagno<span className="text-gradient">Sphere</span>X</span>
+              <div className="mobile-menu-inner">
+                <div className="mobile-menu-links">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'active-mobile-link' : ''}`}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                    >
+                      {link.name}
+                    </a>
+                  ))}
                 </div>
-                <button 
-                  className="mobile-close-btn"
-                  onClick={() => setMobileMenuOpen(false)}
-                  aria-label="Close navigation menu"
-                >
-                  <X size={22} />
-                </button>
-              </div>
 
-              <div className="mobile-drawer-links">
-                {navLinks.map((link) => (
-                  <a 
-                    key={link.name} 
-                    href={link.href} 
-                    className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'active-mobile-link' : ''}`}
-                    onClick={() => setMobileMenuOpen(false)}
+                <div className="mobile-menu-footer">
+                  <MetallicBorderButton
+                    size="md"
+                    onClick={handleWaitlistClick}
+                    style={{ width: '100%', justifyContent: 'center' }}
                   >
-                    {link.name}
-                  </a>
-                ))}
+                    <span>Join Waitlist</span>
+                    <ArrowRight size={16} className="btn-icon-arrow" />
+                  </MetallicBorderButton>
+                </div>
               </div>
-
-              <div className="mobile-drawer-footer">
-                <button 
-                  className="btn-primary w-full"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    if (onOpenModal) onOpenModal();
-                  }}
-                >
-                  Join the waitlist for free
-                </button>
-                <p className="mobile-drawer-note">
-                  AI that explains, not just analyzes.
-                </p>
-              </div>
-            </motion.aside>
+            </motion.div>
           </>
         )}
       </AnimatePresence>
