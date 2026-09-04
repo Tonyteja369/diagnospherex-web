@@ -132,7 +132,7 @@ export const CallToAction: React.FC = () => {
                             <input
                               type="text"
                               required
-                              placeholder="K. Tharun Tej"
+                              placeholder="Aarav Mehta"
                               value={formData.name}
                               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                               style={{
@@ -156,7 +156,7 @@ export const CallToAction: React.FC = () => {
                             <input
                               type="email"
                               required
-                              placeholder="tharun@diagnospherex.com"
+                              placeholder="aarav.mehta@example.com"
                               value={formData.email}
                               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                               style={{
@@ -189,7 +189,7 @@ export const CallToAction: React.FC = () => {
                         How will you primarily use DiagnoSphereX?
                       </p>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                      <div className="waitlist-roles-grid">
                         {ROLES.map((r) => (
                           <button
                             key={r}

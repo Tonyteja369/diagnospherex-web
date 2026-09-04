@@ -124,9 +124,9 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
           width="100%"
           height={scrolled ? 58 : 72}
           borderRadius={9999}
-          backgroundOpacity={0.85}
-          saturation={1.2}
-          distortionScale={-60}
+          backgroundOpacity={0.12}
+          saturation={1.5}
+          distortionScale={-70}
           redOffset={2}
           greenOffset={6}
           blueOffset={10}

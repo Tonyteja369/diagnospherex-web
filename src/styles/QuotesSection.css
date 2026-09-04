@@ -1,6 +1,6 @@
 /* =========================================================
-   QUOTES / TESTIMONIALS — Apple-Tier Polish
-   Minimal visual treatment, radical whitespace, display type
+   QUOTES / TESTIMONIALS — Glassmorphic Premium Cards
+   Synchronized group entrance · Hover elevation
    ========================================================= */
 
 .quotes-section {
@@ -14,7 +14,7 @@
 .quotes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
+  gap: 28px;
 }
 
 .quote-item {
@@ -22,6 +22,27 @@
   flex-direction: column;
   align-items: flex-start;
   position: relative;
+  padding: 30px 28px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
+  box-shadow:
+    0 8px 32px 0 rgba(82, 39, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  cursor: default;
+  transition: box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.quote-item:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow:
+    0 16px 48px 0 rgba(82, 39, 255, 0.14),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .quote-mark-wrap {
@@ -32,11 +53,11 @@
 
 .quote-text {
   font-family: 'Instrument Serif', 'Plus Jakarta Sans', serif;
-  font-size: clamp(1.28rem, 1.8vw, 1.55rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--text-primary);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   flex: 1;
   letter-spacing: -0.01em;
 }
@@ -46,7 +67,7 @@
   flex-direction: column;
   gap: 4px;
   padding-top: 16px;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
   width: 100%;
 }
 
@@ -65,12 +86,12 @@
   letter-spacing: 0.06em;
 }
 
-/* ── Breakpoints ── */
+/* Breakpoints */
 @media (max-width: 1023px) {
   .quotes-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
-    max-width: 680px;
+    gap: 20px;
+    max-width: 640px;
     margin: 0 auto;
   }
 }
@@ -80,7 +101,11 @@
     padding: 70px 0 80px;
   }
 
+  .quote-item {
+    padding: 22px 18px;
+  }
+
   .quote-text {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
 }

@@ -73,7 +73,7 @@ const EarlyAccessForm = ({ onSuccessClose }: EarlyAccessFormProps) => {
                 value={formData.name} 
                 onChange={handleChange} 
                 required 
-                placeholder="Dr. John Doe / Jane Doe"
+                placeholder="Dr. Aarav Mehta / Maya Rao"
                 disabled={isSubmitting}
               />
             </div>

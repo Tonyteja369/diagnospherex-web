@@ -21,13 +21,15 @@
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: linear-gradient(
-    var(--metallic-angle, 135deg),
-    #6D28D9 0%,
-    #A78BFA 25%,
-    #E2E8F0 50%,
-    #60A5FA 75%,
-    #6D28D9 100%
+  background: conic-gradient(
+    from var(--metallic-angle, 0deg),
+    #5227FF 0%,
+    #8B5CF6 25%,
+    #DDD6FE 45%,
+    #FFFFFF 50%,
+    #DDD6FE 55%,
+    #8B5CF6 75%,
+    #5227FF 100%
   );
   z-index: -1;
   transition: opacity 0.25s ease;
@@ -46,10 +48,10 @@
 
 @keyframes rotateMetallicBorder {
   0% {
-    filter: hue-rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    filter: hue-rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 

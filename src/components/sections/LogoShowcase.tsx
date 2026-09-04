@@ -84,9 +84,10 @@ const LogoShowcase: React.FC = () => {
               tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && setSelectedLogo(logo)}
               aria-label={`Preview ${logo.label}`}
+              style={{ width: '100%', maxWidth: '280px' }}
             >
               <GlassSurface
-                width={260}
+                width="100%"
                 height={270}
                 borderRadius={22}
                 backgroundOpacity={0.14}

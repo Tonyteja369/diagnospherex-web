@@ -666,3 +666,31 @@
     animation: none !important;
   }
 }
+
+/* ── Responsive Media Queries: Maintain Exact Desktop Ratio & Scale on All Devices ── */
+@media (max-width: 1023px) {
+  .hpm-phones-row {
+    transform: scale(0.8);
+    transform-origin: center center;
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hpm-phones-row {
+    transform: scale(calc((100vw - 48px) / 660));
+    transform-origin: center center;
+    width: auto;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hpm-phones-row {
+    transform: scale(calc((100vw - 32px) / 640));
+    transform-origin: center center;
+    width: auto;
+    padding: 0;
+  }
+}
+

@@ -24,6 +24,8 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   justify-content: center;
+  width: 100%;
+  max-width: 280px;
 }
 
 .brand-tile-card:hover {
