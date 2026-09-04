@@ -183,6 +183,14 @@
   flex-direction: column;
 }
 
+@media (min-width: 1024px) {
+  .panel-original {
+    position: sticky;
+    top: 96px;
+    align-self: flex-start;
+  }
+}
+
 .panel-top-bar {
   display: flex;
   align-items: center;

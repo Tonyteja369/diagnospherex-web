@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, GraduationCap, Users, ArrowRight } from 'lucide-react';
 import HeroPhoneMockups from './HeroPhoneMockups';
 import '../../styles/HeroSection.css';
@@ -8,8 +9,21 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Scroll-driven 3D parallax (Apple product-page style)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const rotateY = useTransform(scrollYProgress, [0, 1], [0, -12]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 8]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
+
   return (
-    <section className="hero-section" id="hero">
+    <section className="hero-section" id="hero" ref={heroRef}>
       <div className="hero-container">
         <div className="hero-content">
 
@@ -65,9 +79,9 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
 
                 <div className="social-proof-badge">
                   <div className="avatar-group">
-                    <div className="avatar" style={{ background: '#818CF8' }}>Dr</div>
-                    <div className="avatar" style={{ background: '#A78BFA' }}>AI</div>
-                    <div className="avatar" style={{ background: '#60A5FA' }}>R</div>
+                    <div className="avatar" style={{ background: '#7C3AED' }}>Dr</div>
+                    <div className="avatar" style={{ background: '#6366F1' }}>AI</div>
+                    <div className="avatar" style={{ background: '#06B6D4' }}>R</div>
                   </div>
                   <span className="social-proof-text">
                     <Users size={13} className="inline-icon" />
@@ -87,7 +101,7 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
                     <span className="ib-tags">Biomedical AI · Healthcare · Full Stack · AI Agents</span>
                   </div>
                 </div>
-                <a href="#about" className="ib-link">
+                <a href="#careers" className="ib-link">
                   <span>Apply Now</span>
                   <ArrowRight size={13} />
                 </a>
@@ -95,14 +109,24 @@ const HeroSection = ({ onOpenModal }: HeroSectionProps) => {
             </motion.div>
           </div>
 
-          {/* ── RIGHT: Phone Mockups Visual ── */}
+          {/* ── RIGHT: 3D Scroll Parallax Mockups Visual ── */}
           <motion.div 
-            className="hero-visual-container"
+            className="hero-visual-container hero-perspective-wrap"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <HeroPhoneMockups />
+            <motion.div 
+              className="hero-3d-parallax-element"
+              style={{
+                rotateY,
+                rotateX,
+                y: yParallax,
+                scale,
+              }}
+            >
+              <HeroPhoneMockups />
+            </motion.div>
           </motion.div>
 
         </div>

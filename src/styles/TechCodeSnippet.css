@@ -1,0 +1,172 @@
+/* =========================================================
+   TECH CODE SNIPPET — Engineering Architecture Window
+   Dark Code Block on Soft Off-White SaaS
+   ========================================================= */
+
+.tech-snippet-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 0 130px;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.code-window-container {
+  max-width: 920px;
+  margin: 40px auto 0;
+  background: #0E0E15;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .code-window-container {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Window Header ── */
+.code-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #151520;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.window-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #FF5F56; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #27C93F; }
+
+.code-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code-tab-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #94A3B8;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.code-tab-btn:hover {
+  color: #F8FAFC;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.code-tab-btn.is-active {
+  color: #F8FAFC;
+  background: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.code-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #CBD5E1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.code-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+}
+
+/* ── Code Area ── */
+.code-pre-wrapper {
+  padding: 24px;
+  overflow-x: auto;
+  max-height: 420px;
+}
+
+.code-pre {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #E2E8F0;
+}
+
+/* ── Bottom Callout Bar ── */
+.code-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: #12121B;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #A78BFA;
+  background: rgba(167, 139, 250, 0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.tech-note {
+  font-size: 0.74rem;
+  color: #64748B;
+  margin-left: auto;
+}
+
+/* ── Mobile ── */
+@media (max-width: 639px) {
+  .tech-snippet-section {
+    padding: 70px 0 80px;
+  }
+
+  .code-window-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .code-tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .code-copy-btn {
+    align-self: flex-end;
+  }
+
+  .tech-note {
+    margin-left: 0;
+    width: 100%;
+  }
+}

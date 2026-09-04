@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 import '../styles/Navbar.css';
 
 interface NavbarProps {
@@ -102,8 +103,10 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
               })}
             </div>
 
-            {/* Actions: CTA (Visible on both Desktop and Mobile!) & Hamburger */}
+            {/* Actions: Theme Toggle, CTA & Hamburger */}
             <div className="navbar-actions">
+              <ThemeToggle />
+
               <button 
                 className="btn-primary cta-nav"
                 onClick={onOpenModal}

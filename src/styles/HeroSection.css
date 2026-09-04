@@ -225,7 +225,7 @@
   color: #6D28D9;
 }
 
-/* ── RIGHT: Visual Container ── */
+/* ── RIGHT: Visual Container (3D Perspective Wrap) ── */
 .hero-visual-container {
   display: flex;
   align-items: center;
@@ -233,6 +233,34 @@
   position: relative;
   width: 100%;
   min-height: 480px;
+}
+
+.hero-perspective-wrap {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.hero-3d-parallax-element {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@media (max-width: 1023px) {
+  .hero-perspective-wrap {
+    perspective: none !important;
+  }
+  .hero-3d-parallax-element {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-3d-parallax-element {
+    transform: none !important;
+  }
 }
 
 /* ── Mobile Responsiveness (< 1024px) ── */

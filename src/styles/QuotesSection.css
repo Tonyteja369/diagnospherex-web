@@ -1,0 +1,86 @@
+/* =========================================================
+   QUOTES / TESTIMONIALS — Apple-Tier Polish
+   Minimal visual treatment, radical whitespace, display type
+   ========================================================= */
+
+.quotes-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 0 130px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.quote-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+.quote-mark-wrap {
+  margin-bottom: 20px;
+  color: var(--accent-purple);
+  opacity: 0.7;
+}
+
+.quote-text {
+  font-family: 'Instrument Serif', 'Plus Jakarta Sans', serif;
+  font-size: clamp(1.28rem, 1.8vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.quote-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  width: 100%;
+}
+
+.author-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.author-role {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Breakpoints ── */
+@media (max-width: 1023px) {
+  .quotes-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 639px) {
+  .quotes-section {
+    padding: 70px 0 80px;
+  }
+
+  .quote-text {
+    font-size: 1.25rem;
+  }
+}
