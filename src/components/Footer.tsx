@@ -20,8 +20,8 @@ const Footer: React.FC = () => {
             </p>
             <div className="footer-contact-item">
               <Mail size={15} className="contact-icon" />
-              <a href="mailto:diagnospherex@gmail.com" className="footer-email-link">
-                diagnospherex@gmail.com
+              <a href="mailto:connect@diagnospherex.online" className="footer-email-link">
+                connect@diagnospherex.online
               </a>
             </div>
             <div className="footer-location-item">
@@ -76,13 +76,13 @@ const Footer: React.FC = () => {
               <ul className="footer-links-list">
                 <li><a href="#about">About DiagnoSphereX</a></li>
                 <li>
-                  <a href="mailto:diagnospherex@gmail.com?subject=Internship%20Application%20-%20DiagnoSphereX" className="internship-link">
+                  <a href="mailto:connect@diagnospherex.online?subject=Internship%20Application%20-%20DiagnoSphereX" className="internship-link">
                     <span>Careers & Internships</span>
                     <span className="hiring-pill">Hiring</span>
                   </a>
                 </li>
                 <li><a href="#about">Clinical Advisory</a></li>
-                <li><a href="mailto:diagnospherex@gmail.com">Contact Us</a></li>
+                <li><a href="mailto:connect@diagnospherex.online">Contact Us</a></li>
               </ul>
             </div>
           </div>
