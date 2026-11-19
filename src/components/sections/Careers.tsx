@@ -24,10 +24,10 @@ const ROLES = [
   },
   {
     title: 'Biomedical Engineering Intern',
-    tags: ['Remote', 'Internship', 'Signal Intelligence'],
+    tags: ['On-site', 'Internship', 'Signal Intelligence'],
     gradient: 'linear-gradient(135deg, #2FD3FF22, #6236FF22)',
     overview:
-      'Analyze ECG/EEG signal processing pipelines and reference datasets. Your biomedical engineering expertise directly shapes explainable signal intelligence.',
+      'Analyze ECG/EEG signal processing pipelines and reference datasets on-site. Your biomedical engineering expertise directly shapes explainable signal intelligence.',
   },
   {
     title: 'Frontend Development Intern',

@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <a href="https://linkedin.com/in/tharuntej-diagnospherex" target="_blank" rel="noopener noreferrer" className="external-footer-link">
-                    <span>NeuroSenseX Research</span>
+                    <span>Neurology Research</span>
                     <ArrowUpRight size={12} />
                   </a>
                 </li>

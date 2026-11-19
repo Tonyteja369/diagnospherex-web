@@ -125,7 +125,7 @@ const ApplicationForm = () => {
             <select name="Role" required defaultValue="">
               <option value="" disabled>Select a role...</option>
               <option value="AI Research Intern">AI Research Intern</option>
-              <option value="Biomedical Engineering Intern">Biomedical Engineering Intern</option>
+              <option value="Biomedical Engineering Intern (On-site)">Biomedical Engineering Intern (On-site)</option>
               <option value="Frontend Development Intern">Frontend Development Intern</option>
               <option value="Product Research Intern">Product Research Intern</option>
               <option value="Technical Exploration Intern">Technical Exploration Intern</option>

@@ -23,11 +23,11 @@ const ROLES = [
     title: 'Biomedical Engineering Intern',
     subtitle: 'Signal Processing & Demographic Baselines',
     impact: 'Calibrate epidemiological physiological baselines to ensure Indian clinical standards are accurately reflected across every demographic.',
-    skills: ['ICMR Reference Datasets', 'Haematology Baselines', 'Deterministic Verification'],
+    skills: ['On-site', 'ICMR Reference Datasets', 'Haematology Baselines', 'Deterministic Verification'],
     icon: Activity,
     bg: '#EFF6FF',
     color: '#2563EB',
-    duration: 'Remote · 3-6 months',
+    duration: 'On-site · 3-6 months',
     stipend: 'Performance-based',
   },
   {

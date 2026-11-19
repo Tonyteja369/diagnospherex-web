@@ -28,7 +28,7 @@ const RESEARCH_PILLARS = [
   {
     icon: BrainCircuit,
     title: 'Brain Intelligence',
-    subtitle: 'NeuroSenseX',
+    subtitle: 'Neurology Research',
     status: 'Active Development',
     statusColor: '#00F5FF',
     description: 'An advanced EEG intelligence platform focused on explainable brain signal analysis, neuroscience research, AI-assisted clinical decision support, biomedical visualization, and intelligent research workflows.',
@@ -68,7 +68,7 @@ const RESEARCH_PILLARS = [
 
 const PUBLICATIONS = [
   { project: 'MedQuantum-NIN', status: 'Research Paper in Preparation', type: 'Paper' },
-  { project: 'NeuroSenseX', status: 'Active Development', type: 'Platform' },
+  { project: 'Neurology Research', status: 'Active Development', type: 'Platform' },
   { project: 'Human Intelligence Engine', status: 'Research Vision', type: 'Vision Paper' },
   { project: 'Future Publications', status: 'Coming Soon', type: 'Upcoming' },
 ];

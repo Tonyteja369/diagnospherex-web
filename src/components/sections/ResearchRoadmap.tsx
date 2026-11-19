@@ -6,7 +6,7 @@ import '../../styles/ResearchRoadmap.css';
 const MILESTONES = [
   {
     year: '2026',
-    title: 'NeuroSenseX',
+    title: 'Neurology Research',
     desc: 'EEG Intelligence Platform',
     color: '#2FD3FF',
   },
